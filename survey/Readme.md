@@ -6,14 +6,7 @@ Use this directory to identify relevant specifications and resources and to depo
 Overview on relevant LOD vocabularies and their use
 ---------------------------------------------------
 ### State of the Art
-Several vocabularies currently in use, cf. [https://link.springer.com/book/10.1007%2F978-3-030-30225-2](https://link.springer.com/book/10.1007%2F978-3-030-30225-2) (drafts of relevant chapters can be shared on a private basis, request via ResearchGate from [https://www.researchgate.net/profile/Christian\_Chiarcos/publications](https://www.researchgate.net/profile/Christian_Chiarcos/publications): 
-
-*   Representing Annotated Texts as RDF (Chap.5)
-    
-*   Chap. 6 Modelling Linguistic Annotations (Chap. 6)
-    
-*   Chap. 8 Linguistic Categories (Chap. 8)
-    
+Several vocabularies currently in use, cf. [https://link.springer.com/book/10.1007%2F978-3-030-30225-2](https://link.springer.com/book/10.1007%2F978-3-030-30225-2) for an overview
 
 Most frequently used for linguistic annotation (in a LOD context) are
 
