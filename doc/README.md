@@ -8,3 +8,4 @@ Minutes:
 
 Other documentation:
 * [consolidated NIF 2.0/2.1 specifications](nif-2.0) in Markdown format (also see schemas and examples under [../survey](../survey/nif-2.0))
+* [consolidated Web Annotation deliverables](wa) as published by W3C (also see ontology under [../survey](../survey/wa))

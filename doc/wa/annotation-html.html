@@ -1,0 +1,1820 @@
+<!DOCTYPE html>
+<html dir="ltr" typeof="bibo:Document " prefix="bibo: http://purl.org/ontology/bibo/ w3p: http://www.w3.org/2001/02pd/rec54#" lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta property="dc:language" content="en" lang="">
+  <style>
+    /*
+
+github.com style (c) Vasily Polovnyov <vast@whiteants.net>
+
+*/
+    
+    .hljs {
+      display: block;
+      overflow-x: auto;
+      padding: 0.5em;
+      color: #333;
+      background: #f8f8f8;
+    }
+    
+    .hljs-comment,
+    .hljs-quote {
+      color: #998;
+      font-style: italic;
+    }
+    
+    .hljs-keyword,
+    .hljs-selector-tag,
+    .hljs-subst {
+      color: #333;
+      font-weight: bold;
+    }
+    
+    .hljs-number,
+    .hljs-literal,
+    .hljs-variable,
+    .hljs-template-variable,
+    .hljs-tag .hljs-attr {
+      color: #008080;
+    }
+    
+    .hljs-string,
+    .hljs-doctag {
+      color: #d14;
+    }
+    
+    .hljs-title,
+    .hljs-section,
+    .hljs-selector-id {
+      color: #900;
+      font-weight: bold;
+    }
+    
+    .hljs-subst {
+      font-weight: normal;
+    }
+    
+    .hljs-type,
+    .hljs-class .hljs-title {
+      color: #458;
+      font-weight: bold;
+    }
+    
+    .hljs-tag,
+    .hljs-name,
+    .hljs-attribute {
+      color: #000080;
+      font-weight: normal;
+    }
+    
+    .hljs-regexp,
+    .hljs-link {
+      color: #009926;
+    }
+    
+    .hljs-symbol,
+    .hljs-bullet {
+      color: #990073;
+    }
+    
+    .hljs-built_in,
+    .hljs-builtin-name {
+      color: #0086b3;
+    }
+    
+    .hljs-meta {
+      color: #999;
+      font-weight: bold;
+    }
+    
+    .hljs-deletion {
+      background: #fdd;
+    }
+    
+    .hljs-addition {
+      background: #dfd;
+    }
+    
+    .hljs-emphasis {
+      font-style: italic;
+    }
+    
+    .hljs-strong {
+      font-weight: bold;
+    }
+  </style>
+  <style>
+    /* --- EXAMPLES --- */
+    
+    div.example-title {
+      min-width: 7.5em;
+      color: #b9ab2d;
+    }
+    
+    div.example-title span {
+      text-transform: uppercase;
+    }
+    
+    aside.example,
+    div.example,
+    div.illegal-example {
+      padding: 0.5em;
+      margin: 1em 0;
+      position: relative;
+      clear: both;
+    }
+    
+    div.illegal-example {
+      color: red
+    }
+    
+    div.illegal-example p {
+      color: black
+    }
+    
+    aside.example,
+    div.example {
+      padding: .5em;
+      border-left-width: .5em;
+      border-left-style: solid;
+      border-color: #e0cb52;
+      background: #fcfaee;
+    }
+    
+    aside.example div.example {
+      border-left-width: .1em;
+      border-color: #999;
+      background: #fff;
+    }
+    
+    aside.example div.example div.example-title {
+      color: #999;
+    }
+  </style>
+  <style>
+    /* --- ISSUES/NOTES --- */
+    
+    div.issue-title,
+    div.note-title,
+    div.ednote-title,
+    div.warning-title {
+      padding-right: 1em;
+      min-width: 7.5em;
+      color: #b9ab2d;
+    }
+    
+    div.issue-title {
+      color: #e05252;
+    }
+    
+    div.note-title,
+    div.ednote-title {
+      color: #2b2;
+    }
+    
+    div.warning-title {
+      color: #f22;
+    }
+    
+    div.issue-title span,
+    div.note-title span,
+    div.ednote-title span,
+    div.warning-title span {
+      text-transform: uppercase;
+    }
+    
+    div.note,
+    div.issue,
+    div.ednote,
+    div.warning {
+      margin-top: 1em;
+      margin-bottom: 1em;
+    }
+    
+    .note>p:first-child,
+    .ednote>p:first-child,
+    .issue>p:first-child,
+    .warning>p:first-child {
+      margin-top: 0
+    }
+    
+    .issue,
+    .note,
+    .ednote,
+    .warning {
+      padding: .5em;
+      border-left-width: .5em;
+      border-left-style: solid;
+    }
+    
+    div.issue,
+    div.note,
+    div.ednote,
+    div.warning {
+      padding: 1em 1.2em 0.5em;
+      margin: 1em 0;
+      position: relative;
+      clear: both;
+    }
+    
+    span.note,
+    span.ednote,
+    span.issue,
+    span.warning {
+      padding: .1em .5em .15em;
+    }
+    
+    .issue {
+      border-color: #e05252;
+      background: #fbe9e9;
+    }
+    
+    .note,
+    .ednote {
+      border-color: #52e052;
+      background: #e9fbe9;
+    }
+    
+    .warning {
+      border-color: #f11;
+      border-width: .2em;
+      border-style: solid;
+      background: #fbe9e9;
+    }
+    
+    .warning-title:before {
+      content: "⚠";
+      /*U+26A0 WARNING SIGN*/
+      font-size: 3em;
+      float: left;
+      height: 100%;
+      padding-right: .3em;
+      vertical-align: top;
+      margin-top: -0.5em;
+    }
+    
+    li.task-list-item {
+      list-style: none;
+    }
+    
+    input.task-list-item-checkbox {
+      margin: 0 0.35em 0.25em -1.6em;
+      vertical-align: middle;
+    }
+  </style>
+  <style id="respec-mainstyle">
+    /*****************************************************************
+ * ReSpec 3 CSS
+ * Robin Berjon - http://berjon.com/
+ *****************************************************************/
+    /* Override code highlighter background */
+    
+    .hljs {
+      background: transparent !important;
+    }
+    /* --- INLINES --- */
+    
+    em.rfc2119 {
+      text-transform: lowercase;
+      font-style: normal;
+      color: #900;
+    }
+    
+    h1 acronym,
+    h2 acronym,
+    h3 acronym,
+    h4 acronym,
+    h5 acronym,
+    h6 acronym,
+    a acronym,
+    h1 abbr,
+    h2 abbr,
+    h3 abbr,
+    h4 abbr,
+    h5 abbr,
+    h6 abbr,
+    a abbr {
+      border: none;
+    }
+    
+    dfn {
+      font-weight: bold;
+    }
+    
+    a.internalDFN {
+      color: inherit;
+      border-bottom: 1px solid #99c;
+      text-decoration: none;
+    }
+    
+    a.externalDFN {
+      color: inherit;
+      border-bottom: 1px dotted #ccc;
+      text-decoration: none;
+    }
+    
+    a.bibref {
+      text-decoration: none;
+    }
+    
+    cite .bibref {
+      font-style: normal;
+    }
+    
+    code {
+      color: #C83500;
+    }
+    
+    th code {
+      color: inherit;
+    }
+    /* --- TOC --- */
+    
+    .toc a,
+    .tof a {
+      text-decoration: none;
+    }
+    
+    a .secno,
+    a .figno {
+      color: #000;
+    }
+    
+    ul.tof,
+    ol.tof {
+      list-style: none outside none;
+    }
+    
+    .caption {
+      margin-top: 0.5em;
+      font-style: italic;
+    }
+    /* --- TABLE --- */
+    
+    table.simple {
+      border-spacing: 0;
+      border-collapse: collapse;
+      border-bottom: 3px solid #005a9c;
+    }
+    
+    .simple th {
+      background: #005a9c;
+      color: #fff;
+      padding: 3px 5px;
+      text-align: left;
+    }
+    
+    .simple th[scope="row"] {
+      background: inherit;
+      color: inherit;
+      border-top: 1px solid #ddd;
+    }
+    
+    .simple td {
+      padding: 3px 10px;
+      border-top: 1px solid #ddd;
+    }
+    
+    .simple tr:nth-child(even) {
+      background: #f0f6ff;
+    }
+    /* --- DL --- */
+    
+    .section dd>p:first-child {
+      margin-top: 0;
+    }
+    
+    .section dd>p:last-child {
+      margin-bottom: 0;
+    }
+    
+    .section dd {
+      margin-bottom: 1em;
+    }
+    
+    .section dl.attrs dd,
+    .section dl.eldef dd {
+      margin-bottom: 0;
+    }
+    
+    .respec-hidden {
+      display: none;
+    }
+    
+    #respec-ui {
+      position: fixed;
+      display: flex;
+      flex-direction: row-reverse;
+      top: 20px;
+      right: 20px;
+      width: 202px;
+      text-align: right;
+    }
+    
+    #respec-pill,
+    .respec-info-button {
+      background: #fff;
+      height: 2.5em;
+      color: rgb(120, 120, 120);
+      border: 1px solid #ccc;
+      box-shadow: 1px 1px 8px 0 rgba(100, 100, 100, .5);
+    }
+    
+    .respec-info-button {
+      border: none;
+      opacity: .5;
+      border-radius: 2em;
+      margin-right: 1em;
+      min-width: 3.5em;
+    }
+    
+    .respec-info-button:focus {
+      opacity: 1;
+      transition: opacity .2s;
+    }
+    
+    #respec-pill:disabled {
+      font-size: 2.8px;
+      text-indent: -9999em;
+      border-top: 1.1em solid rgba(40, 40, 40, 0.2);
+      border-right: 1.1em solid rgba(40, 40, 40, 0.2);
+      border-bottom: 1.1em solid rgba(40, 40, 40, 0.2);
+      border-left: 1.1em solid #ffffff;
+      transform: translateZ(0);
+      animation: respec-spin .5s infinite linear;
+      box-shadow: none;
+    }
+    
+    #respec-pill:disabled,
+    #respec-pill:disabled:after {
+      border-radius: 50%;
+      width: 10em;
+      height: 10em;
+    }
+    
+    @keyframes respec-spin {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+    
+    #respec-pill:hover,
+    #respec-pill:focus {
+      color: rgb(0, 0, 0);
+      background-color: rgb(245, 245, 245);
+      transition: color .2s;
+    }
+    
+    #respec-menu {
+      position: absolute;
+      margin: 0;
+      padding: 0;
+      font-family: sans-serif;
+      background: #fff;
+      box-shadow: 1px 1px 8px 0 rgba(100, 100, 100, .5);
+      width: 200px;
+      display: none;
+      text-align: left;
+      margin-top: 32px;
+      font-size: .8em;
+    }
+    
+    #respec-menu li {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+    }
+    
+    .respec-save-button {
+      background: #fff;
+      border: 1px solid #000;
+      border-radius: 5px;
+      padding: 5px;
+      margin: 5px;
+      display: block;
+      width: 100%;
+      color: #000;
+      text-decoration: none;
+      text-align: center;
+      font-size: inherit;
+    }
+    
+    #respec-ui button:focus,
+    #respec-pill:focus,
+    .respec-option:focus {
+      outline: 0;
+      outline-style: none;
+    }
+    
+    #respec-pill-error {
+      background-color: red;
+      color: white;
+    }
+    
+    #respec-pill-warning {
+      background-color: orange;
+      color: white;
+    }
+    
+    .respec-warning-list,
+    .respec-error-list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      font-family: sans-serif;
+      background-color: rgb(255, 251, 230);
+      font-size: .9em;
+    }
+    
+    .respec-warning-list li,
+    .respec-error-list li {
+      padding: 0.4em 0.7em;
+    }
+    
+    .respec-warning-list li::before {
+      content: "⚠️";
+      padding-right: .5em;
+    }
+    
+    .respec-warning-list li {
+      color: rgb(92, 59, 0);
+      border-bottom: thin solid rgb(255, 245, 194);
+    }
+    
+    .respec-error-list,
+    .respec-error-list li {
+      background-color: rgb(255, 240, 240);
+    }
+    
+    .respec-error-list li::before {
+      content: "💥";
+      padding-right: .5em;
+    }
+    
+    .respec-error-list li {
+      padding: 0.4em 0.7em;
+      color: rgb(92, 59, 0);
+      border-bottom: thin solid rgb(255, 215, 215);
+    }
+    
+    #respec-overlay {
+      display: block;
+      opacity: 0;
+      position: fixed;
+      z-index: 10000;
+      top: 0px;
+      left: 0px;
+      height: 100%;
+      width: 100%;
+      background: #000;
+    }
+    
+    .respec-modal {
+      display: block;
+      position: fixed;
+      opacity: 0;
+      z-index: 11000;
+      margin: auto;
+      top: 10%;
+      background: #fff;
+      border: 5px solid #666;
+      min-width: 20%;
+      width: 85%;
+      padding: 0;
+      max-height: 80%;
+      overflow-y: auto;
+      margin: 0 -.5cm
+    }
+    
+    @media screen and (min-width: 78em) {
+      .respec-modal {
+        width: 64%;
+      }
+    }
+    
+    .respec-modal h3 {
+      margin: 0;
+      padding: .2em;
+      text-align: center;
+      color: black;
+      background: linear-gradient(to bottom, rgba(238, 238, 238, 1) 0%, rgba(238, 238, 238, 1) 50%, rgba(204, 204, 204, 1) 100%);
+      font-size: 1em;
+    }
+    
+    .respec-modal .inside p {
+      padding-left: 1cm;
+    }
+    
+    #respec-menu button.respec-option {
+      background: white;
+      padding: 0 .2cm;
+      border: none;
+      width: 100%;
+      text-align: left;
+      font-size: inherit;
+      padding: 1.2em 1.2em;
+    }
+    
+    #respec-menu button.respec-option:hover,
+    #respec-menu button:focus {
+      background-color: #eeeeee;
+    }
+    
+    .respec-cmd-icon {
+      padding-right: .5em;
+    }
+    
+    #respec-ui button.respec-option:last-child {
+      border: none;
+      border-radius: inherit;
+    }
+    
+    .respec-offending-element {
+      display: inline-block;
+      position: relative;
+      background: url(data:image/gif;base64,R0lGODdhBAADAPEAANv///8AAP///wAAACwAAAAABAADAEACBZQjmIAFADs=) bottom repeat-x;
+    }
+    
+    .respec-dfn-list {
+      column-count: 2;
+    }
+    
+    .respec-dfn-list li {
+      list-style: none;
+    }
+    
+    @media print {
+      .removeOnSave {
+        display: none;
+      }
+    }
+  </style>
+  <title>Embedding Web Annotations in HTML</title>
+
+  <style>
+    .turtle .hll {
+      background-color: #ffffcc
+    }
+    
+    .turtle .c {
+      color: #408080;
+      font-style: italic
+    }
+    /* Comment */
+    
+    .turtle .err {
+      border: 1px solid #FF0000
+    }
+    /* Error */
+    
+    .turtle .k {
+      color: #008000;
+      font-weight: bold
+    }
+    /* Keyword */
+    
+    .turtle .o {
+      color: #666666
+    }
+    /* Operator */
+    
+    .turtle .ch {
+      color: #408080;
+      font-style: italic
+    }
+    /* Comment.Hashbang */
+    
+    .turtle .cm {
+      color: #408080;
+      font-style: italic
+    }
+    /* Comment.Multiline */
+    
+    .turtle .cp {
+      color: #BC7A00
+    }
+    /* Comment.Preproc */
+    
+    .turtle .cpf {
+      color: #408080;
+      font-style: italic
+    }
+    /* Comment.PreprocFile */
+    
+    .turtle .c1 {
+      color: #408080;
+      font-style: italic
+    }
+    /* Comment.Single */
+    
+    .turtle .cs {
+      color: #408080;
+      font-style: italic
+    }
+    /* Comment.Special */
+    
+    .turtle .gd {
+      color: #A00000
+    }
+    /* Generic.Deleted */
+    
+    .turtle .ge {
+      font-style: italic
+    }
+    /* Generic.Emph */
+    
+    .turtle .gr {
+      color: #FF0000
+    }
+    /* Generic.Error */
+    
+    .turtle .gh {
+      color: #000080;
+      font-weight: bold
+    }
+    /* Generic.Heading */
+    
+    .turtle .gi {
+      color: #00A000
+    }
+    /* Generic.Inserted */
+    
+    .turtle .go {
+      color: #888888
+    }
+    /* Generic.Output */
+    
+    .turtle .gp {
+      color: #000080;
+      font-weight: bold
+    }
+    /* Generic.Prompt */
+    
+    .turtle .gs {
+      font-weight: bold
+    }
+    /* Generic.Strong */
+    
+    .turtle .gu {
+      color: #800080;
+      font-weight: bold
+    }
+    /* Generic.Subheading */
+    
+    .turtle .gt {
+      color: #0044DD
+    }
+    /* Generic.Traceback */
+    
+    .turtle .kc {
+      color: #008000;
+      font-weight: bold
+    }
+    /* Keyword.Constant */
+    
+    .turtle .kd {
+      color: #008000;
+      font-weight: bold
+    }
+    /* Keyword.Declaration */
+    
+    .turtle .kn {
+      color: #008000;
+      font-weight: bold
+    }
+    /* Keyword.Namespace */
+    
+    .turtle .kp {
+      color: #008000
+    }
+    /* Keyword.Pseudo */
+    
+    .turtle .kr {
+      color: #008000;
+      font-weight: bold
+    }
+    /* Keyword.Reserved */
+    
+    .turtle .kt {
+      color: #B00040
+    }
+    /* Keyword.Type */
+    
+    .turtle .m {
+      color: #666666
+    }
+    /* Literal.Number */
+    
+    .turtle .s {
+      color: #BA2121
+    }
+    /* Literal.String */
+    
+    .turtle .na {
+      color: #7D9029
+    }
+    /* Name.Attribute */
+    
+    .turtle .nb {
+      color: #008000
+    }
+    /* Name.Builtin */
+    
+    .turtle .nc {
+      color: #0000FF;
+      font-weight: bold
+    }
+    /* Name.Class */
+    
+    .turtle .no {
+      color: #880000
+    }
+    /* Name.Constant */
+    
+    .turtle .nd {
+      color: #AA22FF
+    }
+    /* Name.Decorator */
+    
+    .turtle .ni {
+      color: #999999;
+      font-weight: bold
+    }
+    /* Name.Entity */
+    
+    .turtle .ne {
+      color: #D2413A;
+      font-weight: bold
+    }
+    /* Name.Exception */
+    
+    .turtle .nf {
+      color: #0000FF
+    }
+    /* Name.Function */
+    
+    .turtle .nl {
+      color: #A0A000
+    }
+    /* Name.Label */
+    
+    .turtle .nn {
+      color: #0000FF;
+      font-weight: bold
+    }
+    /* Name.Namespace */
+    
+    .turtle .nt {
+      color: #008000;
+      font-weight: bold
+    }
+    /* Name.Tag */
+    
+    .turtle .nv {
+      color: #19177C
+    }
+    /* Name.Variable */
+    
+    .turtle .ow {
+      color: #AA22FF;
+      font-weight: bold
+    }
+    /* Operator.Word */
+    
+    .turtle .w {
+      color: #bbbbbb
+    }
+    /* Text.Whitespace */
+    
+    .turtle .mb {
+      color: #666666
+    }
+    /* Literal.Number.Bin */
+    
+    .turtle .mf {
+      color: #666666
+    }
+    /* Literal.Number.Float */
+    
+    .turtle .mh {
+      color: #666666
+    }
+    /* Literal.Number.Hex */
+    
+    .turtle .mi {
+      color: #666666
+    }
+    /* Literal.Number.Integer */
+    
+    .turtle .mo {
+      color: #666666
+    }
+    /* Literal.Number.Oct */
+    
+    .turtle .sa {
+      color: #BA2121
+    }
+    /* Literal.String.Affix */
+    
+    .turtle .sb {
+      color: #BA2121
+    }
+    /* Literal.String.Backtick */
+    
+    .turtle .sc {
+      color: #BA2121
+    }
+    /* Literal.String.Char */
+    
+    .turtle .dl {
+      color: #BA2121
+    }
+    /* Literal.String.Delimiter */
+    
+    .turtle .sd {
+      color: #BA2121;
+      font-style: italic
+    }
+    /* Literal.String.Doc */
+    
+    .turtle .s2 {
+      color: #BA2121
+    }
+    /* Literal.String.Double */
+    
+    .turtle .se {
+      color: #BB6622;
+      font-weight: bold
+    }
+    /* Literal.String.Escape */
+    
+    .turtle .sh {
+      color: #BA2121
+    }
+    /* Literal.String.Heredoc */
+    
+    .turtle .si {
+      color: #BB6688;
+      font-weight: bold
+    }
+    /* Literal.String.Interpol */
+    
+    .turtle .sx {
+      color: #008000
+    }
+    /* Literal.String.Other */
+    
+    .turtle .sr {
+      color: #BB6688
+    }
+    /* Literal.String.Regex */
+    
+    .turtle .s1 {
+      color: #BA2121
+    }
+    /* Literal.String.Single */
+    
+    .turtle .ss {
+      color: #19177C
+    }
+    /* Literal.String.Symbol */
+    
+    .turtle .bp {
+      color: #008000
+    }
+    /* Name.Builtin.Pseudo */
+    
+    .turtle .fm {
+      color: #0000FF
+    }
+    /* Name.Function.Magic */
+    
+    .turtle .vc {
+      color: #19177C
+    }
+    /* Name.Variable.Class */
+    
+    .turtle .vg {
+      color: #19177C
+    }
+    /* Name.Variable.Global */
+    
+    .turtle .vi {
+      color: #19177C
+    }
+    /* Name.Variable.Instance */
+    
+    .turtle .vm {
+      color: #19177C
+    }
+    /* Name.Variable.Magic */
+    
+    .turtle .il {
+      color: #666666
+    }
+    /* Literal.Number.Integer.Long */
+  </style>
+  <style>
+    .model {
+      empty-cells: show;
+      border-collapse: collapse;
+      margin-bottom: .5ex;
+      border: 1px solid black;
+      width: 100%;
+    }
+    
+    .model th {
+      padding: 3px;
+      border: 1px solid #404040;
+      text-align: center;
+      font-weight: bold;
+    }
+    
+    .model td {
+      padding: 5px;
+      border: 1px solid #404040;
+      text-align: left;
+    }
+    
+    .ex_title {
+      margin-top: 2rem;
+      font-style: italic;
+      color: #005A9C;
+    }
+    
+    span.orcid a {
+      text-decoration: none !important;
+      border: none !important;
+    }
+    
+    span.orcid a img {
+      transform: translateY(3px);
+    }
+  </style>
+
+
+  <!--[if lt IE 9]><script src='https://www.w3.org/2008/site/js/html5shiv.js'></script><![endif]-->
+  <link rel="stylesheet" href="https://www.w3.org/StyleSheets/TR/2016/W3C-WG-NOTE.css">
+  <link rel="canonical" href="https://www.w3.org/TR/annotation-html/">
+  <meta name="generator" content="ReSpec 10.4.0">
+  <script id="initialUserConfig" type="application/json">
+    {
+      "specStatus": "WG-NOTE",
+      "shortName": "annotation-html",
+      "errata": "https://www.w3.org/annotation/errata/",
+      "editors": [
+      {
+        "name": "Timothy W. Cole",
+        "url": "http://www.library.illinois.edu/people/bios/t-cole3/",
+        "company": "University of Illinois at Urbana-Champaign",
+        "companyURL": "http://illinois.edu",
+        "mailto": "t-cole3@illinois.edu",
+        "extras": [
+        {
+          "name": "<img src='orcid_logo.png' alt='orcid logo' />",
+          "href": "https://orcid.org/0000-0002-5906-4581",
+          "class": "orcid"
+        }]
+      },
+      {
+        "name": "Sarven Capadisli",
+        "url": "http://csarven.ca/#i",
+        "company": "University of Bonn",
+        "companyURL": "http://eis.iai.uni-bonn.de/",
+        "mailto": "info@csarven.ca"
+      },
+      {
+        "name": "Benjamin Young",
+        "url": "http://bigbluehat.com/",
+        "company": "John Wiley &amp; Sons, Inc.",
+        "companyURL": "http://www.wiley.com/",
+        "mailto": "byoung@bigbluehat.com"
+      },
+      {
+        "name": "Ivan Herman",
+        "url": "https://www.w3.org/People/Ivan/",
+        "company": "W3C",
+        "extras": [
+        {
+          "name": "<img src='orcid_logo.png' alt='orcid logo'  />",
+          "href": "http://orcid.org/0000-0003-0782-2704",
+          "class": "orcid"
+        }],
+        "companyURL": "http://www.w3.org",
+        "mailto": "ivan@w3.org"
+      }],
+      "edDraftURI": "http://w3c.github.io/web-annotation/serialization-html-note/",
+      "wg": "Web Annotation Working Group",
+      "wgURI": "http://www.w3.org/annotation/",
+      "wgPublicList": "public-annotation",
+      "wgPatentURI": "https://www.w3.org/2004/01/pp-impl/73180/status",
+      "publishDate": "2017-02-23",
+      "noRecTrack": true,
+      "localBiblio":
+      {
+        "iana-media-types":
+        {
+          "title": "Media Types",
+          "href": "http://www.iana.org/assignments/media-types/",
+          "publisher": "IANA (Internet Assigned Numbers Authority)"
+        },
+        "iconclass":
+        {
+          "title": "Iconclass",
+          "href": "http://iconclass.org",
+          "publisher": "RKD, The Netherlands Institute for Art History"
+        },
+        "w3c-language-tags":
+        {
+          "title": "Language Tags in HTML and XML",
+          "href": "https://www.w3.org/International/articles/language-tags/",
+          "publisher": "W3C"
+        },
+        "annotation-vocab":
+        {
+          "authors": [
+            "Robert Sanderson",
+            "Paolo Ciccarese",
+            "Benjamin Young"
+          ],
+          "title": "Web Annotation Vocabulary",
+          "href": "http://www.w3.org/TR/annotation-vocab/",
+          "publisher": "W3C",
+          "rawDate": "2017-02-23",
+          "status": "REC"
+        },
+        "annotation-model":
+        {
+          "authors": [
+            "Robert Sanderson",
+            "Paolo Ciccarese",
+            "Benjamin Young"
+          ],
+          "title": "Web Annotation Data Model",
+          "href": "http://www.w3.org/TR/annotation-model/",
+          "publisher": "W3C",
+          "rawDate": "2017-02-23",
+          "status": "REC"
+        },
+        "annotation-protocol":
+        {
+          "authors": [
+            "Robert Sanderson"
+          ],
+          "title": "Web Annotation Protocol",
+          "href": "http://www.w3.org/TR/annotation-protocol/",
+          "publisher": "W3C",
+          "rawDate": "2017-02-23",
+          "status": "REC"
+        },
+        "cfi":
+        {
+          "authors": [
+            "Peter Sorotokin",
+            "Garth Conboy",
+            "Brady Duga",
+            "John Rivlin",
+            "Don Beaver",
+            "Kevin Ballard",
+            "Alastair Fettes",
+            "Daniel Weck"
+          ],
+          "title": "EPUB Canonical Fragment Identifiers",
+          "href": "http://www.idpf.org/epub/linking/cfi/epub-cfi-20140628.html",
+          "publisher": "IDPF",
+          "rawDate": "2014-06-26",
+          "status": "Recommended Specification"
+        },
+        "html-notes":
+        {
+          "authors": [
+            "Shane McCarron",
+            "David MacDonald"
+          ],
+          "title": "HTML Notes and Note References",
+          "href": "http://spec-ops.github.io/html-note/index.html",
+          "publisher": "Spec-Ops",
+          "rawDate": "2016-04-26",
+          "status": "Unofficial Draft"
+        },
+        "selectors-states":
+        {
+          "authors": [
+            "Ivan Herman",
+            "Robert Sanderson",
+            "Paolo Ciccarese",
+            "Benjamin Young"
+          ],
+          "title": "Selectors and States",
+          "href": "http://www.w3.org/TR/selectors-state/",
+          "publisher": "W3C",
+          "rawDate": "2017-02-23",
+          "status": "W3C Reference Note"
+        }
+      },
+      "otherLinks": [
+      {
+        "key": "Repository",
+        "data": [
+        {
+          "value": "Github Repository",
+          "href": "https://github.com/w3c/web-annotation"
+        },
+        {
+          "value": "File an issue",
+          "href": "https://github.com/w3c/web-annotation/issues"
+        }]
+      }],
+      "alternateFormats": [
+      {
+        "uri": "annotation-html.epub",
+        "label": "ePub"
+      }],
+      "noIDLIn": true,
+      "issueBase": "https://github.com/w3c/web-annotation/issues/"
+    }
+  </script>
+</head>
+<body aria-busy="false" class="h-entry" role="document" id="respecDocument">
+  <div class="head" role="contentinfo" id="respecHeader">
+    <p>
+      <a class="logo" href="https://www.w3.org/"><img src="https://www.w3.org/StyleSheets/TR/2016/logos/W3C" alt="W3C" width="72" height="48"></a>
+    </p>
+    <h1 class="title p-name" id="title" property="dcterms:title">Embedding Web Annotations in HTML</h1>
+    <h2 id="w3c-working-group-note-23-february-2017"><abbr title="World Wide Web Consortium">W3C</abbr> Working Group Note <time property="dcterms:issued" class="dt-published" datetime="2017-02-23">23 February 2017</time></h2>
+    <dl>
+      <dt>This version:</dt>
+      <dd><a class="u-url" href="https://www.w3.org/TR/2017/NOTE-annotation-html-20170223/">https://www.w3.org/TR/2017/NOTE-annotation-html-20170223/</a></dd>
+      <dt>Latest published version:</dt>
+      <dd><a href="https://www.w3.org/TR/annotation-html/">https://www.w3.org/TR/annotation-html/</a></dd>
+      <dt>Latest editor's draft:</dt>
+      <dd><a href="http://w3c.github.io/web-annotation/serialization-html-note/">http://w3c.github.io/web-annotation/serialization-html-note/</a></dd>
+      <dt>Editors:</dt>
+      <dd class="p-author h-card vcard" property="bibo:editor" resource="_:editor0"><span property="rdf:first" typeof="foaf:Person"><meta property="foaf:name" content="Timothy W. Cole"><a class="u-url url p-name fn" property="foaf:homepage" href="http://www.library.illinois.edu/people/bios/t-cole3/">Timothy W. Cole</a>, <a property="foaf:workplaceHomepage" class="p-org org h-org h-card" href="http://illinois.edu">University of Illinois at Urbana-Champaign</a>, <span class="ed_mailto"><a class="u-email email" property="foaf:mbox" href="mailto:t-cole3@illinois.edu">t-cole3@illinois.edu</a></span>, <span class="orcid"><a href="https://orcid.org/0000-0002-5906-4581" property="rdfs:seeAlso"><img src="orcid_logo.png" alt="orcid logo"></a></span></span>
+        <span property="rdf:rest" resource="_:editor1"></span>
+      </dd>
+      <dd class="p-author h-card vcard" resource="_:editor1"><span property="rdf:first" typeof="foaf:Person"><meta property="foaf:name" content="Sarven Capadisli"><a class="u-url url p-name fn" property="foaf:homepage" href="http://csarven.ca/#i">Sarven Capadisli</a>, <a property="foaf:workplaceHomepage" class="p-org org h-org h-card" href="http://eis.iai.uni-bonn.de/">University of Bonn</a>, <span class="ed_mailto"><a class="u-email email" property="foaf:mbox" href="mailto:info@csarven.ca">info@csarven.ca</a></span></span>
+        <span property="rdf:rest" resource="_:editor2"></span>
+      </dd>
+      <dd class="p-author h-card vcard" resource="_:editor2"><span property="rdf:first" typeof="foaf:Person"><meta property="foaf:name" content="Benjamin Young"><a class="u-url url p-name fn" property="foaf:homepage" href="http://bigbluehat.com/">Benjamin Young</a>, <a property="foaf:workplaceHomepage" class="p-org org h-org h-card" href="http://www.wiley.com/">John Wiley &amp; Sons, Inc.</a>, <span class="ed_mailto"><a class="u-email email" property="foaf:mbox" href="mailto:byoung@bigbluehat.com">byoung@bigbluehat.com</a></span></span>
+        <span property="rdf:rest" resource="_:editor3"></span>
+      </dd>
+      <dd class="p-author h-card vcard" resource="_:editor3"><span property="rdf:first" typeof="foaf:Person"><meta property="foaf:name" content="Ivan Herman"><a class="u-url url p-name fn" property="foaf:homepage" href="https://www.w3.org/People/Ivan/">Ivan Herman</a>, <a property="foaf:workplaceHomepage" class="p-org org h-org h-card" href="http://www.w3.org"><abbr title="World Wide Web Consortium">W3C</abbr></a>, <span class="ed_mailto"><a class="u-email email" property="foaf:mbox" href="mailto:ivan@w3.org">ivan@w3.org</a></span>, <span class="orcid"><a href="http://orcid.org/0000-0003-0782-2704" property="rdfs:seeAlso"><img src="orcid_logo.png" alt="orcid logo"></a></span></span>
+        <span property="rdf:rest" resource="rdf:nil"></span>
+      </dd>
+
+      <dt>Repository:</dt>
+      <dd>
+        <a href="https://github.com/w3c/web-annotation">
+                      Github Repository
+                    </a>
+      </dd>
+      <dd>
+        <a href="https://github.com/w3c/web-annotation/issues">
+                      File an issue
+                    </a>
+      </dd>
+    </dl>
+    <p>
+      Please check the <a href="https://www.w3.org/annotation/errata/"><strong>errata</strong></a> for any errors or issues reported since publication.
+    </p>
+    <p>
+      This document is also available in this non-normative format:
+      <a rel="alternate" href="annotation-html.epub">ePub</a>
+    </p>
+    <p class="copyright">
+      <a href="https://www.w3.org/Consortium/Legal/ipr-notice#Copyright">Copyright</a> © 2017
+
+      <a href="https://www.w3.org/"><abbr title="World Wide Web Consortium">W3C</abbr></a><sup>®</sup> (<a href="https://www.csail.mit.edu/"><abbr title="Massachusetts Institute of Technology">MIT</abbr></a>,
+      <a href="https://www.ercim.eu/"><abbr title="European Research Consortium for Informatics and Mathematics">ERCIM</abbr></a>,
+      <a href="https://www.keio.ac.jp/">Keio</a>, <a href="http://ev.buaa.edu.cn/">Beihang</a>).
+      <abbr title="World Wide Web Consortium">W3C</abbr> <a href="https://www.w3.org/Consortium/Legal/ipr-notice#Legal_Disclaimer">liability</a>,
+      <a href="https://www.w3.org/Consortium/Legal/ipr-notice#W3C_Trademarks">trademark</a> and
+      <a rel="license" href="https://www.w3.org/Consortium/Legal/copyright-documents">document use</a> rules apply.
+    </p>
+    <hr title="Separator for header">
+  </div>
+
+  <section id="abstract" class="introductory" property="dc:abstract">
+    <h2 id="h-abstract" resource="#h-abstract"><span property="xhv:role" resource="xhv:heading">Abstract</span></h2>
+    <p>The Web Annotation Working Group has published three Recommendations for expressing annotations on the Web: the Web Annotation Data Model [<cite><a class="bibref" href="#bib-annotation-model">annotation-model</a></cite>]; the Web Annotation Vocabulary [<cite><a class="bibref" href="#bib-annotation-vocab">annotation-vocab</a></cite>]; and the Web Annotation Protocol [<cite><a class="bibref" href="#bib-annotation-protocol">annotation-protocol</a></cite>]. These Recommendations define a serialization of the Model in a new, Web annotation-specific profile of JSON-LD [<cite><a class="bibref" href="#bib-json-ld">json-ld</a></cite>].</p>
+
+    <p>This Note describes and illustrates potential approaches for including annotations within HTML documents. Examples also are included illustrating the use within an HTML document of annotation Selectors as fragment identifiers. (The Working Group's Selectors and States Reference Note [<cite><a class="bibref" href="#bib-selectors-states">selectors-states</a></cite>] defines the syntax used for Selectors as fragment identifiers.)</p>
+
+    <p>The approaches described in this document are incomplete and preliminary. They do not exhaust the full range of feasible options. The approaches discussed in this note have emerged from Working Group discussions and should be considered no more than initial starting points for further discussion, experimentation and development.</p>
+  </section>
+
+  <section id="sotd" class="introductory">
+    <h2 id="h-sotd" resource="#h-sotd"><span property="xhv:role" resource="xhv:heading">Status of This Document</span></h2>
+    <p>
+      <em>This section describes the status of this document at the time of its publication. Other documents may supersede this document. A list of current <abbr title="World Wide Web Consortium">W3C</abbr> publications and the latest revision of this technical report can be found in the <a href="https://www.w3.org/TR/"><abbr title="World Wide Web Consortium">W3C</abbr> technical reports index</a> at https://www.w3.org/TR/.</em>
+    </p>
+
+
+    <p>
+      This document was published by the <a href="http://www.w3.org/annotation/">Web Annotation Working Group</a> as a Working Group Note. If you wish to make comments regarding this document, please send them to
+      <a href="mailto:public-annotation@w3.org">public-annotation@w3.org</a> (<a href="mailto:public-annotation-request@w3.org?subject=subscribe">subscribe</a>,
+      <a href="https://lists.w3.org/Archives/Public/public-annotation/">archives</a>). All comments are welcome.
+    </p>
+    <p>
+      Publication as a Working Group Note does not imply endorsement by the <abbr title="World Wide Web Consortium">W3C</abbr> Membership. This is a draft document and may be updated, replaced or obsoleted by other documents at any time. It is inappropriate to cite this document as other than work in progress.
+    </p>
+    <p>
+      This document was produced by a group operating under the
+      <a id="sotd_patent" property="w3p:patentRules" href="https://www.w3.org/Consortium/Patent-Policy-20040205/">5 February 2004 <abbr title="World Wide Web Consortium">W3C</abbr> Patent
+              Policy</a>.
+      <abbr title="World Wide Web Consortium">W3C</abbr> maintains a <a href="https://www.w3.org/2004/01/pp-impl/73180/status" rel="disclosure">public list of any patent
+                disclosures</a> made in connection with the deliverables of the group; that page also includes instructions for disclosing a patent. An individual who has actual knowledge of a patent which the individual believes contains
+      <a href="https://www.w3.org/Consortium/Patent-Policy-20040205/#def-essential">Essential
+              Claim(s)</a> must disclose the information in accordance with
+      <a href="https://www.w3.org/Consortium/Patent-Policy-20040205/#sec-Disclosure">section
+              6 of the <abbr title="World Wide Web Consortium">W3C</abbr> Patent Policy</a>.
+    </p>
+    <p>This document is governed by the <a id="w3c_process_revision" href="https://www.w3.org/2015/Process-20150901/">1 September 2015 <abbr title="World Wide Web Consortium">W3C</abbr> Process Document</a>.
+    </p>
+
+  </section>
+  <nav id="toc">
+    <h2 class="introductory" id="table-of-contents" resource="#table-of-contents"><span property="xhv:role" resource="xhv:heading">Table of Contents</span></h2>
+    <ol class="toc" role="directory">
+      <li class="tocline"><a href="#introduction" class="tocxref"><span class="secno">1. </span>Introduction</a>
+        <ol class="toc">
+          <li class="tocline"><a href="#scope" class="tocxref"><span class="secno">1.1 </span>Scope</a></li>
+          <li class="tocline"><a href="#motivation" class="tocxref"><span class="secno">1.2 </span>Motivation</a></li>
+        </ol>
+      </li>
+      <li class="tocline"><a href="#embed-json-ld" class="tocxref"><span class="secno">2. </span>Annotations Embedded as JSON-LD</a>
+        <ol class="toc">
+          <li class="tocline"><a href="#annotating-an-html-div" class="tocxref"><span class="secno">2.1 </span>Annotating an HTML <code>&lt;div&gt;</code></a></li>
+          <li class="tocline"><a href="#annotating-a-web-page-image" class="tocxref"><span class="secno">2.2 </span>Annotating a Web page image</a></li>
+          <li class="tocline"><a href="#annotating-the-body-of-an-html-document" class="tocxref"><span class="secno">2.3 </span>Annotating the <code>&lt;body&gt;</code> of an HTML document</a></li>
+        </ol>
+      </li>
+      <li class="tocline"><a href="#annotations-embedded-as-rdfa" class="tocxref"><span class="secno">3. </span>Annotations Embedded as RDFa</a>
+        <ol class="toc">
+          <li class="tocline"><a href="#mixing-rdfa-with-embedded-rdf-content" class="tocxref"><span class="secno">3.1 </span>Mixing RDFa with embedded RDF content</a></li>
+        </ol>
+      </li>
+      <li class="tocline"><a href="#web-annotation-based-citation-urls" class="tocxref"><span class="secno">4. </span>Web Annotation-based Citation URLs</a>
+        <ol class="toc">
+          <li class="tocline"><a href="#example-using-blockquote-and-q-tags" class="tocxref"><span class="secno">4.1 </span>Example using <code>&lt;blockquote&gt;</code> and <code>&lt;q&gt;</code> tags</a></li>
+          <li class="tocline"><a href="#example-using-an-a-tag" class="tocxref"><span class="secno">4.2 </span>Example using an <code>&lt;a&gt;</code> tag</a></li>
+        </ol>
+      </li>
+      <li class="tocline"><a href="#acknowledgements" class="tocxref"><span class="secno">A. </span>Acknowledgements</a></li>
+      <li class="tocline"><a href="#references" class="tocxref"><span class="secno">B. </span>References</a>
+        <ol class="toc">
+          <li class="tocline"><a href="#informative-references" class="tocxref"><span class="secno">B.1 </span>Informative references</a></li>
+        </ol>
+      </li>
+    </ol>
+  </nav>
+
+
+
+  <section id="introduction" typeof="bibo:Chapter" resource="#introduction" property="bibo:hasPart">
+    <!--OddPage-->
+    <h2 id="h-introduction" resource="#h-introduction"><span property="xhv:role" resource="xhv:heading"><span class="secno">1. </span>Introduction</span>
+    </h2>
+
+    <p>According to the Web Annotation Data Model [<cite><a class="bibref" href="#bib-annotation-model">annotation-model</a></cite>]:
+    </p>
+    <blockquote>
+      <p>"An annotation is considered to be a set of connected resources, typically including a body and target, and conveys that the body is related to the target.... This perspective results in a basic model with three parts, depicted below."</p>
+      <img src="images/intro_model.png" alt="Basic Model: Annotation, Body and Target" width="400">
+    </blockquote>
+    <p></p>
+
+    <p>The Model goes on to define an extensible, interoperable framework for expressing such annotations in RDF-based vocabularies. The Model additionally defines a JSON-LD [<cite><a class="bibref" href="#bib-json-ld">json-ld</a></cite>] serialization of that framework. However, the Model does not prescribe a means for including an annotation within a Web page (HTML document)—even when the annotation targets all or part of the page itself or all or part of another, external Resource linked from the page.</p>
+
+    <p>For example, the quotation above is simply an HTML blockquote and contains no encoded reference to the quotation as it exists within the Web Annotation Data Model Recommendation [<cite><a class="bibref" href="#bib-annotation-model">annotation-model</a></cite>], an HTML document.</p>
+
+    <p>This Note considers how a conformant expression of a Web Annotation or an annotation <a href="http://www.w3.org/TR/annotation-model/#selectors">Selector</a> that references a segment of an HTML document might usefully be embedded within the same or another HTML document. In addition to text embedded within the DOM, HTML documents often reference external resources such as images that are meant to be considered integral parts of an HTML Document when viewed on the Web, e.g., through the use of the HTML <code>&lt;img&gt;</code> element's <code>src</code> attribute. Approaches discussed in this Note would facilitate embedding in HTML an annotation targeting (in the context or scope of a Web page) an image or other similar Web page component resource external to an HTML document. </p>
+
+    <section id="scope" typeof="bibo:Chapter" resource="#scope" property="bibo:hasPart">
+      <h3 id="h-scope" resource="#h-scope"><span property="xhv:role" resource="xhv:heading"><span class="secno">1.1 </span>Scope</span>
+      </h3>
+      <p>Pending further experimentation, use-case development, incubation and broader collaborative efforts, this Note stops short of proposing any new, annotation-specific extensions to HTML [<cite><a class="bibref" href="#bib-html">html</a></cite>]. Nor does it propose any new, annotation-specific HTML elements or attributes. To address specific use cases, possible extensions of HTML have been discussed within the Web Annotation Working Group and elsewhere, e.g., an informal proposal for new note, notegroup, and noteref HTML elements to better handle footnote-style references within HTML documents [<cite><a class="bibref" href="#bib-html-notes">html-notes</a></cite>]. But for now this Note only considers approaches that can work out of the box today, without the need for an extension of HTML or the Web Annotation Vocabulary [<cite><a class="bibref" href="#bib-annotation-vocab">annotation-vocab</a></cite>]. These approaches rely on existing mechanisms, e.g., RDFa, JSON-LD, fragment identifiers, to embed annotations and elements of annotations within HTML documents. </p>
+
+      <p>This document also neither addresses nor proposes user interface implementations. Some illustrations included have been drawn from demonstration or developmental implementations that include user interface features, but the focus of this Note is the inclusion of annotations in HTML, not interface design.</p>
+    </section>
+
+    <section id="motivation" typeof="bibo:Chapter" resource="#motivation" property="bibo:hasPart">
+      <h3 id="h-motivation" resource="#h-motivation"><span property="xhv:role" resource="xhv:heading"><span class="secno">1.2 </span>Motivation</span>
+      </h3>
+
+      <p>The interest in embedding Web Annotations within HTML is motivated by several generic use cases that predate or have arisen over the course of the Web Annotation Working Group's existence, a few of which are listed here:
+      </p>
+      <dl>
+        <dt>Personal Annotating</dt>
+        <dd>Personal annotations added to a locally stored or cached copy of an HTML Web page can obviate the need to create and maintain a separate system to store and manage annotations. Such annotations could be shared on a limited basis (e.g., via email) by sharing the locally modified HTML, prior to or instead of sharing the annotations publicly.</dd>
+
+        <dt>Offline-first Annotations</dt>
+        <dd>Annotations made while offline and embedded in a local copy of HTML might later be extracted from the locally stored HTML and published to an online, centralized Web Annotation Protocol [<cite><a class="bibref" href="#bib-annotation-protocol">annotation-protocol</a></cite>] store of annotations when the user is back online.</dd>
+
+        <dt>Lighweight, decentralized Annotation Tools</dt>
+        <dd>Embedding annotations in HTML may facilitate the creation of lightweight annotation tools that are meant to be deployed in a decentralized fashion (i.e. copies deployed by individuals and used independently of any centralized annotation server or service). </dd>
+
+        <dt>Collaborative Annotating</dt>
+        <dd>Directly adding annotations to an HTML Web page that is being collaboratively authored, edited, and/or curated by a group of individuals, obviates the need for the group to agree on and select a single, central annotation repository or collaboration environment. But because the annotations as stored in the HTML still use a standard model and vocabulary, individualized tools used by members of the group for viewing and interacting with the annotations can still refer to the standard set of elements and attributes.</dd>
+
+        <dt>Wholly Internal Annotations</dt>
+        <dd>Requiring the external storage of internal (e.g., footnote) annotations, i.e., annotations linking text (an annotation target) appearing at one point in an HTML document to text (an annotation body) appearing elsewhere in the same HTML document is inefficient in most instances and can make interactive displays of these annotations unduly complicated.</dd>
+      </dl>
+      <p></p>
+    </section>
+  </section>
+
+  <section typeof="bibo:Chapter" resource="#embed-json-ld" property="bibo:hasPart">
+    <!--OddPage-->
+    <h2 id="embed-json-ld" resource="#embed-json-ld"><span property="xhv:role" resource="xhv:heading"><span class="secno">2. </span>Annotations Embedded as JSON-LD</span>
+    </h2>
+    <p>JSON-LD [<cite><a class="bibref" href="#bib-json-ld">json-ld</a></cite>] is the serialization format used in the Web Annotation Data Model [<cite><a class="bibref" href="#bib-annotation-model">annotation-model</a></cite>]. HTML can accommodate this serialization format directly via the use of the HTML <code>&lt;script&gt;</code> element with its
+      <code>type</code> attribute assigned the media type for a Web Annotation:
+      <code>application/ld+json;profile="http://www.w3.org/ns/anno.jsonld"</code>.
+    </p>
+
+    <p>The following three annotations are all embedded in a single HTML document. This document describes a digital image created by scanning a page from a Renaissance-era book; the object scanned was known as an emblem. A JPEG image of the emblem is linked from the HTML document using an <code>&lt;img&gt;</code> element. A transcription of the German language text of the emblem's motto (i.e., the emblem's caption) is included in the HTML document.
+    </p>
+
+    <section id="annotating-an-html-div" typeof="bibo:Chapter" resource="#annotating-an-html-div" property="bibo:hasPart">
+      <h3 id="h-annotating-an-html-div" resource="#h-annotating-an-html-div"><span property="xhv:role" resource="xhv:heading"><span class="secno">2.1 </span>Annotating an HTML <code>&lt;div&gt;</code></span>
+      </h3>
+      <p><span style="font-weight:bold">Use case for Example 1:</span> Mara wants to annotate the transcription of the emblem motto with its Latin translation. The target of the annotation is the
+        <code>&lt;div&gt;</code> node of the HTML document that has an <code>id</code> attribute with the value <code>"mottoTranscription"</code>. Because the target of the annotation is a node which has an <code>id</code> attribute, a CSS Selector is appropriate. The body of the annotation is the plain text of the Latin translation. To embed the body in the annotation, a <code>TextualBody</code> is used. To identify the annotation itself, an IRI [<cite><a class="bibref" href="#bib-rfc3987">rfc3987</a></cite>] is provided as the value of the annotation's <code>id</code> property. It is not required that this IRI be dereferenceable.
+      </p>
+
+      <h3 id="json-ld-example-1">JSON-LD Example 1</h3>
+      <div class="example">
+        <div class="example-title marker"><span>Example 1</span><span style="text-transform: none">: Annotating a transcribed motto</span></div>
+        <pre class="highlight hljs xml" aria-busy="false" aria-live="polite"><span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">type</span>=<span class="hljs-string">'application/ld+json;profile="http://www.w3.org/ns/anno.jsonld"'</span>&gt;</span><span class="javascript">
+{
+    <span class="hljs-string">"@context"</span>: <span class="hljs-string">"http://www.w3.org/ns/anno.jsonld"</span>,
+    <span class="hljs-string">"id"</span>: <span class="hljs-string">"http://example.org/annotations/anno-01"</span>,
+    <span class="hljs-string">"type"</span>: <span class="hljs-string">"Annotation"</span>,
+    <span class="hljs-string">"motivation"</span>: <span class="hljs-string">"describing"</span>,
+
+    <span class="hljs-string">"target"</span>: {
+        <span class="hljs-string">"source"</span>: <span class="hljs-string">"http://example.org/Emblem004.html"</span>,
+        <span class="hljs-string">"selector"</span>: {
+            <span class="hljs-string">"type"</span>: <span class="hljs-string">"CssSelector"</span>,
+            <span class="hljs-string">"value"</span>: <span class="hljs-string">"div#mottoTranscription"</span>
+        }
+    },
+
+    <span class="hljs-string">"body"</span>: {
+        <span class="hljs-string">"type"</span>: <span class="hljs-string">"TextualBody"</span>,
+        <span class="hljs-string">"value"</span>: <span class="hljs-string">"Fiunt, quae posse negabas."</span>,
+        <span class="hljs-string">"format"</span>: <span class="hljs-string">"text/plain"</span>,
+        <span class="hljs-string">"language"</span>: <span class="hljs-string">"la"</span>
+    },
+
+    <span class="hljs-string">"created"</span>: <span class="hljs-string">"2017-01-26T17:30:04.639Z"</span>,
+    <span class="hljs-string">"creator"</span>: {
+        <span class="hljs-string">"type"</span>: <span class="hljs-string">"Person"</span>,
+        <span class="hljs-string">"email"</span>: <span class="hljs-string">"mailto:mara@example.org"</span>,
+        <span class="hljs-string">"name"</span>: <span class="hljs-string">"Mara"</span>
+    }
+}
+</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></pre>
+      </div>
+
+      <div class="note">
+        <div class="note-title marker" aria-level="4" role="heading" id="h-note1"><span>Note</span></div>
+        <p class=""> While an HTML <code>&lt;script&gt;</code> node may itself have an <code>id</code> attribute, implementers are discouraged from using an HTML URL with fragment identifier to identify an annotation. An HTML fragment identifier is only intended to indicate and help navigate to a specific DOM node in an HTML document (see HTML5 Recommendation [<cite><a class="bibref" href="#bib-html5">html5</a></cite>] Section 5.6.9, "Navigating to a fragment identifier"). A fragment identifier does not unambiguously identify the contents of this node as a separate resource.
+        </p>
+      </div>
+    </section>
+
+    <section id="annotating-a-web-page-image" typeof="bibo:Chapter" resource="#annotating-a-web-page-image" property="bibo:hasPart">
+      <h3 id="h-annotating-a-web-page-image" resource="#h-annotating-a-web-page-image"><span property="xhv:role" resource="xhv:heading"><span class="secno">2.2 </span>Annotating a Web page image</span>
+      </h3>
+      <p><span style="font-weight:bold">Use case for Example 2</span>: Tim wants to tag the emblem image linked from the HTML document with an Iconclass descriptor. (Iconclass [<cite><a class="bibref" href="#bib-iconclass">iconclass</a></cite>] is a linked open data friendly, multilingual classification system for cultural content.) The body of this annotation is therefore an External Web Resource. To make clear that the image is being annotated within the context of the Web page describing the emblem, a <code>SpecificResource</code> with a <code>scope</code> property is used to express the target of the annotation.
+      </p>
+
+      <h3 id="json-ld-example-2">JSON-LD Example 2</h3>
+      <div class="example">
+        <div class="example-title marker"><span>Example 2</span><span style="text-transform: none">: Annotating the embedded image</span></div>
+        <pre class="highlight hljs xml" aria-busy="false" aria-live="polite"><span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">type</span>=<span class="hljs-string">'application/ld+json;profile="http://www.w3.org/ns/anno.jsonld"'</span>&gt;</span><span class="javascript">
+{
+    <span class="hljs-string">"@context"</span>: <span class="hljs-string">"http://www.w3.org/ns/anno.jsonld"</span>,
+    <span class="hljs-string">"id"</span>: <span class="hljs-string">"http://example.org/annotations/anno-02"</span>,
+    <span class="hljs-string">"type"</span>: <span class="hljs-string">"Annotation"</span>,
+    <span class="hljs-string">"motivation"</span>: <span class="hljs-string">"tagging"</span>,
+
+    <span class="hljs-string">"target"</span>: {
+        <span class="hljs-string">"source"</span>: <span class="hljs-string">"http://example.org/images/E4.jpg"</span>,
+        <span class="hljs-string">"scope"</span>: <span class="hljs-string">"http://example.org/Emblem004.html"</span>
+    },
+
+    <span class="hljs-string">"body"</span>: <span class="hljs-string">"http://iconclass.org/rkd/25F24"</span>,
+
+    <span class="hljs-string">"created"</span>: <span class="hljs-string">"2017-01-26T18:16:42.26Z"</span>,
+    <span class="hljs-string">"creator"</span>: {
+        <span class="hljs-string">"type"</span>: <span class="hljs-string">"Person"</span>,
+        <span class="hljs-string">"email"</span>: <span class="hljs-string">"mailto:tim@example.org"</span>,
+        <span class="hljs-string">"name"</span>: <span class="hljs-string">"Tim"</span>
+    }
+}
+</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></pre>
+      </div>
+    </section>
+
+    <section id="annotating-the-body-of-an-html-document" typeof="bibo:Chapter" resource="#annotating-the-body-of-an-html-document" property="bibo:hasPart">
+      <h3 id="h-annotating-the-body-of-an-html-document" resource="#h-annotating-the-body-of-an-html-document"><span property="xhv:role" resource="xhv:heading"><span class="secno">2.3 </span>Annotating the <code>&lt;body&gt;</code> of an HTML document</span>
+      </h3>
+      <p><span style="font-weight:bold">Use case for Example 3</span>: Myung-Ja wants to link the description of this emblem with another digitized emblem at the University of Illinois. The other emblem, an external Web resource, is the body of the annotation. The motivation of the annotation is "linking". The entire <code>&lt;body&gt;</code> node of the HTML document serves as the target of this annotation. As with Example 1, a CSS Selector is used to express the target.
+      </p>
+      <h3 id="json-ld-example-3">JSON-LD Example 3</h3>
+      <div class="example">
+        <div class="example-title marker"><span>Example 3</span><span style="text-transform: none">: Annotating the body of a Web page</span></div>
+        <pre class="highlight hljs xml" aria-busy="false" aria-live="polite"><span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">type</span>=<span class="hljs-string">'application/ld+json;profile="http://www.w3.org/ns/anno.jsonld"'</span>&gt;</span><span class="javascript">
+{
+    <span class="hljs-string">"@context"</span>: <span class="hljs-string">"http://www.w3.org/ns/anno.jsonld"</span>,
+    <span class="hljs-string">"id"</span>: <span class="hljs-string">"http://example.org/annotations/anno-03"</span>,
+    <span class="hljs-string">"type"</span>: <span class="hljs-string">"Annotation"</span>,
+    <span class="hljs-string">"motivation"</span>: <span class="hljs-string">"linking"</span>,
+
+    <span class="hljs-string">"target"</span>: {
+        <span class="hljs-string">"source"</span>: <span class="hljs-string">"http://example.org/Emblem004.html"</span>,
+        <span class="hljs-string">"selector"</span>: {
+            <span class="hljs-string">"type"</span>: <span class="hljs-string">"CssSelector"</span>,
+            <span class="hljs-string">"value"</span>: <span class="hljs-string">"body"</span>
+        }
+    },
+
+    <span class="hljs-string">"body"</span>: <span class="hljs-string">"http://hdl.handle.net/10111/EmblemRegistry:E012658"</span>,
+
+    <span class="hljs-string">"created"</span>: <span class="hljs-string">"2017-01-26T18:41:43.218Z"</span>,
+    <span class="hljs-string">"creator"</span>: {
+        <span class="hljs-string">"type"</span>: <span class="hljs-string">"Person"</span>,
+        <span class="hljs-string">"email"</span>: <span class="hljs-string">"mailto:mj@example.org"</span>,
+        <span class="hljs-string">"name"</span>: <span class="hljs-string">"Myung-Ja"</span>
+    }
+}
+</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span></pre>
+      </div>
+      <div class="note">
+        <div class="note-title marker" aria-level="4" role="heading" id="h-note2"><span>Note</span></div>
+        <p class="">While HTML <code>&lt;script&gt;</code> elements are allowed in both the <code>&lt;head&gt;</code> and the <code>&lt;body&gt;</code> elements, it is suggested to add embedded annotations to the <code>&lt;head&gt;</code> element when targeting the whole of the <code>&lt;body&gt;</code> element of an HTML document; this avoids any potential ambiguity that might arise from an annotation targeting itself.
+        </p>
+      </div>
+    </section>
+  </section>
+
+  <section id="annotations-embedded-as-rdfa" typeof="bibo:Chapter" resource="#annotations-embedded-as-rdfa" property="bibo:hasPart">
+    <!--OddPage-->
+    <h2 id="h-annotations-embedded-as-rdfa" resource="#h-annotations-embedded-as-rdfa"><span property="xhv:role" resource="xhv:heading"><span class="secno">3. </span>Annotations Embedded as RDFa</span>
+    </h2>
+    <!-- <p>TODO: Describe how dokieli embeds Web Annotations in HTML using RDFa. Include examples of annotations in RDFa.
+                     Otherwise keep relatively succint and focused on the annotation in RDFa, with less about the complete application
+                     Instead point to the application...</p>
+            <p>TODO: Summarize comparitive advantages of this approach, e.g., markup of the target with attributes, etc. ...</p> -->
+
+    <p>Another approach of embedding annotations into HTML is to use RDFa [<cite><a class="bibref" href="#bib-rdfa-primer">rdfa-primer</a></cite>]. The advantage of using RDFa is that the annotation terms are mixed with the core HTML content, meaning that, for example, the text in the HTML source can be also re-used as an annotation textual body. In other words, a single resource may become both human visible as well as machine-readable. On the other hand, RDFa is an RDF serialization syntax: the RDF vocabulary described in [<cite><a class="bibref" href="#bib-annotation-vocab">annotation-vocab</a></cite>] must thefore be used instead of the JSON-LD encoding used in the [<cite><a class="bibref" href="#bib-annotation-model">annotation-model</a></cite>] document. This requirement may be problematic for some users.</p>
+
+    <h2 id="example">Example</h2>
+
+    <p>This example is a significantly simplified version of a more complex application that uses an RDFa encoding of annotations within a framework for decentralised article authoring and annotation (see <a href="https://dokie.li/"> for further details</a>). The example shows one of the advantages of RDFa: the “Communities have various…” text, while readable when the corresponding HTML page is displayed, automatically provides the textual body of the annotation. The relative complexity of mixing complex RDFa structures with HTML makes it more suitable for automatic code generation (e.g., through authoring systems) rather than manual editing.</p>
+
+    <div class="note">
+      <div class="note-title marker" aria-level="3" role="heading" id="h-note3"><span>Note</span></div>
+      <p class="">The example below relies on the fact that RDFa parsers use the <a href="https://www.w3.org/2011/rdfa-context/rdfa-1.1">RDFa Core Initial Context</a> to understand the predefined prefixes.</p>
+    </div>
+
+    <div class="example">
+      <div class="example-title marker"><span>Example 4</span><span style="text-transform: none">: Simplified dokieli example</span></div>
+      <pre id="dokieli-example" class="hljs xml" aria-busy="false" aria-live="polite"><span class="hljs-tag">&lt;<span class="hljs-name">article</span> <span class="hljs-attr">resource</span>=<span class="hljs-string">""</span> <span class="hljs-attr">typeof</span>=<span class="hljs-string">"oa:Annotation"</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">h1</span> <span class="hljs-attr">property</span>=<span class="hljs-string">"schema:name"</span>&gt;</span>Sarven Capadisli <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">property</span>=<span class="hljs-string">"oa:motivatedBy"</span>
+      <span class="hljs-attr">resource</span>=<span class="hljs-string">"oa:comments"</span>&gt;</span>comments<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">dl</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">dt</span>&gt;</span>Canonical<span class="hljs-tag">&lt;/<span class="hljs-name">dt</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">dd</span> <span class="hljs-attr">property</span>=<span class="hljs-string">"oa:canonical"</span>
+        <span class="hljs-attr">resource</span>=<span class="hljs-string">"urn:uuid:5fdc8f8d-5930..."</span>&gt;</span>5fdc8f8d-5930...<span class="hljs-tag">&lt;/<span class="hljs-name">dd</span>&gt;</span>
+
+    <span class="hljs-tag">&lt;<span class="hljs-name">dt</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">"#abstract"</span> <span class="hljs-attr">property</span>=<span class="hljs-string">"oa:hasTarget"</span>&gt;</span>In response to<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span> (<span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">about</span>=<span class="hljs-string">"#abstract"</span> <span class="hljs-attr">href</span>=<span class="hljs-string">"http://example.org/ldn"</span>
+           <span class="hljs-attr">property</span>=<span class="hljs-string">"oa:hasSource"</span> <span class="hljs-attr">typeof</span>=<span class="hljs-string">"oa:SpecificResource"</span>&gt;</span>part of<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span>)<span class="hljs-tag">&lt;/<span class="hljs-name">dt</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">dd</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">blockquote</span> <span class="hljs-attr">about</span>=<span class="hljs-string">"#abstract"</span> <span class="hljs-attr">cite</span>=<span class="hljs-string">"http://example.org/ldn#abstract"</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">property</span>=<span class="hljs-string">"oa:hasSelector"</span> <span class="hljs-attr">typeof</span>=<span class="hljs-string">"oa:FragmentSelector"</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">property</span>=<span class="hljs-string">"oa:refinedBy"</span> <span class="hljs-attr">typeof</span>=<span class="hljs-string">"oa:TextQuoteSelector"</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">property</span>=<span class="hljs-string">"oa:prefix"</span>&gt;</span>N provides a building block for <span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">property</span>=<span class="hljs-string">"oa:exact"</span>&gt;</span>decentralised<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">property</span>=<span class="hljs-string">"oa:suffix"</span>&gt;</span> Web applications. This permits e<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+         <span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+       <span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+     <span class="hljs-tag">&lt;/<span class="hljs-name">blockquote</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">dd</span>&gt;</span>
+
+    <span class="hljs-tag">&lt;<span class="hljs-name">dt</span>&gt;</span>Rendered via<span class="hljs-tag">&lt;/<span class="hljs-name">dt</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">dd</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">about</span>=<span class="hljs-string">"#abstract"</span> <span class="hljs-attr">href</span>=<span class="hljs-string">"https://dokie.li/"</span>
+           <span class="hljs-attr">property</span>=<span class="hljs-string">"oa:renderedVia"</span>&gt;</span>dokieli<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">dd</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">dl</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">section</span> <span class="hljs-attr">rel</span>=<span class="hljs-string">"oa:hasBody"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">datatype</span>=<span class="hljs-string">"rdf:HTML"</span> <span class="hljs-attr">property</span>=<span class="hljs-string">"rdf:value"</span> <span class="hljs-attr">typeof</span>=<span class="hljs-string">"oa:TextualBody"</span>&gt;</span>
+      Communities have various semantics for the term <span class="hljs-tag">&lt;<span class="hljs-name">em</span>&gt;</span>decentralisation<span class="hljs-tag">&lt;/<span class="hljs-name">em</span>&gt;</span>.<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">section</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">article</span>&gt;</span></pre>
+    </div>
+
+    <p>Interpreting this HTML content yields, in [<cite><a class="bibref" href="#bib-turtle">turtle</a></cite>]:</p>
+
+    <div class="example">
+      <div class="example-title marker"><span>Example 5</span><span style="text-transform: none">: dokieli example in Turtle</span></div>
+      <pre id="dokieli-example-turtle" class="nohighlight turtle"><span></span><span class="k">@prefix</span><span class="w"> </span><span class="nn">oa:</span><span class="w"> </span><span class="nv">&lt;http://www.w3.org/ns/oa#&gt;</span><span class="w"> </span><span class="p">.</span><span class="w"></span>
+<span class="k">@prefix</span><span class="w"> </span><span class="nn">schema:</span><span class="w"> </span><span class="nv">&lt;http://schema.org/&gt;</span><span class="w"> </span><span class="p">.</span><span class="w"></span>
+<span class="k">@prefix</span><span class="w"> </span><span class="nn">rdf:</span><span class="w"> </span><span class="nv">&lt;http://www.w3.org/1999/02/22-rdf-syntax-ns#&gt;</span><span class="w"> </span><span class="p">.</span><span class="w"></span>
+
+<span class="nv">&lt;https://example.org/art&gt;</span><span class="w"> </span><span class="kt">a</span><span class="w"> </span><span class="nn">oa:</span><span class="nt">Annotation</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="nn">schema:</span><span class="nt">name</span><span class="w"> </span><span class="s">"Sarven Capadisli comments"</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="nn">oa:</span><span class="nt">canonical</span><span class="w"> </span><span class="nv">&lt;urn:uuid:5fdc8f8d-5930...&gt;</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="nn">oa:</span><span class="nt">hasBody</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">    </span><span class="kt">a</span><span class="w"> </span><span class="nn">oa:</span><span class="nt">TextualBody</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="nn">rdf:</span><span class="nt">value</span><span class="w"> </span><span class="s">"Communities have various semantics for the term &lt;em&gt;decentralisation&lt;/em&gt;."</span><span class="o">^^</span><span class="ge">rdf:HTML</span><span class="w"></span>
+<span class="w">  </span><span class="p">]</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="nn">oa:</span><span class="nt">hasTarget</span><span class="w"> </span><span class="nv">&lt;http://example.org/art#abstract&gt;</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="nn">oa:</span><span class="nt">motivatedBy</span><span class="w"> </span><span class="nn">oa:</span><span class="nt">comments</span><span class="w"> </span><span class="p">.</span><span class="w"></span>
+
+<span class="nv">&lt;http://example.org/art#abstract&gt;</span><span class="w"> </span><span class="kt">a</span><span class="w"> </span><span class="nn">oa:</span><span class="nt">SpecificResource</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="nn">oa:</span><span class="nt">hasSelector</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">    </span><span class="kt">a</span><span class="w"> </span><span class="nn">oa:</span><span class="nt">FragmentSelector</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="nn">oa:</span><span class="nt">refinedBy</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">      </span><span class="kt">a</span><span class="w"> </span><span class="nn">oa:</span><span class="nt">TextQuoteSelector</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="nn">oa:</span><span class="nt">exact</span><span class="w"> </span><span class="s">"decentralised"</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="nn">oa:</span><span class="nt">prefix</span><span class="w"> </span><span class="s">"N provides a building block for "</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
+<span class="w">      </span><span class="nn">oa:</span><span class="nt">suffix</span><span class="w"> </span><span class="s">" Web applications. This permits e"</span><span class="w"></span>
+<span class="w">	</span><span class="p">]</span><span class="w"></span>
+<span class="w">  </span><span class="p">]</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="nn">oa:</span><span class="nt">hasSource</span><span class="w"> </span><span class="nv">&lt;http://example.org/ldn&gt;</span><span class="w"> </span><span class="p">;</span><span class="w"></span>
+<span class="w">  </span><span class="nn">oa:</span><span class="nt">renderedVia</span><span class="w"> </span><span class="nv">&lt;https://dokie.li/&gt;</span><span class="w"> </span><span class="p">.</span><span class="w"></span></pre>
+    </div>
+
+    <section id="mixing-rdfa-with-embedded-rdf-content" typeof="bibo:Chapter" resource="#mixing-rdfa-with-embedded-rdf-content" property="bibo:hasPart">
+      <h3 id="h-mixing-rdfa-with-embedded-rdf-content" resource="#h-mixing-rdfa-with-embedded-rdf-content"><span property="xhv:role" resource="xhv:heading"><span class="secno">3.1 </span>Mixing RDFa with embedded RDF content</span>
+      </h3>
+
+      <p>The approach used in <a href="#embed-json-ld" class="sec-ref"><span class="secno">2.</span> <span class="sec-title">Annotations Embedded as JSON-LD</span></a> can be combined, within the same HTML content, with the usage of RDFa. It is also possible to use the same approach (namely using a <code>&lt;script&gt;</code> element with an appropriate media type) to include RDF using other serializations, for exaple Turtle (see <a href="https://www.w3.org/TR/turtle/#in-html">Appendix A</a> of the [<cite><a class="bibref" href="#bib-turtle">turtle</a></cite>] specification for more details). I.e, it is possible to modify the <a href="#dokieli-example">dokieli example</a> above as follows:</p>
+
+      <div class="example">
+        <div class="example-title marker"><span>Example 6</span><span style="text-transform: none">: Simplified dokieli example with embedded turtle</span></div>
+        <pre id="dokieli-example-modified" class="hljs xml" aria-busy="false" aria-live="polite"><span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"text/turtle"</span>&gt;</span><span class="xml">
+  @prefix oa: <span class="hljs-tag">&lt;<span class="hljs-name">http:</span>//<span class="hljs-attr">www.w3.org</span>/<span class="hljs-attr">ns</span>/<span class="hljs-attr">oa</span>#&gt;</span> .
+
+  <span class="hljs-tag">&lt;<span class="hljs-name">http:</span>//<span class="hljs-attr">example.org</span>/<span class="hljs-attr">art</span>#<span class="hljs-attr">abstract</span>&gt;</span> a oa:SpecificResource ;
+    oa:hasSelector [
+      a oa:FragmentSelector ;
+      oa:refinedBy [
+        a oa:TextQuoteSelector ;
+        oa:exact "decentralised" ;
+        oa:prefix "N provides a building block for " ;
+        oa:suffix " Web applications. This permits e"
+      ]
+    ] ;
+</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+
+<span class="hljs-tag">&lt;<span class="hljs-name">article</span> <span class="hljs-attr">resource</span>=<span class="hljs-string">""</span> <span class="hljs-attr">typeof</span>=<span class="hljs-string">"oa:Annotation"</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">h1</span> <span class="hljs-attr">property</span>=<span class="hljs-string">"schema:name"</span>&gt;</span>Sarven Capadisli <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">property</span>=<span class="hljs-string">"oa:motivatedBy"</span>
+      <span class="hljs-attr">resource</span>=<span class="hljs-string">"oa:comments"</span>&gt;</span>comments<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">dl</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">dt</span>&gt;</span>Canonical<span class="hljs-tag">&lt;/<span class="hljs-name">dt</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">dd</span> <span class="hljs-attr">property</span>=<span class="hljs-string">"oa:canonical"</span>
+        <span class="hljs-attr">resource</span>=<span class="hljs-string">"urn:uuid:5fdc8f8d-5930..."</span>&gt;</span>5fdc8f8d-5930...<span class="hljs-tag">&lt;/<span class="hljs-name">dd</span>&gt;</span>
+
+    <span class="hljs-tag">&lt;<span class="hljs-name">dt</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">"#abstract"</span> <span class="hljs-attr">property</span>=<span class="hljs-string">"oa:hasTarget"</span>&gt;</span>In response to<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span> (<span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">about</span>=<span class="hljs-string">"#abstract"</span> <span class="hljs-attr">href</span>=<span class="hljs-string">"http://example.org/ldn"</span>
+           <span class="hljs-attr">property</span>=<span class="hljs-string">"oa:hasSource"</span> <span class="hljs-attr">typeof</span>=<span class="hljs-string">"oa:SpecificResource"</span>&gt;</span>part of<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span>)<span class="hljs-tag">&lt;/<span class="hljs-name">dt</span>&gt;</span>
+
+    <span class="hljs-tag">&lt;<span class="hljs-name">dt</span>&gt;</span>Rendered via<span class="hljs-tag">&lt;/<span class="hljs-name">dt</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">dd</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">about</span>=<span class="hljs-string">"#abstract"</span> <span class="hljs-attr">href</span>=<span class="hljs-string">"https://dokie.li/"</span>
+         <span class="hljs-attr">property</span>=<span class="hljs-string">"oa:renderedVia"</span>&gt;</span>dokieli<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">dd</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">dl</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">section</span> <span class="hljs-attr">rel</span>=<span class="hljs-string">"oa:hasBody"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">datatype</span>=<span class="hljs-string">"rdf:HTML"</span> <span class="hljs-attr">property</span>=<span class="hljs-string">"rdf:value"</span> <span class="hljs-attr">typeof</span>=<span class="hljs-string">"oa:TextualBody"</span>&gt;</span>
+      Communities have various semantics for the term <span class="hljs-tag">&lt;<span class="hljs-name">em</span>&gt;</span>decentralisation<span class="hljs-tag">&lt;/<span class="hljs-name">em</span>&gt;</span>.<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">section</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">article</span>&gt;</span></pre>
+      </div>
+
+      <p>With an appropriate tools that understand both RDFa and the embedded Turtle the results is identical to <a href="#dokieli-example-turtle">Example 5</a>.</p>
+
+      <p>Care should be taken, however, that the exact details of what it means to mix both RDFa and embedded RDF contents within the same HTML file is not (yet) formally specified. Tools that do understand this type of mix usually parse the various syntaxes into separate RDF Graphs (see [<cite><a class="bibref" href="#bib-rdf11-concepts">rdf11-concepts</a></cite>]) which are then merged following the rules described in the RDF Semantics document&nbsp;[<cite><a class="bibref" href="#bib-rdf11-mt">rdf11-mt</a></cite>]. This means that, for example, blank nodes are not shared, nor are namespace declarations among the different serializations.</p>
+    </section>
+  </section>
+
+  <section id="web-annotation-based-citation-urls" typeof="bibo:Chapter" resource="#web-annotation-based-citation-urls" property="bibo:hasPart">
+    <!--OddPage-->
+    <h2 id="h-web-annotation-based-citation-urls" resource="#h-web-annotation-based-citation-urls"><span property="xhv:role" resource="xhv:heading"><span class="secno">4. </span>Web Annotation-based Citation URLs</span>
+    </h2>
+    <p>The Selectors and States Note [<cite><a class="bibref" href="#bib-selectors-states">selectors-states</a></cite>] published by the Web Annotation Working Group includes information on encoding
+      <a href="http://www.w3.org/TR/selectors-state/#frags">Web Annotation Selectors and State classes as IRI Fragment Identifiers</a>. The following examples show how these URLs could be used to reference portions of a Specific Resource on the Web via IRIs:
+    </p>
+
+    <section id="example-using-blockquote-and-q-tags" typeof="bibo:Chapter" resource="#example-using-blockquote-and-q-tags" property="bibo:hasPart">
+      <h3 id="h-example-using-blockquote-and-q-tags" resource="#h-example-using-blockquote-and-q-tags"><span property="xhv:role" resource="xhv:heading"><span class="secno">4.1 </span>Example using <code>&lt;blockquote&gt;</code> and <code>&lt;q&gt;</code> tags</span>
+      </h3>
+
+      <div class="example">
+        <div class="example-title marker"><span>Example 7</span><span style="text-transform: none">: Example blockquote and q tags using the cite attribute</span></div>
+        <pre class="highlight hljs xml" aria-busy="false" aria-live="polite"><span class="hljs-tag">&lt;<span class="hljs-name">blockquote</span> <span class="hljs-attr">cite</span>=<span class="hljs-string">"https://www.w3.org/TR/annotation-model/#introduction"</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">q</span> <span class="hljs-attr">cite</span>=<span class="hljs-string">"https://www.w3.org/TR/annotation-model/#selector(type=TextPositionSelector,start=8424,end=8270)"</span>&gt;</span>
+  An annotation is considered to be a set of connected resources, typically including
+   a body and target, and conveys that the body is related to the target.<span class="hljs-tag">&lt;/<span class="hljs-name">q</span>&gt;</span>
+
+  <span class="hljs-tag">&lt;<span class="hljs-name">q</span> <span class="hljs-attr">cite</span>=<span class="hljs-string">"https://www.w3.org/TR/annotation-model/#selector(type=TextPositionSelector,start=8651,end=8576)"</span>&gt;</span>
+  This perspective results in a basic model with three parts, depicted below.<span class="hljs-tag">&lt;/<span class="hljs-name">q</span>&gt;</span>
+
+  <span class="hljs-tag">&lt;<span class="hljs-name">q</span> <span class="hljs-attr">cite</span>=<span class="hljs-string">"https://www.w3.org/TR/annotation-model/#selector(type=XPathSelector,value=//*[@id%3D%22introduction%22]/img)"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"images/intro_model.png"</span> <span class="hljs-attr">alt</span>=<span class="hljs-string">"Basic Model: Annotation, Body and Target"</span> <span class="hljs-attr">width</span>=<span class="hljs-string">"400"</span>/&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">q</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">blockquote</span>&gt;</span></pre>
+      </div>
+
+      <p>In this example, the <code>&lt;blockquote&gt;</code>'s <code>cite</code> attribute is set to a typical HTML fragment identifier. The <code>&lt;q&gt;</code> tags use <code>cite</code> attribute values set to Web Annotation Selector Fragment Identifiers—which are convertable into Web Annotation Data Model [<cite><a class="bibref" href="#bib-annotation-model">annotation-model</a></cite>] Selector statements. The <code>&lt;img&gt;</code> tag is also wrapped in a <code>&lt;q&gt;</code> as it's location is not directly contained in either of the previously quoted section. However, all of the quotations (within the <code>&lt;q&gt;</code> tags) exist within the <code>#introduction</code> section referenced by the surrounding <code>&lt;blockquote&gt;</code>.
+
+      </p>
+      <p>The Selectors and States Note [<cite><a class="bibref" href="#bib-selectors-states">selectors-states</a></cite>] explains that fragment identifiers are technically defined when the media type is specified. However in practice the utilization of fragment identifiers by publishers and developers ranges from browser state handling to anchoring highlights of quotations (as seen here).</p>
+
+      <p>Using these fragment identifiers as values of the <code>cite</code> attribute on <code>&lt;blockquote&gt;</code> and <code>&lt;q&gt;</code> tags provides a means for both specificity and future extensibility. Site authors as well as browser, server, and JavaScript developers may take advantage of these citations identifiers for re-anchoring selection or extracting (and verifying) quotations made within an HTML document which uses this method.</p>
+    </section>
+
+    <section id="example-using-an-a-tag" typeof="bibo:Chapter" resource="#example-using-an-a-tag" property="bibo:hasPart">
+      <h3 id="h-example-using-an-a-tag" resource="#h-example-using-an-a-tag"><span property="xhv:role" resource="xhv:heading"><span class="secno">4.2 </span>Example using an <code>&lt;a&gt;</code> tag</span>
+      </h3>
+
+      <p>Using the same methods described above, <code>&lt;a&gt;</code> tags may also be used to express a desired highlight or reference. However, as mentioned above, the use of that fragment within the retrieved resource may vary.</p>
+
+      <div class="example">
+        <div class="example-title marker"><span>Example 8</span><span style="text-transform: none">: Example using an anchor tag</span></div>
+        <pre class="highlight hljs xml" aria-busy="false" aria-live="polite"><span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>According to the Web Annotation Data Model spec
+<span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">"https://www.w3.org/TR/annotation-model/#selector(type=TextPositionSelector,start=8424,end=8270)"</span>&gt;</span>
+an annotation is considered to be a set of what things?<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span>
+(click the link to find out!)<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span></pre>
+      </div>
+    </section>
+  </section>
+
+  <section class="appendix" id="acknowledgements" typeof="bibo:Chapter" resource="#acknowledgements" property="bibo:hasPart">
+    <!--OddPage-->
+    <h2 id="h-acknowledgements" resource="#h-acknowledgements"><span property="xhv:role" resource="xhv:heading"><span class="secno">A. </span>Acknowledgements</span>
+    </h2>
+
+    <p>The Web Annotation Working Group gratefully acknowledges the contributions of the <a href="http://www.w3.org/community/openannotation/">Open Annotation Community Group</a>. The <a href="http://www.openannotation.org/spec/core">output</a> of the Community Group was fundamental to the current data model. In particular the editors would like to thank Herbert Van de Sompel of Los Alamos National Laboratory for his editorial contributions throughout the Community Group process.
+    </p>
+
+    <p>The following people have been instrumental in providing thoughts, feedback, reviews, content, criticism and input in the creation of this specification:</p>
+
+    <div style="margin-left: 3em">
+      Vladimir Alexiev, Art Barstow, Tim Berners-Lee, Chris Birk, Dan Brickley, Sarven Capadisli, Paolo Ciccarese, Tim Cole, Ray Denenberg, TB Dinesh, Sergiu Gordea, Benjamin Goering, Amy Guy, Ivan Herman, Frederick Hirsch, Antoine Isaac, Jacob Jett, Takeshi Kanai, Gregg Kellogg, Andreas Kuckartz, Randall Leeds, Hugo Manguinhas, Ben De Meester, Luc Moreau, Addison Phillips, Davis Salisbury, Robert Sanderson, Maria Janina Sarol, Felix Sasaki, Doug Schepers, Tzviya Siegman, Stian Soiland-Reyes, Manu Sporny, Nick Stenning, Jon Stroop, Lutz Suhrbier, Kyrce Swenson, Raphaël Troncy, Simeon Warner, Erik Wilde, Dan Whaley, Benjamin Young
+    </div>
+  </section>
+
+
+
+  <section id="references" class="appendix" typeof="bibo:Chapter" resource="#references" property="bibo:hasPart">
+    <!--OddPage-->
+    <h2 id="h-references" resource="#h-references"><span property="xhv:role" resource="xhv:heading"><span class="secno">B. </span>References</span>
+    </h2>
+
+    <section id="informative-references" typeof="bibo:Chapter" resource="#informative-references" property="bibo:hasPart">
+      <h3 id="h-informative-references" resource="#h-informative-references"><span property="xhv:role" resource="xhv:heading"><span class="secno">B.1 </span>Informative references</span>
+      </h3>
+      <dl class="bibliography" resource=""><dt id="bib-annotation-model">[annotation-model]</dt>
+        <dd><a href="http://www.w3.org/TR/annotation-model/" property="dc:references"><cite>Web Annotation Data Model</cite></a>. Robert Sanderson; Paolo Ciccarese; Benjamin Young. W3C. W3C Recommendation. URL: <a href="http://www.w3.org/TR/annotation-model/" property="dc:references">http://www.w3.org/TR/annotation-model/</a>
+        </dd><dt id="bib-annotation-protocol">[annotation-protocol]</dt>
+        <dd><a href="http://www.w3.org/TR/annotation-protocol/" property="dc:references"><cite>Web Annotation Protocol</cite></a>. Robert Sanderson. W3C. W3C Recommendation. URL: <a href="http://www.w3.org/TR/annotation-protocol/" property="dc:references">http://www.w3.org/TR/annotation-protocol/</a>
+        </dd><dt id="bib-annotation-vocab">[annotation-vocab]</dt>
+        <dd><a href="http://www.w3.org/TR/annotation-vocab/" property="dc:references"><cite>Web Annotation Vocabulary</cite></a>. Robert Sanderson; Paolo Ciccarese; Benjamin Young. W3C. W3C Recommendation. URL: <a href="http://www.w3.org/TR/annotation-vocab/" property="dc:references">http://www.w3.org/TR/annotation-vocab/</a>
+        </dd><dt id="bib-html">[html]</dt>
+        <dd><a href="https://html.spec.whatwg.org/multipage/" property="dc:references"><cite>HTML Standard</cite></a>. Anne van Kesteren; Domenic Denicola; Ian Hickson; Philip Jägenstedt; Simon Pieters. WHATWG. Living Standard. URL: <a href="https://html.spec.whatwg.org/multipage/" property="dc:references">https://html.spec.whatwg.org/multipage/</a>
+        </dd><dt id="bib-html-notes">[html-notes]</dt>
+        <dd><a href="http://spec-ops.github.io/html-note/index.html" property="dc:references"><cite>HTML Notes and Note References</cite></a>. Shane McCarron; David MacDonald. Spec-Ops. Unofficial Draft. URL: <a href="http://spec-ops.github.io/html-note/index.html" property="dc:references">http://spec-ops.github.io/html-note/index.html</a>
+        </dd><dt id="bib-html5">[html5]</dt>
+        <dd><a href="https://www.w3.org/TR/html5/" property="dc:references"><cite>HTML5</cite></a>. Ian Hickson; Robin Berjon; Steve Faulkner; Travis Leithead; Erika Doyle Navara; Theresa O'Connor; Silvia Pfeiffer. W3C. 28 October 2014. W3C Recommendation. URL: <a href="https://www.w3.org/TR/html5/" property="dc:references">https://www.w3.org/TR/html5/</a>
+        </dd><dt id="bib-iconclass">[iconclass]</dt>
+        <dd><a href="http://iconclass.org" property="dc:references"><cite>Iconclass</cite></a>. RKD, The Netherlands Institute for Art History. URL: <a href="http://iconclass.org" property="dc:references">http://iconclass.org</a>
+        </dd><dt id="bib-json-ld">[json-ld]</dt>
+        <dd><a href="https://www.w3.org/TR/json-ld/" property="dc:references"><cite>JSON-LD 1.0</cite></a>. Manu Sporny; Gregg Kellogg; Markus Lanthaler. W3C. 16 January 2014. W3C Recommendation. URL: <a href="https://www.w3.org/TR/json-ld/" property="dc:references">https://www.w3.org/TR/json-ld/</a>
+        </dd><dt id="bib-rdf11-concepts">[rdf11-concepts]</dt>
+        <dd><a href="https://www.w3.org/TR/rdf11-concepts/" property="dc:references"><cite>RDF 1.1 Concepts and Abstract Syntax</cite></a>. Richard Cyganiak; David Wood; Markus Lanthaler. W3C. 25 February 2014. W3C Recommendation. URL: <a href="https://www.w3.org/TR/rdf11-concepts/" property="dc:references">https://www.w3.org/TR/rdf11-concepts/</a>
+        </dd><dt id="bib-rdf11-mt">[rdf11-mt]</dt>
+        <dd><a href="https://www.w3.org/TR/rdf11-mt/" property="dc:references"><cite>RDF 1.1 Semantics</cite></a>. Patrick Hayes; Peter Patel-Schneider. W3C. 25 February 2014. W3C Recommendation. URL: <a href="https://www.w3.org/TR/rdf11-mt/" property="dc:references">https://www.w3.org/TR/rdf11-mt/</a>
+        </dd><dt id="bib-rdfa-primer">[rdfa-primer]</dt>
+        <dd><a href="https://www.w3.org/TR/rdfa-primer/" property="dc:references"><cite>RDFa 1.1 Primer - Third Edition</cite></a>. Ivan Herman; Ben Adida; Manu Sporny; Mark Birbeck. W3C. 17 March 2015. W3C Note. URL: <a href="https://www.w3.org/TR/rdfa-primer/" property="dc:references">https://www.w3.org/TR/rdfa-primer/</a>
+        </dd><dt id="bib-rfc3987">[rfc3987]</dt>
+        <dd><a href="https://tools.ietf.org/html/rfc3987" property="dc:references"><cite>Internationalized Resource Identifiers (IRIs)</cite></a>. M. Duerst; M. Suignard. IETF. January 2005. Proposed Standard. URL: <a href="https://tools.ietf.org/html/rfc3987" property="dc:references">https://tools.ietf.org/html/rfc3987</a>
+        </dd><dt id="bib-selectors-states">[selectors-states]</dt>
+        <dd><a href="http://www.w3.org/TR/selectors-state/" property="dc:references"><cite>Selectors and States</cite></a>. Ivan Herman; Robert Sanderson; Paolo Ciccarese; Benjamin Young. W3C. W3C Reference Note. URL: <a href="http://www.w3.org/TR/selectors-state/" property="dc:references">http://www.w3.org/TR/selectors-state/</a>
+        </dd><dt id="bib-turtle">[turtle]</dt>
+        <dd><a href="https://www.w3.org/TR/turtle/" property="dc:references"><cite>RDF 1.1 Turtle</cite></a>. Eric Prud'hommeaux; Gavin Carothers. W3C. 25 February 2014. W3C Recommendation. URL: <a href="https://www.w3.org/TR/turtle/" property="dc:references">https://www.w3.org/TR/turtle/</a>
+        </dd>
+      </dl>
+    </section>
+  </section>
+  <p role="navigation" id="back-to-top"><a href="#toc"><abbr title="Back to Top">↑</abbr></a></p>
+  <script src="https://www.w3.org/scripts/TR/2016/fixup.js"></script>
+</body>
+</html>
