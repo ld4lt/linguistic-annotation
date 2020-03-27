@@ -1,0 +1,142 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix nif: <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+
+<http://example.org/resource1#char=0,>
+  a nif:String , nif:Context , nif:RFC5147String ;
+  nif:isString "My favourite actress is Natalie Portman. My favourite color is red."^^xsd:string .
+
+
+<http://example.org/resource1#char=0,40>
+  a nif:String , nif:Sentence , nif:RFC5147String ;
+  nif:referenceContext <http://example.org/resource1#char=0,> ;
+  nif:sourceUrl <http://example.org/resource1> ;
+  nif:anchorOf "My favourite actress is Natalie Portman."^^xsd:string ;
+  nif:word <http://example.org/resource1#char=0,2> ,
+           <http://example.org/resource1#char=3,12> ,
+           <http://example.org/resource1#char=13,20> ,
+		   <http://example.org/resource1#char=21,23> ,
+           <http://example.org/resource1#char=24,31> ,
+           <http://example.org/resource1#char=32,39> ,
+           <http://example.org/resource1#char=39,40> ;
+  nif:firstWord <http://example.org/resource1#char=0,2> .
+
+<http://example.org/resource1#char=0,2>
+  a nif:String , nif:RFC5147String , nif:Word ;
+  nif:oliaLink <http://purl.org/olia/penn.owl#PRP> ;
+  nif:beginIndex "0";
+  nif:endIndex "2";
+  nif:anchorOf "My";
+  nif:nextWord <http://example.org/resource1#char=3,12>.
+
+<http://example.org/resource1#char=3,12>
+  a nif:String , nif:RFC5147String , nif:Word ;
+  nif:oliaLink <http://purl.org/olia/penn.owl#JJ> ;
+  nif:beginIndex "3";
+  nif:endIndex "12";
+  nif:anchorOf "favourite";
+  nif:nextWord <http://example.org/resource1#char=10,18>.
+
+<http://example.org/resource1#char=13,20>
+  a nif:String , nif:RFC5147String , nif:Word ;
+  nif:oliaLink <http://purl.org/olia/penn.owl#NN> ;
+  nif:beginIndex "13";
+  nif:endIndex "20";
+  nif:anchorOf "actress";
+  nif:nextWord <http://example.org/resource1#char=21,23>.
+
+<http://example.org/resource1#char=21,23>
+  a nif:String , nif:RFC5147String , nif:Word ;
+  nif:oliaLink <http://purl.org/olia/penn.owl#VB> ;
+  nif:beginIndex "21";
+  nif:endIndex "23";
+  nif:anchorOf "is";
+  nif:nextWord <http://example.org/resource1#char=24,31>.
+
+<http://example.org/resource1#char=24,31>
+  a nif:String , nif:RFC5147String , nif:Word ;
+  nif:oliaLink <http://purl.org/olia/penn.owl#NNP> ;
+  nif:beginIndex "24";
+  nif:endIndex "31";
+  nif:anchorOf "Natalie";
+  nif:nextWord <http://example.org/resource1#char=21,23>.
+
+<http://example.org/resource1#char=32,39>
+  a nif:String , nif:RFC5147String , nif:Word ;
+  nif:oliaLink <http://purl.org/olia/penn.owl#NNP> ;
+  nif:beginIndex "32";
+  nif:endIndex "39";
+  nif:anchorOf "Portman";
+  nif:nextWord <http://example.org/resource1#char=39,40>.
+
+<http://example.org/resource1#char=39,40>
+  a nif:String , nif:RFC5147String ;
+  nif:oliaLink <http://purl.org/olia/penn.owl#colon> ;
+  nif:beginIndex "39";
+  nif:endIndex "40";
+  nif:anchorOf ".".
+
+<http://example.org/resource1#char=41,67>
+  a nif:String , nif:Sentence , nif:RFC5147String ;
+  nif:referenceContext <http://example.org/resource1#char=0,> ;
+  nif:sourceUrl <http://example.org/ex.html> ;
+  nif:anchorOf "My favourite color is red."^^xsd:string ;
+  nif:word <http://example.org/resource1#char=41,43> ,
+           <http://example.org/resource1#char=44,53> ,
+           <http://example.org/resource1#char=54,59> ,
+           <http://example.org/resource1#char=60,62> ,
+           <http://example.org/resource1#char=63,66> ,
+           <http://example.org/resource1#char=66,67> ;
+  nif:firstWord <http://example.org/resource1#char=41,43> .
+
+<http://example.org/resource1#char=41,43>
+  a nif:String , nif:RFC5147String , nif:Word ;
+  nif:oliaLink <http://purl.org/olia/penn.owl#PRP> ;
+  nif:beginIndex "41";
+  nif:endIndex "43";
+  nif:anchorOf "My";
+  nif:nextWord <http://example.org/resource1#char=44,53>.
+
+<http://example.org/resource1#char=44,53>
+  a nif:String , nif:RFC5147String , nif:Word ;
+  nif:oliaLink <http://purl.org/olia/penn.owl#JJ> ;
+  nif:beginIndex "44";
+  nif:endIndex "53";
+  nif:anchorOf "favourite";
+  nif:nextWord <http://example.org/resource1#char=54,59>.
+
+<http://example.org/resource1#char=54,59>
+  a nif:String , nif:RFC5147String , nif:Word ;
+  nif:oliaLink <http://purl.org/olia/penn.owl#NN> ;
+  nif:beginIndex "54";
+  nif:endIndex "59";
+  nif:anchorOf "color";
+  nif:nextWord <http://example.org/resource1#char=60,62>.
+
+<http://example.org/resource1#char=60,62>
+  a nif:String , nif:RFC5147String , nif:Word ;
+  nif:oliaLink <http://purl.org/olia/penn.owl#VB> ;
+  nif:beginIndex "60";
+  nif:endIndex "62";
+  nif:anchorOf "is";
+  nif:nextWord <http://example.org/resource1#char=63,66>.
+
+<http://example.org/resource1#char=63,66>
+  a nif:String , nif:RFC5147String , nif:Word ;
+  nif:oliaLink <http://purl.org/olia/penn.owl#JJ> ;
+  nif:beginIndex "63";
+  nif:endIndex "66";
+  nif:anchorOf "red";
+  nif:nextWord <http://example.org/resource1#char=66,67>.
+
+<http://example.org/resource1#char=66,67>
+  a nif:String , nif:RFC5147String ;
+  nif:oliaLink <http://purl.org/olia/penn.owl#colon> ;
+  nif:beginIndex "66";
+  nif:endIndex "67";
+  nif:anchorOf ".".

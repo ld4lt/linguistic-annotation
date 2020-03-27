@@ -1,0 +1,30 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+@prefix nif: <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#> .
+@prefix nif-ann: <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-annotation#> .
+@prefix itsrdf: <http://www.w3.org/2005/11/its/rdf#> .
+@prefix dbp: <http://dbpedia.org/resource/> .
+@prefix dbpo: <http://dbpedia.org/ontology/> .
+@prefix nerd: <http://nerd.eurecom.fr/ontology#> .
+
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix ex: <http://example.org/nif-21/dresden#> .
+
+ex:doc_offset_0_7
+  a nif:OffsetBasedString ;
+  nif:beginIndex "0"^^xsd:nonNegativeInteger ;
+  nif:endIndex "7"^^xsd:nonNegativeInteger ;
+  nif:anchorOf "Dresden"^^xsd:string ;
+  nif:referenceContext ex:doc_offset_0_62 ;
+  a nif-ann:EntityOccurrence ;
+  nif-ann:entityOccurrenceConf "0.88"^^xsd:decimal ;
+  nif-ann:entityOccurrenceProv ex:simple-spotter-service ;
+  nif-ann:annotationUnit [
+    itsrdf:taIdentRef dbp:Dresden ;
+    itsrdf:taClassRef dbo:City ;
+    itsrdf:taConfidence "0.80"^^xsd:decimal ;
+    itsrdf:taAnnotatorRef ex:linker-service
+  ] .

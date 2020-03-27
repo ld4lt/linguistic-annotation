@@ -11,6 +11,8 @@ Several vocabularies currently in use, cf. [https://link.springer.com/book/10.10
 Most frequently used for linguistic annotation (in a LOD context) are
 
 *   NIF (NLP Interchange Format, [https://persistence.uni-leipzig.org/nlp2rdf/](https://persistence.uni-leipzig.org/nlp2rdf/), [https://github.com/NLP2RDF](https://github.com/NLP2RDF)) 
+** NIF 2.0 documentation and specification under ../doc/nif-2.0
+** data samples and schemas under nif-2.0
     
 *   Web Annotation / Open Annotation ([https://www.w3.org/TR/annotation-model/](https://www.w3.org/TR/annotation-model/))
   

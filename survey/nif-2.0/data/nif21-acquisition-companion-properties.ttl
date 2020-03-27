@@ -1,0 +1,83 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+@prefix nif: <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#> .
+@prefix itsrdf: <http://www.w3.org/2005/11/its/rdf#> .
+@prefix dbp: <http://dbpedia.org/resource/> .
+@prefix dbpo: <http://dbpedia.org/ontology/> .
+@prefix nerd: <http://nerd.eurecom.fr/ontology#> .
+@prefix freme-api: <http://api.freme-project.eu/example/> .
+
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix ex: <http://example.org/nif-21/acq#> .
+
+[] a owl:Ontology ;
+  owl:imports nif:, <http://www.w3.org/2005/11/its/rdf#> .
+
+ex:doc_offset_0_52
+  a nif:OffsetBasedString, nif:Context ;
+  nif:beginIndex "0"^^xsd:nonNegativeInteger ;
+  nif:endIndex "52"^^xsd:nonNegativeInteger ;
+  nif:isString "Apple acquired Metaio, an Augmented Reality company."^^xsd:string .
+
+ex:doc_offset_0_5
+  a nif:OffsetBasedString ;
+  nif:beginIndex "0"^^xsd:nonNegativeInteger ;
+  nif:endIndex "5"^^xsd:nonNegativeInteger ;
+  nif:anchorOf "Apple"^^xsd:string ;
+  nif:referenceContext ex:doc_offset_0_52 ;
+  # entity spotting information
+  a nif:EntityOccurrence ;
+  nif:entityOccurrenceConf "0.7"^^xsd:decimal ;
+  nif:entityOccurrenceProv freme-api:description%2Fe-entity%2Fdbpedia-spotlight%2Fdocuments ;
+  # primary entity linking result
+  itsrdf:taIdentRef dbp:Apple_Inc ;
+  nif:taIdentConf "0.8"^^xsd:decimal ;
+  nif:taIdentProv freme-api:description%2Fe-entity%2Fdbpedia-spotlight%2Fdocuments ;
+  itsrdf:taClassRef nerd:Organization ;
+  nif:taClassConf "0.95"^^xsd:decimal ;
+  nif:taClassProv freme-api:description%2Fe-entity%2Fdbpedia-spotlight%2Fdocuments ;
+  # alternative, less probable entity linking result
+  nif:annotationUnit [
+    itsrdf:taIdentRef dbp:Apple_Bank_for_Savings ;
+    nif:taIdentConf "0.3"^^xsd:decimal ;
+    nif:taIdentProv freme-api:description%2Fe-entity%2Fdbpedia-spotlight%2Fdocuments ;
+    itsrdf:taClassRef dbpo:Bank ;
+    nif:taClassConf "0.9"^^xsd:decimal ;
+    nif:taClassProv freme-api:description%2Fe-entity%2Fdbpedia-spotlight%2Fdocuments ;
+  ] .
+
+ex:doc_offset_15_21
+  a nif:OffsetBasedString ;
+  nif:beginIndex "15"^^xsd:nonNegativeInteger ;
+  nif:endIndex "21"^^xsd:nonNegativeInteger ;
+  nif:anchorOf "Metaio"^^xsd:string ;
+  nif:referenceContext ex:doc_offset_0_52 ;
+  # entity spotting information
+  a nif:EntityOccurrence ;
+  nif:entityOccurrenceConf "0.95"^^xsd:decimal ;
+  nif:entityOccurrenceProv freme-api:description%2Fe-entity%2Fdbpedia-spotlight%2Fdocuments ;
+  # entity linking result
+  itsrdf:taIdentRef dbp:Metaio_GmbH ;
+  nif:taIdentConf "0.9"^^xsd:decimal ;
+  nif:taIdentProv freme-api:description%2Fe-entity%2Fdbpedia-spotlight%2Fdocuments ;
+  itsrdf:taClassRef dbpo:Company ;
+  nif:taClassConf "0.85"^^xsd:decimal ;
+  nif:taClassProv freme-api:description%2Fe-entity%2Fdbpedia-spotlight%2Fdocuments .
+
+ex:doc_offset_26_43
+  a nif:OffsetBasedString ;
+  nif:beginIndex "26"^^xsd:nonNegativeInteger ;
+  nif:endIndex "43"^^xsd:nonNegativeInteger ;
+  nif:anchorOf "Augmented Reality"^^xsd:string ;
+  nif:referenceContext ex:doc_offset_0_52 ;
+  # entity spotting information
+  a nif:TermOccurrence ;
+  nif:termOccurrenceConf "0.7"^^xsd:decimal ;
+  nif:termOccurrenceProv freme-api:description%2Fe-terminology%2Ftilde ;
+  # term linking result
+  itsrdf:termInfoRef    <https://term.tilde.com/terms/998795> ;
+  nif:termInfoConf "0.65"^^xsd:decimal ;
+  nif:termInfoProv freme-api:description%2Fe-terminology%2Ftilde .

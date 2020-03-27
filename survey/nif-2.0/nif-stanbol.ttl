@@ -1,0 +1,151 @@
+#   Licensed to the NLP2RDF project under one or more
+#   contributor license agreements.  See the NOTICE file distributed with
+#   this work for additional information regarding copyright ownership.
+#   The ASF licenses this file to You under the Apache License, Version 2.0
+#   (the "License"); you may not use this file except in compliance with
+#   the License.  You may obtain a copy of the License at
+#
+#        http://www.apache.org/licenses/LICENSE-2.0
+#
+#   Unless required by applicable law or agreed to in writing, software
+#   distributed under the License is distributed on an "AS IS" BASIS,
+#   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+#   See the License for the specific language governing permissions and
+#   limitations under the License.
+
+
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix nif: <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core#> .
+@prefix nifs: <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-stanbol#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+
+# not sure
+@prefix skosxl: <http://www.w3.org/2008/05/skos-xl#> .
+@prefix marl: <http://purl.org/marl/ns#> .
+
+<http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-stanbol#> 
+    a owl:Ontology ;
+ 
+    <http://purl.org/vocab/vann/preferredNamespacePrefix> "nifs" ;
+    <http://purl.org/vocab/vann/preferredNamespaceUri> "http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-stanbol#" ;
+    <http://purl.org/vocab/vann/changes> <https://github.com/NLP2RDF/persistence.uni-leipzig.org/commits/master/ontologies/nif-core> ;
+    
+    owl:versionInfo "0.0.0 not versioned" ;
+    owl:versionIRI <https://github.com/NLP2RDF/ontologies/blob/master/nif-core/nif-stanbol.ttl> ;
+ 
+ 
+    dcterms:license <http://creativecommons.org/licenses/by/3.0/> ;		
+    dcterms:license <http://www.apache.org/licenses/LICENSE-2.0> ;		
+    dcterms:title "NIF 2.0 Stanbol Profile Ontology"@en ;
+
+    rdfs:label "NIF 2.0  Stanbol Profile Ontology"@en ;
+    rdfs:isDefinedBy <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core/nif-stanbol.ttl> ;
+    rdfs:isDefinedBy <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core/nif-stanbol-inf.ttl> ;
+    rdfs:isDefinedBy <http://persistence.uni-leipzig.org/nlp2rdf/ontologies/nif-core/nif-stanbol-val.ttl> ;
+    rdfs:comment """"""@en ;
+
+	dc:creator "Sebastian Hellmann" ;
+    dc:contributor "Special thanks to  Rupert Westenthaler";
+    dc:publisher "AKSW, University Leipzig" ;
+    dc:rights """This ontology is licensed under Apache 2.0 (http://www.apache.org/licenses/LICENSE-2.0) and CC-BY (http://creativecommons.org/licenses/by/3.0/)"""@en ;
+	#dc:description <http://svn.aksw.org/papers/2013/ISWC_NIF/public/portman_small.png> ;	
+    dc:description """
+    This is a very rough draft of the ontology for the NIF 2.0 Stanbol Profile. It is far from finished
+	
+	
+# Relation to the FISE ontology
+FISE is an ontology originated from Apache Stanbol and found here: http://fise.iks-project.eu/ontology/
+The ontology was compatible and useful and we just included it here.
+"""@en  .
+
+
+
+###################
+# Base Classes and Properties
+###################
+
+nif:String
+    rdfs:subClassOf nifs:Annotation .
+  
+
+########################################################################
+    
+nifs:Annotation
+    a owl:Class ;
+    owl:versionInfo "0.0.0" ;
+    rdfs:label "Annotation"@en ;
+    rdfs:comment """This class is an individual used in the NIF-Stanbol profile and can be a URN """@en .
+
+   
+###############
+# Classes for  Annotations and the NIF Stanbol profile. 
+############### 	
+
+nif:EntityAnnotation
+    a owl:Class ;
+    owl:versionInfo "0.0.0-not_versioned" ; 
+    rdfs:label "Entity Annotation"@en ;
+    rdfs:comment """This anntotation is an entity. Only usable with the Apache Stanbol profile. disjointWith nif:String and fise:TextAnnotation."""@en ;
+    rdfs:subClassOf nif:Annotation .
+
+
+nif:TopicAnnotation
+    a owl:Class ;
+    owl:versionInfo "0.0.0-not_versioned" ; 
+    rdfs:label "A Topic Annotation"@en ;
+    rdfs:comment """This anntotation is TODO:???? . Only usable with the Apache Stanbol profile. disjointWith nif:String and fise:TextAnnotation. """@en ;
+    rdfs:subClassOf nif:Annotation .
+
+    
+nifs:extractedFrom
+	owl:versionInfo "0.0.0-not_versioned" ; 
+    a owl:ObjectProperty ;
+    rdfs:comment """links a nif:String to a nif:Annotation ."""@en ;
+    rdfs:domain nif:String ;
+    rdfs:range [owl:unionOf (nif:TopicAnnotation  nif:EntityAnnotation ) ] ;
+    rdfs:label "extracted from"@en .
+
+###############
+# Confidence
+###############    
+# might be moved to external
+nif:ConfidenceLevel
+    a owl:Class ;
+    rdfs:comment """Class for the four different confidence levels defined by this ontology (introduced with STANBOL-631)"""@en ;
+    rdfs:label "Confidence Level"@en .
+
+# might be moved to external
+nif:cl_ambiguous
+    a nif:ConfidenceLevel ;
+    rdfs:comment """Indicates that an Enhancement is ambiguous with an other one. To be used in cases where there are several possibilities but it is likelly that one of those is the correct one (e.g. Paris, Paris (Texas)).
+Enhancements with this confidence value typically need some kind of manual disambiguation step (introduced by STANBOL-631)"""@en ;
+    rdfs:label "ambiguous"@en .
+
+# might be moved to external
+nif:cl_certain
+    a nif:ConfidenceLevel ;
+    rdfs:comment "Indicates that an enhancement is very certain AND also not ambiguous. Enhancements with this confidence level can be usually accepped by annotation workfolws without manuall validation of resutls (introduced by STANBOL-631)"@en ;
+    rdfs:label "Certain"@en .
+
+# might be moved to external
+nif:cl_suggestion
+    a nif:ConfidenceLevel ;
+    rdfs:comment """Indicates that an Enhancement is not completly certain but there are not several options (e.g. Germans -> Germany). Enhancements with this confidence level might or might not be used for automatic tagging workflows. However they can be typically suggested to users (introduced by STANBOL-631)"""@en ;
+    rdfs:label "suggestion"@en .
+# might be moved to external
+nif:cl_uncertain
+    a nif:ConfidenceLevel ;
+    rdfs:comment """Indicating that an Enhancement is rather speculative. Enhancements with this confidence level can be ignored by most usecases. However they might be processed by other Enhancements Engines (introduced by STANBOL-631)"""@en ;
+    rdfs:label "uncertain"@en .
+
+nif:confidence_level
+    a owl:ObjectProperty ;
+    rdfs:comment "the level of confidence for this Annotation (introduced by STANBOL-631)."@en ;
+    rdfs:domain nif:Annotation ;
+    rdfs:label "confidence level"@en ;
+    rdfs:range nif:ConfidenceLevel .
