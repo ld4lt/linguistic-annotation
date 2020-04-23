@@ -17,7 +17,7 @@ For representing linguistic annotations on the web, several vocabularies are cur
     
 *   Web Annotation / Open Annotation ([https://www.w3.org/TR/annotation-model/](https://www.w3.org/TR/annotation-model/))
     
-
+Another important family of standards is being developed by ISO ([Linguistic Annotation Framework, LAF](https://www.cs.vassar.edu/~ide/papers/LAF.pdf)). This provides a general conceptual model that can be replicated in RDF. 
   
   
 
