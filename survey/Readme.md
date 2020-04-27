@@ -75,6 +75,8 @@ Most frequently used for linguistic annotation (in a LOD context) are
     *   CLARIN Concept Registry ([https://www.clarin.eu/ccr](https://www.clarin.eu/ccr), successor solution to ISOcat, pre-RDF)
         
     *   GOLD ([http://linguistics-ontology.org/](http://linguistics-ontology.org/); development stalled since 2010)
+    
+    *   OMTD-SHARE ([http://w3id.org/meta-share/omtd-share](http://w3id.org/meta-share/omtd-share) has a class for annotation types relevant to Language Technology tools and services, including linguistic categories with links to OLiA)
         
 *   Cross-linguistic annotation standards
     
