@@ -19,7 +19,7 @@ List of identified unsupported use cases in NIF.
 ### Annotation of morphology
 
 - Not addressed by NIF, neither WA
-- It is unclear how to NIF in combination with the Lemon Morphology Module: https://www.w3.org/community/ontolex/wiki/Morphology
+- It is unclear how to use NIF in combination with the Lemon Morphology Module: https://www.w3.org/community/ontolex/wiki/Morphology
 
 Example:
 `cats` = `cat` + `s`
