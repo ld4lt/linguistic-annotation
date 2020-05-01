@@ -205,6 +205,24 @@ The different encoding possibilities can be transformed into each other. E.g., e
 
 To facilitate encoding, a vocabulary should specify which (if any) strategy is recommended. In addition to marking whether a vocabulary provides sequence annotation vocabulary (`+`, `-`), mark the strategy.
 
+### annotation values: plain literals
+
+The vocabulary should support annotation (annotation value/body) with plain literals, e.g., strings.
+
+Example:
+```
+:some_region_uri nif:lemma "tree" .
+```
+
+### annotation values: feature structures
+
+The vocabulary should support annotation (annotation value/body) with feature structures, i.e., root nodes of directed (acyclic) graphs. In RDF, this requirement can be reformulated as permitting RDF resources as annotations.
+
+Example:
+```
+:some_region_uri nif:oliaLink penn:NN.
+```
+
 ## Levels of linguistic analysis: units of annotation
 
 For a particular level of linguistic analysis, the vocabulary should
@@ -248,15 +266,20 @@ It is unclear how to use NIF in combination with the Lemon Morphology Module: ht
 
 The vocabulary should provide (or refer to) an inventory of syntactic categories, e.g., phrase. Note that this must be extensible to accomodate novel types of annotation.
 
-NIF: `nif:Word`, `nif:Phrase`, `nif:Paragraph`, etc.; but note that these do not describe nodes in the sense of LAF, but regions, so, this is `(+)`
-
 Web Annotation: user-provided subclasses of `oa:Annotation`, hence `(-)`
 
-Candidate resources for an external terminology base are [OLiA](http://purl.org/olia) (extensible by the community) or the [CLARIN Concept Registry](https://www.clarin.eu/ccr) (extensible by national CLARIN representatives).
+NIF predefined: `nif:Word`, `nif:Phrase`, `nif:Paragraph`, etc.; but note that these do not describe nodes in the sense of LAF, but regions, so, this is `(+)`
+
+In addition, NIF allows to use `nif:oliaLink` to refer to an external terminology base, here [OLiA](http://purl.org/olia). An alternative to OLiA is the [CLARIN Concept Registry](https://www.clarin.eu/ccr), but note that it is extensible only by national CLARIN representatives whereas OLiA is an [open source project on GitHub](https://github.com/acoli-repo/olia). AFAIK, NIF uses `nif:oliaLink` for part of speech information only, so this is partial solution, again, hence, `(+)`.
 
 ### semantics: node labels/types
 
-Similar as for nodes, cf. SemAF, [NERD](http://nerd.eurecom.fr/ontology) (for named entities), etc. This requires a very rich and extensible inventory of data categories, so better as an external resources.
+Similar as for syntax/text structure, details to be determined from SemAF, [NERD](http://nerd.eurecom.fr/ontology) (for named entities), [GlobalWordNet Interlingual Index](https://github.com/globalwordnet/ili) (for word senses), etc. 
+
+This requires a very rich and extensible inventory of data categories, so better as an external resource. Again, [OLiA](http://purl.org/olia) and the [OLiA Discourse Extensions](http://www.acoli.informatik.uni-frankfurt.de/resources/discourse/) are a candidate resources here, but note that this would require extensions wrt. lexical semantics.
+
+NIF supports entity linking, but no other form of semantic annotation, hence `(-)`.
+Web Annotation is widely used for entity linking, but it does not provide a designated vocabulary for entities, hence `(-)`.
 
 ## Levels of linguistic analysis: sequential structure
 
