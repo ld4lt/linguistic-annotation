@@ -38,6 +38,24 @@ NIF 2.0 and Web Annotation is fully documented using public, freely accessible o
 NIF 2.1 documentation does not properly reflect the latest advancements in NIF 2.1, hence `(-)`.
 ISO standards (LAF, etc.) are usually proprietary. If internal copies or drafts are accessible, use `(+)` and describe how to access them. If 'only' supporting documentation (e.g., secondary literature such as scientific papers about the standard) are accessible, use `(-)`. If only the proprietary standard itself is accessible, without either secondary literature or drafts, use `-`.
 
+### IRI fragment identifiers for strings
+
+A highly praised feature of NIF (in comparison to Web Annotation) is that it supports compact String URIs that can be interpreted in isolation (but whose information can [should] be made explicit in RDF statements).
+
+In NIF, this is part of the specification (`+`). In Web Annotation, this is possible, but not part of the standard, but only described in a [working note](https://w3c.github.io/web-annotation/selector-note/), hence `(+)`.
+
+### Explicit selectors
+
+Aside from string IRIs, it should be possible to decode their information (e.g., offset information) into RDF statements.
+
+NIF: `+`, WebAnnotation: `+`
+
+### Explicit context strings
+
+In order to facilitate interpretability and robustness of string URIs (regardless of changes in underlying resource or differences in, say, Unicode normalization), the vocabulary should permit to provide explicit contexts that contain the text that a string IRI refers to (e.g., its offsets).
+
+NIF: `+`, WebAnnotation: `-`
+
 ## Expressiveness
 
 This mostly refers to the capability of providing 'generic' data structures as defined by [ISO 24612-2012 (LAF)](https://www.cs.vassar.edu/~ide/papers/ISO+24612-2012.pdf): generic linguistic data structures from which annotation-specific datastructures can be derived. These are
