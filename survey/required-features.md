@@ -92,6 +92,13 @@ Web Annotation provides the class `oa:Selector`. For different media, users can 
 
 ### Pointers: Support the annotation of continuous strings
 
+represent continuous multi-word segments, necessary for syntactic phrases, semantic annotations
+
+Example (basic phrase structure syntax)
+```
+[NP ten books]
+```
+
 ### Pointers: Annotation of discontinuous strings
 
 Example:
@@ -118,7 +125,28 @@ In Web Annotation, `node` may be compared to `oa:Annotation` or the body (depend
 
 ### Generic data structures for linguistic annotation: zero nodes
 
-For textual data, the vocabulary does 
+Support the annotation of zero elements, e.g., elements of syntactic analysis that are not overtly realized, e.g., traces or zero anaphors.
+
+Note that a zero element can have a position in the text (and can be annotated as an empty string, then), but only if its position can be inferred, e.g., by substitution. 
+
+Example (elision):
+```
+Peter was looking forward to it. Mary was [0], too.
+Peter was looking forward to it. Mary was [looking forward to it], too.
+```
+
+However, implicit semantic roles that are not resolvable against the context do not have a position in the text:
+
+Example:
+```
+[AGENT Rome] withdrew [SOURCE from Britain] [TIME around 409 CE].
+```
+
+The frame ([withdraw](https://framenet2.icsi.berkeley.edu/fnReports/data/frameIndex.xml?frame=Removing)) defines two core arguments not realized in the sentence, THEME (object that changes location, here: troops), and CAUSE (here: to defend continental territories of the Roman Empire). These have no position in the text, but [can be annotated](https://www.aclweb.org/anthology/P10-1160.pdf).
+
+Full-fledged zero annotation must thus permit both annotations of zero strings that are attached to a particular position in the text and zero annotations that independent from any string realization (but are indirectly evoked, here, by the verb).
+
+For textual data, the vocabulary should thus
 - support annotations that exist independently from their string seriaization: mark as `+`
 - support the annotation of empty strings: mark as `(+)` (with parentheses)
 - require the annotation target to be an non-empty string: mark as `-`.
@@ -216,7 +244,7 @@ Example:
 
 ### annotation values: feature structures
 
-The vocabulary should support annotation (annotation value/body) with feature structures, i.e., root nodes of directed (acyclic) graphs. In RDF, this requirement can be reformulated as permitting RDF resources as annotations.
+The vocabulary should support annotation (annotation value/body) with feature structures, i.e., root nodes of directed (acyclic) graphs. In RDF, this requirement can be reformulated as permitting RDF resources (URIs) as annotations.
 
 Example:
 ```
@@ -236,6 +264,12 @@ The vocabulary must support the annotation of individual words (tokens), e.g., f
 - If it can address/express words or tokens, but does not provide a designated concept, mark as `(+)`
 - If it does not allow to annotate words, mark as `-`.
 
+Example: part-of-speech annotation
+
+```
+book/NN
+```
+
 `nif:Word`, hence `+`.
 No concept in Web Annotation, but tokens can be targets, hence `(+)`.
 
@@ -245,6 +279,18 @@ No concept in Web Annotation, but tokens can be targets, hence `(+)`.
 Lacking in Web Annotation, hence `(+)`.
 
 ### morphology: morphological segments
+
+segment a word into its parts, annotate parts individually, required for interlinear glossed text
+
+Example (interlinear glossed text):
+
+```
+Bücher
+Buch -"er
+book -pl
+'books'
+```
+
 
 Example:
 `cats` = `cat` + `s`
@@ -306,6 +352,19 @@ Lacking in Web Annotation, hence `-`.
 `cats` = `cat` + `s` with `cat "directly precedes" s`.
 
 Lacking in NIF and Web Annotation, hence `-`.
+
+### Syntax: discontinuous multi-word segments
+
+represent discontinuous multi-word segments	represent syntactic phrases, regardless of their sequential order
+
+Example:
+```
+[What] did they laugh [about]?
+```
+
+At a deep level, the phrase here is `[about what]`. If this can be represented directly, mark `+`. If the system requires the introduction of a zero element, mark as `(-)`.
+
+Note that this is different from the annotation of discontinuous strings, as the words being connected can have an internal syntactic structure.
 
 ### Syntax/text structure: sequence of elements within a phrase
 
