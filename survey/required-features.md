@@ -172,11 +172,11 @@ The vocabulary should provide a way to
 
 NIF 2.1 defines `nif:AnnotationUnit` which can use used to distinguish annotations comming from different NLP tools on same strings (same offsets).
 
-### Enumeration
+### Sequence of annotation units
 
-No mechanism to enumerate words, sentences, ....
+An annotation vocabulary should allow to encode the sequence of annotation units of the same kind (words, sentences, ...), either by enumeration or by explicit properties.
 
-Example:
+Example (enumeration):
 `Diego Maradona is from Argentina.`
 
 ```
@@ -189,18 +189,27 @@ ext:offset_6_14 a nif:Word ; -> "Maradona"
   nif:enumeration "2" ;
 ```
 
-> To be discussed whether necessary at the vocabulary level, this can be inferred from relations between words within a sentence, e.g., counting all `nif:nextWord` before a particular word.
+Example (`nif:nextWord` property):
 
-## Levels of linguistic analysis
+```
+ext:offset_0_5 nif:nextWord ext:offset_6_14
+```
+
+Example (`rdf:List`):
+
+```
+( ext:offset_0_5 ext:offset_6_14 ) a rdf:List .
+```
+
+The different encoding possibilities can be transformed into each other. E.g., enumeration information (with indices) can be inferred from relations between words within a sentence, e.g., counting all `nif:nextWord` before a particular word.
+
+To facilitate encoding, a vocabulary should specify which (if any) strategy is recommended. In addition to marking whether a vocabulary provides sequence annotation vocabulary (`+`, `-`), mark the strategy.
+
+## Levels of linguistic analysis: units of annotation
 
 For a particular level of linguistic analysis, the vocabulary should
 - define (`+`) or address (`(+)`) the relevant units of annotation, and 
 - permit to navigate among units of annotation (e.g., retrieving the next annotation of the same kind)
-
-As for "navigation" relations between adjacent units: For different levels of linguistic annotation (e.g., morphology, word-level annotations), the vocabulary should provide an explicit means to identify the next (or preceding) unit of annotation. For pre-RDF vocabularies, this can be encoded in the structure of a a file (e.g., in XML or CoNLL formats), for RDF vocabularies, this must be explicit triples.
-
-In Web Annotation, this is absent, hence `-`.
-NIF defines such properties for limited number of possible relations among concepts, e.g. `nif:nextWord` or `nif:nextSentance`, but not for others (e.g., morphs).
 
 ### Word-level annotations: word unit
 
@@ -212,17 +221,12 @@ The vocabulary must support the annotation of individual words (tokens), e.g., f
 `nif:Word`, hence `+`.
 No concept in Web Annotation, but tokens can be targets, hence `(+)`.
 
-### Word-level annotation: relation between adjacent words
-
-`nif:nextWord`, hence `+`.
-Lacking in Web Annotation, hence `-`.
-
 ### Sentence-level annotation: sentence unit
 
 `nif:Sentence`, hence `+`.
 Lacking in Web Annotation, hence `(+)`.
 
-### Annotation of morphology: morphological segments
+### morphology: morphological segments
 
 Example:
 `cats` = `cat` + `s`
@@ -240,9 +244,99 @@ Web Annotation: `(+)`
 
 It is unclear how to use NIF in combination with the Lemon Morphology Module: https://www.w3.org/community/ontolex/wiki/Morphology
 
+### syntax/text structure: node labels/types
+
+The vocabulary should provide (or refer to) an inventory of syntactic categories, e.g., phrase. Note that this must be extensible to accomodate novel types of annotation.
+
+NIF: `nif:Word`, `nif:Phrase`, `nif:Paragraph`, etc.; but note that these do not describe nodes in the sense of LAF, but regions, so, this is `(+)`
+
+Web Annotation: user-provided subclasses of `oa:Annotation`, hence `(-)`
+
+Candidate resources for an external terminology base are [OLiA](http://purl.org/olia) (extensible by the community) or the [CLARIN Concept Registry](https://www.clarin.eu/ccr) (extensible by national CLARIN representatives).
+
+### semantics: node labels/types
+
+Similar as for nodes, cf. SemAF, [NERD](http://nerd.eurecom.fr/ontology) (for named entities), etc. This requires a very rich and extensible inventory of data categories, so better as an external resources.
+
+## Levels of linguistic analysis: sequential structure
+
+For a particular level of linguistic analysis, the vocabulary should
+- define (`+`) or address (`(+)`) the relevant units of annotation, and 
+- permit to navigate among units of annotation (e.g., retrieving the next annotation of the same kind)
+
+As for "navigation" relations between adjacent units: For different levels of linguistic annotation (e.g., morphology, word-level annotations), the vocabulary should provide an explicit means to identify the next (or preceding) unit of annotation. For pre-RDF vocabularies, this can be encoded in the structure of a a file (e.g., in XML or CoNLL formats), for RDF vocabularies, this must be explicit triples.
+
+In Web Annotation, this is absent, hence `-`.
+NIF defines such properties for limited number of possible relations among concepts, e.g. `nif:nextWord` or `nif:nextSentance`, but not for others (e.g., morphs).
+
+### Word-level annotation: sequence of words
+
+`nif:nextWord`, hence `+`.
+Lacking in Web Annotation, hence `-`.
+
+### Sentence-level annotation: sequence of sentences
+
+`nif:nextSentence`, lacking in Web Annotation (`-`).
+
 ### Morphology: sequence of morphological segments
 
 `cats` = `cat` + `s` with `cat "directly precedes" s`.
 
 Lacking in NIF and Web Annotation, hence `-`.
 
+### Syntax/text structure: sequence of elements within a phrase
+
+Within the vocabulary, we should be able to quickly navigate from one sibling to the next.
+
+Lacking in NIF and Web Annotation, hence `-`, but provided by [POWLA](http://purl.org/powla), an RDF/OWL reconstruction of LAF.
+
+## Levels of linguistic analysis: relational structure
+
+(At least) two kinds of relations must be distinguished: Relations there one node contains the other (hierarchical structure, e.g., phrase structure syntax) and relations between independent nodes (relational structure, e.g., dependency syntax, coreference, etc.).
+
+Web Annotation does not provide any vocabulary for relations between annotations (or bodies). Offset-based selectors do, however, permit reasoning over offsets that can be (ab)used to indicate hierarchical structures. However, this does not hold between annotations, but between bodies only, hence `(-)`, because hierarchical structures between co-extensional elements cannot be expressed.
+
+Similarly, NIF encodes hierarchical structure by means of `nif:subString`, but note that this is 'not' a relation between LAF nodes (~ `nif:AnnotationUnit`) but between LAF regions (`nif:String`). Hence, this is `(-)`.
+
+Example for hierarchical relations between co-extensional elements:
+
+```
+[S [VF [NP [NE Peter ] ] ] [LK [V war ] ] [MF [ADVX [ADV nicht] [ADV zuhause] ] ] ]
+```
+
+German, 'Peter wasn't home', example inspired by [TüBa-D/Z corpus](http://www.sfs.uni-tuebingen.de/en/ascl/resources/corpora/tueba-dz.html) 
+
+```
+VF -> Peter (Vorfeld, syntactic position)
+NP -> Peter (Noun Phrase, constituent at VF position)
+NE -> Peter (Named Entity that constitutes the NP)
+```
+
+These are co-extensional, but their hierarchical organization (in the annotation) is meaningful and must not be reversed. In the following, NIF and WA all have `(-)` for hierarchical relations.
+
+### Morphology: relations
+
+hierachical/other relations to be confirmed, cf. OntoLex-Morph and MAF
+
+Vocabulary should either provide the vocabulary or refer to an external terminology repository that provides the necessary vocabulary
+
+### Dependency syntax
+ 
+no hierarchical relations, to be confirmed whether primary and secondary dependencies are to be distinguished (cf. https://universaldependencies.org/), cf. SynAF (other standards?)
+
+### Phrase structure syntax: hierarchical relations
+
+hierarchical relations, must be annotatable, see SynAF, to be confirmed whether primary and secondary edges are to be distinguished (cf. [TIGER XML](https://www.ims.uni-stuttgart.de/forschung/ressourcen/werkzeuge/TIGERSearch/doc/html/TigerXML.html))
+
+### Phrase structure syntax: other relations
+
+to be confirmed, e.g., for movement/traces, see SynAF. 
+Note that an indirect encoding by means of empty elements may be possible under certain circumstances, cf. the modelling of syntactic movement by means of traces in generative syntax.
+
+### Semantics: relations
+
+cf. SemAF, must cover a broad inventory of relations, including TimeML, PropBank/FrameNet-style semantic roles, different forms of discourse annotation (RST: hierarchical, PDTB: non-hierarchical), coreference, etc.
+
+In order to prevent unlimited growth of the vocabulary, semantic annotations should use refer to a(n extensible) terminology repository rather than aiming to provide an exhaustive list 'within the vocabulary'. 
+
+### Other (to be added)
