@@ -4,69 +4,69 @@ Feature requests for a LLOD-compliant vocabulary for linguistic annotations on t
 (includes current NIF/WebAnnotation/LAF features, unsupported use cases in NIF and/or Web Annotation, and prospective use cases)
 
 List will be used to compile a compliancy table for NIF, Web Annotation and other vocabularies, with primary values `+`, `(+)`, `(-)` and `-`.
+Note: The section numbers below are used to identify entries in the result table. Do not change! (Instead, mark a section/feature as deprecated if it's dropped or replaced by a different feature request.)
 
 ## Table of contents
 (auto-generated using https://magnetikonline.github.io/markdown-toc-generate/, needs to be updated when changes are being made)
 
-- [LLOD compliancy](#llod-compliancy)
-	- [RDF serialization](#rdf-serialization)
-	- [Extent of standardization](#extent-of-standardization)
-	- [Documentation](#documentation)
-	- [IRI fragment identifiers for strings](#iri-fragment-identifiers-for-strings)
-	- [Explicit selectors](#explicit-selectors)
-	- [Explicit context strings](#explicit-context-strings)
-	- [API specifications for web services](#api-specifications-for-web-services)
-- [Expressiveness](#expressiveness)
-	- [Pointers to primary data](#pointers-to-primary-data)
-	- [Pointers: Vocabulary for explicit references](#pointers-vocabulary-for-explicit-references)
-	- [Pointers: User-provided selectors](#pointers-user-provided-selectors)
-	- [Pointers: Support the annotation of continuous strings](#pointers-support-the-annotation-of-continuous-strings)
-	- [Pointers: Annotation of discontinuous strings](#pointers-annotation-of-discontinuous-strings)
-	- [Pointers: Annotation of media files](#pointers-annotation-of-media-files)
-	- [Pointers: Support the annotation of timestamps/timelines](#pointers-support-the-annotation-of-timestampstimelines)
-	- [Pointers: standoff annotation](#pointers-standoff-annotation)
-	- [Generic data structures for linguistic annotation: node != pointer](#generic-data-structures-for-linguistic-annotation-node--pointer)
-	- [Generic data structures for linguistic annotation: zero nodes](#generic-data-structures-for-linguistic-annotation-zero-nodes)
-	- [Generic data structures for linguistic annotation: edge ('relation')](#generic-data-structures-for-linguistic-annotation-edge-relation)
-	- [Reified representation of edges (annotation relations)](#reified-representation-of-edges-annotation-relations)
-	- [Generic data structures for linguistic annotation: graphs](#generic-data-structures-for-linguistic-annotation-graphs)
-	- [Generic data structures for linguistic annotation: annotations](#generic-data-structures-for-linguistic-annotation-annotations)
-	- [Generic data structures for linguistic annotation: annotation space ("tagset")](#generic-data-structures-for-linguistic-annotation-annotation-space-tagset)
-	- [Provenance](#provenance)
-	- [Concurrent annotation](#concurrent-annotation)
-	- [Sequence of annotation units](#sequence-of-annotation-units)
-	- [annotation values: plain literals](#annotation-values-plain-literals)
-	- [annotation values: feature structures](#annotation-values-feature-structures)
-- [Levels of linguistic analysis: units of annotation](#levels-of-linguistic-analysis-units-of-annotation)
-	- [Word-level annotations: word unit](#word-level-annotations-word-unit)
-	- [Sentence-level annotation: sentence unit](#sentence-level-annotation-sentence-unit)
-	- [morphology: morphological segments](#morphology-morphological-segments)
-	- [syntax/text structure: node labels/types](#syntaxtext-structure-node-labelstypes)
-	- [semantics: node labels/types](#semantics-node-labelstypes)
-- [Levels of linguistic analysis: sequential structure](#levels-of-linguistic-analysis-sequential-structure)
-	- [Word-level annotation: sequence of words](#word-level-annotation-sequence-of-words)
-	- [Sentence-level annotation: sequence of sentences](#sentence-level-annotation-sequence-of-sentences)
-	- [Morphology: sequence of morphological segments](#morphology-sequence-of-morphological-segments)
-	- [Syntax: discontinuous multi-word segments](#syntax-discontinuous-multi-word-segments)
-	- [Syntax/text structure: sequence of elements within a phrase](#syntaxtext-structure-sequence-of-elements-within-a-phrase)
-- [Levels of linguistic analysis: relational structure](#levels-of-linguistic-analysis-relational-structure)
-	- [Morphology: relations](#morphology-relations)
-	- [Dependency syntax](#dependency-syntax)
-	- [Phrase structure syntax: hierarchical relations](#phrase-structure-syntax-hierarchical-relations)
-	- [Phrase structure syntax: other relations](#phrase-structure-syntax-other-relations)
-	- [Semantics: relations](#semantics-relations)
+- [A. LLOD compliancy](#a-llod-compliancy)
+	- [A.1 RDF serialization](#a1-rdf-serialization)
+	- [A.2 Extent of standardization](#a2-extent-of-standardization)
+	- [A.3 Documentation](#a3-documentation)
+	- [A.4 IRI fragment identifiers for strings](#a4-iri-fragment-identifiers-for-strings)
+	- [A.5 Explicit selectors](#a5-explicit-selectors)
+	- [A.6 Explicit context strings](#a6-explicit-context-strings)
+	- [A.7 API specifications for web services](#a7-api-specifications-for-web-services)
+- [B. Expressiveness](#b-expressiveness)
+	- [B.1 Pointers to primary data](#b1-pointers-to-primary-data)
+	- [B.2 Pointers: Vocabulary for explicit references](#b2-pointers-vocabulary-for-explicit-references)
+	- [B.3 Pointers: User-provided selectors](#b3-pointers-user-provided-selectors)
+	- [B.4 Pointers: Support the annotation of continuous strings](#b4-pointers-support-the-annotation-of-continuous-strings)
+	- [B.5 Pointers: Annotation of discontinuous strings](#b5-pointers-annotation-of-discontinuous-strings)
+	- [B.6 Pointers: Annotation of media files](#b6-pointers-annotation-of-media-files)
+	- [B.7 Pointers: Support the annotation of timestamps/timelines](#b7-pointers-support-the-annotation-of-timestampstimelines)
+	- [B.8 Pointers: standoff annotation](#b8-pointers-standoff-annotation)
+	- [B.9 Generic data structures for linguistic annotation: node != pointer](#b9-generic-data-structures-for-linguistic-annotation-node--pointer)
+	- [B.10 Generic data structures for linguistic annotation: zero nodes](#b10-generic-data-structures-for-linguistic-annotation-zero-nodes)
+	- [B.11 Generic data structures for linguistic annotation: edge ('relation')](#b11-generic-data-structures-for-linguistic-annotation-edge-relation)
+	- [B.12 Reified representation of edges (annotation relations)](#b12-reified-representation-of-edges-annotation-relations)
+	- [B.13 Generic data structures for linguistic annotation: graphs](#b13-generic-data-structures-for-linguistic-annotation-graphs)
+	- [B.14 Generic data structures for linguistic annotation: annotations](#b14-generic-data-structures-for-linguistic-annotation-annotations)
+	- [B.15 Generic data structures for linguistic annotation: annotation space ("tagset")](#b15-generic-data-structures-for-linguistic-annotation-annotation-space-tagset)
+	- [B.16 Provenance](#b16-provenance)
+	- [B.17 Concurrent annotation](#b17-concurrent-annotation)
+	- [B.18 Sequence of annotation units](#b18-sequence-of-annotation-units)
+	- [B.19 annotation values: plain literals](#b19-annotation-values-plain-literals)
+	- [B.20 annotation values: feature structures](#b20-annotation-values-feature-structures)
+- [C. Levels of linguistic analysis: units of annotation](#c-levels-of-linguistic-analysis-units-of-annotation)
+	- [C.1 Word-level annotations: word unit](#c1-word-level-annotations-word-unit)
+	- [C.2 Sentence-level annotation: sentence unit](#c2-sentence-level-annotation-sentence-unit)
+	- [C.3 morphology: morphological segments](#c3-morphology-morphological-segments)
+	- [C.4 syntax/text structure: node labels/types](#c4-syntaxtext-structure-node-labelstypes)
+	- [C.5 semantics: node labels/types](#c5-semantics-node-labelstypes)
+- [D. Levels of linguistic analysis: sequential structure](#d-levels-of-linguistic-analysis-sequential-structure)
+	- [D.1 Word-level annotation: sequence of words](#d1-word-level-annotation-sequence-of-words)
+	- [D.2 Sentence-level annotation: sequence of sentences](#d2-sentence-level-annotation-sequence-of-sentences)
+	- [D.3 Morphology: sequence of morphological segments](#d3-morphology-sequence-of-morphological-segments)
+	- [D.4 Syntax: discontinuous multi-word segments](#d4-syntax-discontinuous-multi-word-segments)
+	- [D.5 Syntax/text structure: sequence of elements within a phrase](#d5-syntaxtext-structure-sequence-of-elements-within-a-phrase)
+- [E. Levels of linguistic analysis: relational structure](#e-levels-of-linguistic-analysis-relational-structure)
+	- [E.1 Morphology: relations](#e1-morphology-relations)
+	- [E.2 Dependency syntax](#e2-dependency-syntax)
+	- [E.3 Phrase structure syntax: hierarchical relations](#e3-phrase-structure-syntax-hierarchical-relations)
+	- [E.4 Phrase structure syntax: other relations](#e4-phrase-structure-syntax-other-relations)
+	- [E.5 Semantics: relations](#e5-semantics-relations)
 	- [Other (to be added)](#other-to-be-added)
-- [Data structures for novel applications](#data-structures-for-novel-applications)
-	- [Intertextual relations](#intertextual-relations)
-	- [Collation and alignment](#collation-and-alignment)
-	- [Links with lexical resources](#links-with-lexical-resources)
-	- [Dialog annotation](#dialog-annotation)
+- [F. Data structures for novel applications](#f-data-structures-for-novel-applications)
+	- [F.1 Intertextual relations](#f1-intertextual-relations)
+	- [F.2 Collation and alignment](#f2-collation-and-alignment)
+	- [F.3 Links with lexical resources](#f3-links-with-lexical-resources)
+	- [F.4 Dialog annotation](#f4-dialog-annotation)
 	- [Other (please add)](#other-please-add)
 
+## A. LLOD compliancy
 
-## LLOD compliancy
-
-### RDF serialization
+### A.1 RDF serialization
 
 - The vocabulary must foresee a serialization in RDF or any standardized RDF format (JSON-LD, RDF/XML, Turtle, ...)
 - Trivially fulfulled by RDF vocabularies such as Web Annotation, but not by, say, ISO standards such as the Linguistic Annotation Framework (LAF), conventional TSV formats ("CoNLL") or XML formats (TEI).
@@ -82,13 +82,13 @@ Counter-example (https://tei-c.org/release/doc/tei-p5-doc/en/html/ref-relation.h
 
 This example records a relationship, defined by the SAWS ontology, between a passage of text identified by a CTS URN, and a variant passage of text in the Perseus Digital Library, and assigns the identification of the relationship to a particular editor (all using resolvable URIs). This is a counter-example in the sense that the TEI does not support a (W3C- or otherwise) standardized way to encode RDF statements but introduces TEI-specific formalisms. 
 
-### Extent of standardization
+### A.2 Extent of standardization
 
 Are candidate vocabularies standardized by a formal standardization body (e.g., ISO, W3C, etc., mark as `+`), community standards used by multiple providers (mark as `(+)`) or tool- or application-specific solutions (mark as `-`)?
 
 Web Annotation is a regular W3C standard, hence `+`. NIF is a widely used community standard, hence  (i.e., `(+)`), and referred to in W3C standards.
 
-### Documentation
+### A.3 Documentation
 
 The vocabulary/standard should be
 - fully documented using public, freely accessible online documentation, mark as `+`, or
@@ -100,25 +100,25 @@ NIF 2.0 and Web Annotation is fully documented using public, freely accessible o
 NIF 2.1 documentation does not properly reflect the latest advancements in NIF 2.1, hence `(-)`.
 ISO standards (LAF, etc.) are usually proprietary. If internal copies or drafts are accessible, use `(+)` and describe how to access them. If 'only' supporting documentation (e.g., secondary literature such as scientific papers about the standard) are accessible, use `(-)`. If only the proprietary standard itself is accessible, without either secondary literature or drafts, use `-`.
 
-### IRI fragment identifiers for strings
+### A.4 IRI fragment identifiers for strings
 
 A highly praised feature of NIF (in comparison to Web Annotation) is that it supports compact String URIs that can be interpreted in isolation (but whose information can [should] be made explicit in RDF statements).
 
 In NIF, this is part of the specification (`+`). In Web Annotation, this is possible, but not part of the standard, but only described in a [working note](https://w3c.github.io/web-annotation/selector-note/), hence `(+)`.
 
-### Explicit selectors
+### A.5 Explicit selectors
 
 Aside from string IRIs, it should be possible to decode their information (e.g., offset information) into RDF statements.
 
 NIF: `+`, WebAnnotation: `+`
 
-### Explicit context strings
+### A.6 Explicit context strings
 
 In order to facilitate interpretability and robustness of string URIs (regardless of changes in underlying resource or differences in, say, Unicode normalization), the vocabulary should permit to provide explicit contexts that contain the text that a string IRI refers to (e.g., its offsets).
 
 NIF: `+`, WebAnnotation: `-`
 
-### API specifications for web services
+### A.7 API specifications for web services
 
 In addition to modelling aspects, the vocabulary should provide API specifications for web services that perform linguistic annotation, e.g., POS tagging, or that provide access to and/or manipulation of data.
 
@@ -127,7 +127,7 @@ Web Annotation: https://www.w3.org/TR/annotation-protocol/ `+`
 
 For independent APIs, also cf. DTS: https://distributed-text-services.github.io/specifications/ (esp. for applications in the humanities)
 
-## Expressiveness
+## B. Expressiveness
 
 This mostly refers to the capability of providing 'generic' data structures as defined by [ISO 24612-2012 (LAF)](https://www.cs.vassar.edu/~ide/papers/ISO+24612-2012.pdf): generic linguistic data structures from which annotation-specific datastructures can be derived. These are
 
@@ -158,7 +158,7 @@ NIF defines:
 
 Generic linguistic data structures (as in LAF) are missing. For specific levels of description (e.g., morphology), see below.
 
-### Pointers to primary data
+### B.1 Pointers to primary data
 
 In RDF vocabularies either by IRI fragment identifiers or explicit RDF statements (and vocabulary for that).
 
@@ -169,17 +169,17 @@ Examples for IRI fragment identifiers as pointers:
 
 The default mechanism to define pointers in Web Annotation is by means of selectors that use application-specific information to address elements of a web document using explicit RDF statements.
 
-### Pointers: Vocabulary for explicit references
+### B.2 Pointers: Vocabulary for explicit references
 
 Provide (optional) RDF statements to explicate pointer information (e.g., offsets).
 
-### Pointers: User-provided selectors
+### B.3 Pointers: User-provided selectors
 
 Allow users to define application-specific pointers.
 
 Web Annotation provides the class `oa:Selector`. For different media, users can provide selector subclasses that encode the information an appication needs to identify the annotated element.
 
-### Pointers: Support the annotation of continuous strings
+### B.4 Pointers: Support the annotation of continuous strings
 
 represent continuous multi-word segments, necessary for syntactic phrases, semantic annotations
 
@@ -188,7 +188,7 @@ Example (basic phrase structure syntax)
 [NP ten books]
 ```
 
-### Pointers: Annotation of discontinuous strings
+### B.5 Pointers: Annotation of discontinuous strings
 
 Example:
 `Diego Maradona is from Argentina.`
@@ -202,27 +202,27 @@ ext:offset_23_32 -> Argentina
 In NIF, annotations such as `ext:offset_0_14_23_32` are not considered nor supported, mark as `-`.
 In Web Annotations, multiple selectors can be combined into an aggregate selector, mark as `+`.
 
-### Pointers: Annotation of media files
+### B.6 Pointers: Annotation of media files
 
 Annotation of non-textual data, e.g., audio, video, images.
 
 Core feature of Web Annotation, hence `+`.
 Not supported in NIF, `-`
 
-### Pointers: Support the annotation of timestamps/timelines
+### B.7 Pointers: Support the annotation of timestamps/timelines
 
 For multi-media annoation, timeline-based annotation is the primary annotation strategy adopted by tools such as [ELAN](https://tla.mpi.nl/tools/tla-tools/elan/) and [Exmaralda](https://exmaralda.org/en/about-exmaralda/). Here, textual data is the value (body) of an annotation, the timeline is correlated with one or multiple mediafiles, but the mediafile is not directly the target of the annotation.
 
 Supported in Web Annotation if a user-specific selector is provided, hence `(+)`, not supported in NIF `-`.
 
-### Pointers: standoff annotation
+### B.8 Pointers: standoff annotation
 
 Vocabulary should be able to annotate content residing in a separate file or resource.
 
 NIF: `+`
 Web Annotation: `+`
 
-### Generic data structures for linguistic annotation: node != pointer
+### B.9 Generic data structures for linguistic annotation: node != pointer
 
 [ISO 24612-2012](https://www.cs.vassar.edu/~ide/papers/ISO+24612-2012.pdf) pointers are distinguished from units of annotation. Conceptually, it is important that pointers and units of annotations are (or: can be) distinguished, because the same string may have multiple, independent annotations. 
 
@@ -232,7 +232,7 @@ In NIF, the function of `node` may be compared to `nif:AnnotationUnit`, but by d
 
 In Web Annotation, `node` may be compared to `oa:Annotation` or the body (depending on perspective), but note that Web Annotation doesn't seem to support nodes without an associated target (region), hence mark as `(+)`.
 
-### Generic data structures for linguistic annotation: zero nodes
+### B.10 Generic data structures for linguistic annotation: zero nodes
 
 Support the annotation of zero elements, e.g., elements of syntactic analysis that are not overtly realized, e.g., traces or zero anaphors.
 
@@ -262,21 +262,21 @@ For textual data, the vocabulary should thus
 
 The default encoding for annotations in NIF is by subclasses of `nif:String`, and this would be `(+)`. Web annotation requires some target, and this would be `(+)`. 
 
-### Generic data structures for linguistic annotation: edge ('relation')
+### B.11 Generic data structures for linguistic annotation: edge ('relation')
 
 [ISO 24612-2012](https://www.cs.vassar.edu/~ide/papers/ISO+24612-2012.pdf) edge is a relation from one or multiple nodes to one or multiple nodes. Edges are, for example, syntactic dependencies. The vocabulary should provide a way to mark an RDF statement as being a edge/relation in the sense of LAF, e.g., a property or class that annotation-specific edges can provide sub-classes/-properties for.
 
 No explicit data structures for edges in NIF nor Web Annotation.
 
-### Reified representation of edges (annotation relations)
+### B.12 Reified representation of edges (annotation relations)
 
 For an edge (relation), it must be possible to annotate it with additional data, e.g., linguistic data categories. The vocabulary should support a reified view on, say, dependency relations.
 
-### Generic data structures for linguistic annotation: graphs
+### B.13 Generic data structures for linguistic annotation: graphs
 
 In LAF, a graph a is a collection of nodes and edges. In RDF, this corresponds to an RDF graph (often representing the document that a particular set of RDF statements originates from). We do not require explicit data structures for graphs beyond that (do we?).
 
-### Generic data structures for linguistic annotation: annotations
+### B.14 Generic data structures for linguistic annotation: annotations
 
 [ISO 24612-2012](https://www.cs.vassar.edu/~ide/papers/ISO+24612-2012.pdf) defines generic linguistic data structures from which annotation-specific datastructures can be derived. These are
 
@@ -288,7 +288,7 @@ In LAF, a graph a is a collection of nodes and edges. In RDF, this corresponds t
 
 The vocabulary should provide a designated class for linguistic annotations. In Web Annotation, this would be either `oa:Annotation` or a body (depending on interpretation). In NIF, such an element is missing. For annotations of a particular string, this function is taken over by `nif:String`, for more complex constellations, `nif:AnnotationUnit` can be used, but is not the default way of modelling.
 
-### Generic data structures for linguistic annotation: annotation space ("tagset")
+### B.15 Generic data structures for linguistic annotation: annotation space ("tagset")
 
 [ISO 24612-2012](https://www.cs.vassar.edu/~ide/papers/ISO+24612-2012.pdf) defines generic linguistic data structures from which annotation-specific datastructures can be derived. These are
 
@@ -300,7 +300,7 @@ The vocabulary should provide a designated class for linguistic annotations. In 
 
 The vocabulary should provide a standard way to assign annotations a particular type or class. This corresponds to user-provided subclasses of (the abstract) `oa:Annotation` class in Web Annotation. 
 
-### Provenance
+### B.16 Provenance
 
 The vocabulary should provide a way to
 - assert provenance about (annotations of) nodes and edges, mark as `+`, or
@@ -309,13 +309,13 @@ The vocabulary should provide a way to
 
 NIF 2.1 defines `nif:AnnotationUnit` which can use used to distinguish annotations comming from different NLP tools on same strings (same offsets).
 
-### Concurrent annotation
+### B.17 Concurrent annotation
 
 It should be possible to provide alternative, and distinct annotations of the same phenomenon with different provenance, e.g., for combining entity linking services or for comparing the output of different parsers.
 
 In addition to provenance, this requires to identify the "annotation space" (LAF terminology).
 
-### Sequence of annotation units
+### B.18 Sequence of annotation units
 
 An annotation vocabulary should allow to encode the sequence of annotation units of the same kind (words, sentences, ...), either by enumeration or by explicit properties.
 
@@ -348,7 +348,7 @@ The different encoding possibilities can be transformed into each other. E.g., e
 
 To facilitate encoding, a vocabulary should specify which (if any) strategy is recommended. In addition to marking whether a vocabulary provides sequence annotation vocabulary (`+`, `-`), mark the strategy.
 
-### annotation values: plain literals
+### B.19 annotation values: plain literals
 
 The vocabulary should support annotation (annotation value/body) with plain literals, e.g., strings.
 
@@ -357,7 +357,7 @@ Example:
 :some_region_uri nif:lemma "tree" .
 ```
 
-### annotation values: feature structures
+### B.20 annotation values: feature structures
 
 The vocabulary should support annotation (annotation value/body) with feature structures, i.e., root nodes of directed (acyclic) graphs. In RDF, this requirement can be reformulated as permitting RDF resources (URIs) as annotations.
 
@@ -366,13 +366,13 @@ Example:
 :some_region_uri nif:oliaLink penn:NN.
 ```
 
-## Levels of linguistic analysis: units of annotation
+## C. Levels of linguistic analysis: units of annotation
 
 For a particular level of linguistic analysis, the vocabulary should
 - define (`+`) or address (`(+)`) the relevant units of annotation, and 
 - permit to navigate among units of annotation (e.g., retrieving the next annotation of the same kind)
 
-### Word-level annotations: word unit
+### C.1 Word-level annotations: word unit
 
 The vocabulary must support the annotation of individual words (tokens), e.g., for entity linking or part-of-speech tagging:
 - If it provides a concept for words or tokens, mark as `+`
@@ -388,12 +388,12 @@ book/NN
 `nif:Word`, hence `+`.
 No concept in Web Annotation, but tokens can be targets, hence `(+)`.
 
-### Sentence-level annotation: sentence unit
+### C.2 Sentence-level annotation: sentence unit
 
 `nif:Sentence`, hence `+`.
 Lacking in Web Annotation, hence `(+)`.
 
-### morphology: morphological segments
+### C.3 morphology: morphological segments
 
 segment a word into its parts, annotate parts individually, required for interlinear glossed text
 
@@ -423,7 +423,7 @@ Web Annotation: `(+)`
 
 It is unclear how to use NIF in combination with the Lemon Morphology Module: https://www.w3.org/community/ontolex/wiki/Morphology
 
-### syntax/text structure: node labels/types
+### C.4 syntax/text structure: node labels/types
 
 The vocabulary should provide (or refer to) an inventory of syntactic categories, e.g., phrase. Note that this must be extensible to accomodate novel types of annotation.
 
@@ -433,7 +433,7 @@ NIF predefined: `nif:Word`, `nif:Phrase`, `nif:Paragraph`, etc.; but note that t
 
 In addition, NIF allows to use `nif:oliaLink` to refer to an external terminology base, here [OLiA](http://purl.org/olia). An alternative to OLiA is the [CLARIN Concept Registry](https://www.clarin.eu/ccr), but note that it is extensible only by national CLARIN representatives whereas OLiA is an [open source project on GitHub](https://github.com/acoli-repo/olia). AFAIK, NIF uses `nif:oliaLink` for part of speech information only, so this is partial solution, again, hence, `(+)`.
 
-### semantics: node labels/types
+### C.5 semantics: node labels/types
 
 Similar as for syntax/text structure, details to be determined from SemAF, [NERD](http://nerd.eurecom.fr/ontology) (for named entities), [GlobalWordNet Interlingual Index](https://github.com/globalwordnet/ili) (for word senses), etc. 
 
@@ -442,7 +442,7 @@ This requires a very rich and extensible inventory of data categories, so better
 NIF supports entity linking, but no other form of semantic annotation, hence `(-)`.
 Web Annotation is widely used for entity linking, but it does not provide a designated vocabulary for entities, hence `(-)`.
 
-## Levels of linguistic analysis: sequential structure
+## D. Levels of linguistic analysis: sequential structure
 
 For a particular level of linguistic analysis, the vocabulary should
 - define (`+`) or address (`(+)`) the relevant units of annotation, and 
@@ -453,22 +453,22 @@ As for "navigation" relations between adjacent units: For different levels of li
 In Web Annotation, this is absent, hence `-`.
 NIF defines such properties for limited number of possible relations among concepts, e.g. `nif:nextWord` or `nif:nextSentance`, but not for others (e.g., morphs).
 
-### Word-level annotation: sequence of words
+### D.1 Word-level annotation: sequence of words
 
 `nif:nextWord`, hence `+`.
 Lacking in Web Annotation, hence `-`.
 
-### Sentence-level annotation: sequence of sentences
+### D.2 Sentence-level annotation: sequence of sentences
 
 `nif:nextSentence`, lacking in Web Annotation (`-`).
 
-### Morphology: sequence of morphological segments
+### D.3 Morphology: sequence of morphological segments
 
 `cats` = `cat` + `s` with `cat "directly precedes" s`.
 
 Lacking in NIF and Web Annotation, hence `-`.
 
-### Syntax: discontinuous multi-word segments
+### D.4 Syntax: discontinuous multi-word segments
 
 represent discontinuous multi-word segments	represent syntactic phrases, regardless of their sequential order
 
@@ -481,13 +481,13 @@ At a deep level, the phrase here is `[about what]`. If this can be represented d
 
 Note that this is different from the annotation of discontinuous strings, as the words being connected can have an internal syntactic structure.
 
-### Syntax/text structure: sequence of elements within a phrase
+### D.5 Syntax/text structure: sequence of elements within a phrase
 
 Within the vocabulary, we should be able to quickly navigate from one sibling to the next.
 
 Lacking in NIF and Web Annotation, hence `-`, but provided by [POWLA](http://purl.org/powla), an RDF/OWL reconstruction of LAF.
 
-## Levels of linguistic analysis: relational structure
+## E. Levels of linguistic analysis: relational structure
 
 (At least) two kinds of relations must be distinguished: Relations there one node contains the other (hierarchical structure, e.g., phrase structure syntax) and relations between independent nodes (relational structure, e.g., dependency syntax, coreference, etc.).
 
@@ -511,26 +511,26 @@ NE -> Peter (Named Entity that constitutes the NP)
 
 These are co-extensional, but their hierarchical organization (in the annotation) is meaningful and must not be reversed. In the following, NIF and WA all have `(-)` for hierarchical relations.
 
-### Morphology: relations
+### E.1 Morphology: relations
 
 hierachical/other relations to be confirmed, cf. OntoLex-Morph and MAF
 
 Vocabulary should either provide the vocabulary or refer to an external terminology repository that provides the necessary vocabulary
 
-### Dependency syntax
+### E.2 Dependency syntax
  
 no hierarchical relations, to be confirmed whether primary and secondary dependencies are to be distinguished (cf. https://universaldependencies.org/), cf. SynAF (other standards?)
 
-### Phrase structure syntax: hierarchical relations
+### E.3 Phrase structure syntax: hierarchical relations
 
 hierarchical relations, must be annotatable, see SynAF, to be confirmed whether primary and secondary edges are to be distinguished (cf. [TIGER XML](https://www.ims.uni-stuttgart.de/forschung/ressourcen/werkzeuge/TIGERSearch/doc/html/TigerXML.html))
 
-### Phrase structure syntax: other relations
+### E.4 Phrase structure syntax: other relations
 
 to be confirmed, e.g., for movement/traces, see SynAF. 
 Note that an indirect encoding by means of empty elements may be possible under certain circumstances, cf. the modelling of syntactic movement by means of traces in generative syntax.
 
-### Semantics: relations
+### E.5 Semantics: relations
 
 cf. SemAF, must cover a broad inventory of relations, including TimeML, PropBank/FrameNet-style semantic roles, different forms of discourse annotation (RST: hierarchical, PDTB: non-hierarchical), coreference, etc.
 
@@ -539,11 +539,11 @@ In order to prevent unlimited growth of the vocabulary, semantic annotations sho
 ### Other (to be added)
 
 
-## Data structures for novel applications
+## F. Data structures for novel applications
 
 Aside from the types of annotation listed below, RDF-based technology enables better support for phenomena that no community standard currently does exist for. These are usecases that involve linking across documents. Note that requirements for "conventional annotations" (such as covered by existing W3C, ISO or other standards) are listed below.
 
-### Intertextual relations
+### F.1 Intertextual relations
 
 Link text passages from different documents that correspond to each other, e.g., because of text reuse. There should be an encoding for undirected overlap (if two sources derive from the same, anonymous source or the direction of reuse is uncear) and a different encoding for confirmed text reuse.
 
@@ -551,7 +551,7 @@ Motivation: Digital Humanities
 
 Currently no native vocabulary within Web Annotation or NIF, but both can be extended with user-provided properties for the purpose, hence `(-)`.
 
-### Collation and alignment
+### F.2 Collation and alignment
 
 Alignment: Parallel corpora are conventionally used, but current technology is restricted to bilingual pairs (e.g., [TreeAligner](https://www.cl.uzh.ch/en/texttechnologies/research/corpus-linguistics/paralleltreebanks/treealigner.ht). For developing language-independent applications and tools, it would be beneficial to support alignment between more than two languages.
 
@@ -563,7 +563,7 @@ Currently no native vocabulary within Web Annotation or NIF, but both can be ext
 
 For original TSV ("CoNLL") annotations, such data can be created with [CoNLL-Merge](https://github.com/acoli-repo/conll) and represented in RDF using the [CoNLL-RDF vocabulary](https://github.com/acoli-repo/conll-rdf).
 
-### Links with lexical resources
+### F.3 Links with lexical resources
 
 Link an expression with a glossary or a dictionary, e.g., to provide attestation information (within a dictionary) or to provide lexical information (within a corpus). Approach should be coordinated with [OntoLex-FrAC](https://github.com/acoli-repo/ontolex-frac).
 
@@ -571,7 +571,7 @@ Motivation: Digital Philologies
 
 Currently no native vocabulary within Web Annotation or NIF, but both can be extended with user-provided properties for the purpose, hence `(-)`.
 
-### Dialog annotation
+### F.4 Dialog annotation
 
 Represent contributions of different dialog partners as indepndent texts/documents/media files and annotate them separately, but within the same annotation graph (tbc: could be required by SemAF).
 
