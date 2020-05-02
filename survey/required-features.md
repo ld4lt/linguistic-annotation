@@ -1,6 +1,9 @@
-# Necessary features
+# Required features
 
-List of identified unsupported use cases in NIF and/or Web Annotation, still incomplete
+Feature requests for a LLOD-compliant vocabulary for linguistic annotations on the web
+(includes current NIF/WebAnnotation/LAF features, unsupported use cases in NIF and/or Web Annotation, and prospective use cases)
+
+List will be used to compile a compliancy table for NIF, Web Annotation and other vocabularies.
 
 ## LLOD compliancy
 
@@ -55,6 +58,13 @@ NIF: `+`, WebAnnotation: `+`
 In order to facilitate interpretability and robustness of string URIs (regardless of changes in underlying resource or differences in, say, Unicode normalization), the vocabulary should permit to provide explicit contexts that contain the text that a string IRI refers to (e.g., its offsets).
 
 NIF: `+`, WebAnnotation: `-`
+
+### API specifications for web services
+
+In addition to modelling aspects, the vocabulary should provide API specifications for web services that perform linguistic annotation, e.g., POS tagging, or that provide access to and/or manipulation of data.
+
+NIF: https://persistence.uni-leipzig.org/nlp2rdf/specification/api.html `+`
+Web Annotation: https://www.w3.org/TR/annotation-protocol/ `+`
 
 ## Expressiveness
 
@@ -440,3 +450,37 @@ cf. SemAF, must cover a broad inventory of relations, including TimeML, PropBank
 In order to prevent unlimited growth of the vocabulary, semantic annotations should use refer to a(n extensible) terminology repository rather than aiming to provide an exhaustive list 'within the vocabulary'. 
 
 ### Other (to be added)
+
+
+## Data structures for novel applications
+
+Aside from the types of annotation listed below, RDF-based technology enables better support for phenomena that no community standard currently does exist for. These are usecases that involve linking across documents. Note that requirements for "conventional annotations" (such as covered by existing W3C, ISO or other standards) are listed below.
+
+### Intertextual relations
+
+Link text passages from different documents that correspond to each other, e.g., because of text reuse. There should be an encoding for undirected overlap (if two sources derive from the same, anonymous source or the direction of reuse is uncear) and a different encoding for confirmed text reuse.
+
+Motivation: Digital Humanities
+
+Currently no native vocabulary within Web Annotation or NIF, but both can be extended with user-provided properties for the purpose, hence `(-)`.
+
+### Collation and alignment
+
+Alignment: Parallel corpora are conventionally used, but current technology is restricted to bilingual pairs (e.g., [TreeAligner](https://www.cl.uzh.ch/en/texttechnologies/research/corpus-linguistics/paralleltreebanks/treealigner.ht). For developing language-independent applications and tools, it would be beneficial to support alignment between more than two languages.
+
+Collation: For different editions of the same document (e.g., different manuscripts), align corresponding passages in an order-insensitive way. Note that collation typically extends to *much* more than two sources. For existing tools, cf. [CollateX](https://collatex.net/doc/), but note that it does not support annotated data.
+
+Motivation: NLP (parallel corpora) and Digital Humanities (collation)
+
+Currently no native vocabulary within Web Annotation or NIF, but both can be extended with user-provided properties for the purpose, hence `(-)`.
+
+For original TSV ("CoNLL") annotations, such data can be created with [CoNLL-Merge](https://github.com/acoli-repo/conll) and represented in RDF using the [CoNLL-RDF vocabulary](https://github.com/acoli-repo/conll-rdf).
+
+### Links with lexical resources
+
+Link an expression with a glossary or a dictionary, e.g., to provide attestation information (within a dictionary) or to provide lexical information (within a corpus). Approach should be coordinated with [OntoLex-FrAC](https://github.com/acoli-repo/ontolex-frac).
+
+Motivation: Digital Philologies
+
+Currently no native vocabulary within Web Annotation or NIF, but both can be extended with user-provided properties for the purpose, hence `(-)`.
+
