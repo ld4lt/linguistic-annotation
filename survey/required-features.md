@@ -125,6 +125,8 @@ In addition to modelling aspects, the vocabulary should provide API specificatio
 NIF: https://persistence.uni-leipzig.org/nlp2rdf/specification/api.html `+`
 Web Annotation: https://www.w3.org/TR/annotation-protocol/ `+`
 
+For independent APIs, also cf. DTS: https://distributed-text-services.github.io/specifications/ (esp. for applications in the humanities)
+
 ## Expressiveness
 
 This mostly refers to the capability of providing 'generic' data structures as defined by [ISO 24612-2012 (LAF)](https://www.cs.vassar.edu/~ide/papers/ISO+24612-2012.pdf): generic linguistic data structures from which annotation-specific datastructures can be derived. These are
