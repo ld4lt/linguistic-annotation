@@ -1,6 +1,6 @@
 # Required features
 
-Feature requests for a LLOD-compliant vocabulary for linguistic annotations on the web
+Feature requests for a LLOD-compliant, native RDF vocabulary for linguistic annotations on the web
 (includes current NIF/WebAnnotation/LAF features, unsupported use cases in NIF and/or Web Annotation, and prospective use cases)
 
 List will be used to compile a compliancy table for NIF, Web Annotation and other vocabularies, with primary values `+`, `(+)`, `(-)` and `-`.
