@@ -3,7 +3,7 @@
 Feature requests for a LLOD-compliant vocabulary for linguistic annotations on the web
 (includes current NIF/WebAnnotation/LAF features, unsupported use cases in NIF and/or Web Annotation, and prospective use cases)
 
-List will be used to compile a compliancy table for NIF, Web Annotation and other vocabularies.
+List will be used to compile a compliancy table for NIF, Web Annotation and other vocabularies, with primary values `+`, `(+)`, `(-)` and `-`.
 
 ## Table of contents
 (auto-generated using https://magnetikonline.github.io/markdown-toc-generate/, needs to be updated when changes are being made)
@@ -84,9 +84,9 @@ This example records a relationship, defined by the SAWS ontology, between a pas
 
 ### Extent of standardization
 
-Are candidate vocabularies standardized by a formal standardization body (e.g., ISO, W3C, etc., mark as `++`), community standards used by multiple providers (mark as `+`) or tool- or application-specific solutions (mark as `-`)?
+Are candidate vocabularies standardized by a formal standardization body (e.g., ISO, W3C, etc., mark as `+`), community standards used by multiple providers (mark as `(+)`) or tool- or application-specific solutions (mark as `-`)?
 
-Web Annotation is a regular W3C standard (`++`). NIF is a widely used community standard (i.e., `+`), and referred to in W3C standards, hence `(++)` (in parentheses). 
+Web Annotation is a regular W3C standard, hence `+`. NIF is a widely used community standard, hence  (i.e., `(+)`), and referred to in W3C standards.
 
 ### Documentation
 
