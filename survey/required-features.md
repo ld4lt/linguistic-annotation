@@ -82,11 +82,17 @@ Counter-example (https://tei-c.org/release/doc/tei-p5-doc/en/html/ref-relation.h
 
 This example records a relationship, defined by the SAWS ontology, between a passage of text identified by a CTS URN, and a variant passage of text in the Perseus Digital Library, and assigns the identification of the relationship to a particular editor (all using resolvable URIs). This is a counter-example in the sense that the TEI does not support a (W3C- or otherwise) standardized way to encode RDF statements but introduces TEI-specific formalisms. 
 
+NIF: `+` (RDF)
+
+Web Annotation: `+` (RDF, preference for JSON-LD)
+
 ### A.2 Extent of standardization
 
 Are candidate vocabularies standardized by a formal standardization body (e.g., ISO, W3C, etc., mark as `+`), community standards used by multiple providers (mark as `(+)`) or tool- or application-specific solutions (mark as `-`)?
 
-Web Annotation is a regular W3C standard, hence `+`. NIF is a widely used community standard, hence  (i.e., `(+)`), and referred to in W3C standards.
+Web Annotation: `+` (regular W3C standard)
+
+NIF: `(+)` (widely used community standard, and referred to in W3C standards)
 
 ### A.3 Documentation
 
@@ -96,9 +102,21 @@ The vocabulary/standard should be
 - If partially documented using public, freely accessible online documentation, mark as `(-)`.
 - Otherwise, mark as `-`.
 
-NIF 2.0 and Web Annotation is fully documented using public, freely accessible online documentation `+`.
-NIF 2.1 documentation does not properly reflect the latest advancements in NIF 2.1, hence `(-)`.
+NIF: `+` (for NIF 2.0)
+
+NIF 2.1: `(-)` (NIF 2.1 documentation does not properly reflect the latest advancements since NIF 2.0)
+
+Web Annotation: `+`
+
 ISO standards (LAF, etc.) are usually proprietary. If internal copies or drafts are accessible, use `(+)` and describe how to access them. If 'only' supporting documentation (e.g., secondary literature such as scientific papers about the standard) are accessible, use `(-)`. If only the proprietary standard itself is accessible, without either secondary literature or drafts, use `-`.
+
+LAF: `(+)` (via https://www.cs.vassar.edu/~ide/papers/ISO+24612-2012.pdf)
+
+MAF: `+` (link tbc.)
+
+SynAF: `-` (unless link/infoprmation provided)
+
+SemAF: `-` (unless link/infoprmation provided)
 
 ### A.4 IRI fragment identifiers for strings
 
@@ -218,64 +236,97 @@ The default mechanism to define pointers in Web Annotation is by means of select
 
 Provide (optional) RDF statements to explicate pointer information (e.g., offsets).
 
+Example (NIF):
+
+```
+<http://example.org/document/1#char=14,20>
+ nif:beginIndex "14"^^xsd:nonNegativeInteger ;
+ nif:endIndex "20"^^xsd:nonNegativeInteger .
+```
+
 ### B.3 Pointers: User-provided selectors
 
 Allow users to define application-specific pointers.
 
-Web Annotation provides the class `oa:Selector`. For different media, users can provide selector subclasses that encode the information an appication needs to identify the annotated element.
+Web Annotation: `+`, provides the class `oa:Selector`. For different media, users can provide selector subclasses that encode the information an appication needs to identify the annotated element.
+
+NIF: `-` (would be considered out of scope)
 
 ### B.4 Pointers: Support the annotation of continuous strings
 
 represent continuous multi-word segments, necessary for syntactic phrases, semantic annotations
 
 Example (basic phrase structure syntax)
+
 ```
 [NP ten books]
 ```
 
 ### B.5 Pointers: Annotation of discontinuous strings
 
+If one wants to "highlight" all entities (or particular words/phrases/strings), he/she would need to annotate each entity mention (word/phrases/strings).
+
 Example:
 `Diego Maradona is from Argentina.`
 
-If one wants to "highlight" all entities (or particular words/phrases/strings), he/she would need to annotate each entity mention (word/phrases/strings).
 ```
 ext:offset_0_14 -> Diego Maradona
 ext:offset_23_32 -> Argentina
 ```
 
-In NIF, annotations such as `ext:offset_0_14_23_32` are not considered nor supported, mark as `-`.
-In Web Annotations, multiple selectors can be combined into an aggregate selector, mark as `+`.
+NIF: `-` (annotations such as `ext:offset_0_14_23_32` are not considered nor supported)
+
+Web Annotations: `+` (multiple selectors can be combined into an aggregate selector)
 
 ### B.6 Pointers: Annotation of media files
 
 Annotation of non-textual data, e.g., audio, video, images.
 
-Core feature of Web Annotation, hence `+`.
-Not supported in NIF, `-`
+Web Annotation: `+` (core feature)
+
+NIF: `-`
 
 ### B.7 Pointers: Support the annotation of timestamps/timelines
 
-For multi-media annoation, timeline-based annotation is the primary annotation strategy adopted by tools such as [ELAN](https://tla.mpi.nl/tools/tla-tools/elan/) and [Exmaralda](https://exmaralda.org/en/about-exmaralda/). Here, textual data is the value (body) of an annotation, the timeline is correlated with one or multiple mediafiles, but the mediafile is not directly the target of the annotation.
+For multi-media annotation, timeline-based annotation is the primary annotation strategy adopted by tools such as [ELAN](https://tla.mpi.nl/tools/tla-tools/elan/) and [Exmaralda](https://exmaralda.org/en/about-exmaralda/). Here, textual data is the value (body) of an annotation, the timeline is correlated with one or multiple mediafiles, but the mediafile is not directly the target of the annotation.
 
-Supported in Web Annotation if a user-specific selector is provided, hence `(+)`, not supported in NIF `-`.
+Example and motivation: see https://www.exmaralda.org/files/SFB_AzM62.pdf (Fig. 2)
+
+Web Annotation: `(+)` (users may provide a specialized selector for such data)
+
+NIF: `-`
 
 ### B.8 Pointers: standoff annotation
 
 Vocabulary should be able to annotate content residing in a separate file or resource.
 
 NIF: `+`
+
 Web Annotation: `+`
 
 ### B.9 Generic data structures for linguistic annotation: node != pointer
 
 [ISO 24612-2012](https://www.cs.vassar.edu/~ide/papers/ISO+24612-2012.pdf) pointers are distinguished from units of annotation. Conceptually, it is important that pointers and units of annotations are (or: can be) distinguished, because the same string may have multiple, independent annotations. 
 
-Example: tbc.
+Example:
 
-In NIF, the function of `node` may be compared to `nif:AnnotationUnit`, but by default, the basis of annotation is a `nif:String` which conflates characteristics of LAF `region` and `node`. Hence, mark as `(+)` (with parentheses). NIF is well-suited for word-based annotations, but `nif:String` is not capable to differentiate annotations of the same string on multiple annotation layers.
+```
+[S [VF [NP [NE Peter ] ] ] [LK [V war ] ] [MF [ADVX [ADV nicht] [ADV zuhause] ] ] ]
+```
 
-In Web Annotation, `node` may be compared to `oa:Annotation` or the body (depending on perspective), but note that Web Annotation doesn't seem to support nodes without an associated target (region), hence mark as `(+)`.
+German, 'Peter wasn't home', example inspired by [TüBa-D/Z corpus](http://www.sfs.uni-tuebingen.de/en/ascl/resources/corpora/tueba-dz.html) 
+
+```
+VF -> Peter (Vorfeld, syntactic position)
+NP -> Peter (Noun Phrase, constituent at VF position)
+NE -> Peter (Named Entity that constitutes the NP)
+```
+
+These are co-extensional, but their hierarchical organization (in the annotation) is meaningful and must be preserved even though they refer to the same string value.
+
+Web Annotation: `+` (pointer = target, node = annotation or body -- depending on interpretation)
+
+NIF: `-`
 
 ### B.10 Generic data structures for linguistic annotation: zero nodes
 
@@ -305,21 +356,60 @@ For textual data, the vocabulary should thus
 - support the annotation of empty strings: mark as `(+)` (with parentheses)
 - require the annotation target to be an non-empty string: mark as `-`.
 
-The default encoding for annotations in NIF is by subclasses of `nif:String`, and this would be `(+)`. Web annotation requires some target, and this would be `(+)`. 
+NIF: `(+)` (the default encoding for annotations in NIF is by subclasses of `nif:String`)
+
+Web Annotation: `(+)` (Web annotation requires some target.)
 
 ### B.11 Generic data structures for linguistic annotation: edge ('relation')
 
 [ISO 24612-2012](https://www.cs.vassar.edu/~ide/papers/ISO+24612-2012.pdf) edge is a relation from one or multiple nodes to one or multiple nodes. Edges are, for example, syntactic dependencies. The vocabulary should provide a way to mark an RDF statement as being a edge/relation in the sense of LAF, e.g., a property or class that annotation-specific edges can provide sub-classes/-properties for.
 
+Example ([POWLA](http://purl.org/powla/powla.owl)):
+`powla:Relation` (concept) with properties `powla:isSourceOf` and `powla:isTargetOf`
+
 No explicit data structures for edges in NIF nor Web Annotation.
+
+NIF: `-`
+
+Web Annotation: `-`
+
+#### B.11.a Non-reified representation of edges
+
+It should be possible to encode edges with a single RDF statement (if provider decides not provide metadata, etc.).
+
+Example ([POWLA](http://purl.org/powla/powla.owl); BUT: restricted to hierachical reations):
+`powla:hasParent` resp. `powla:hasChild`
+
+NIF: `(-)` (`nif:subStringOf` could be abused for this purpose, for hierarchical relations only, operates on regions/strings, not annotations. Default strategy in NIF is to introduce ad hoc properties, cf. [NIF Stanford Core demo](http://stanford.nlp2rdf.aksw.org/stanfordcorenlpn?f=text&i=This+is+a+test.&t=direct))
+
+Web Annotation: `-`
+
+POWLA: `(+)` (for hierarchical relations only)
 
 ### B.12 Reified representation of edges (annotation relations)
 
 For an edge (relation), it must be possible to annotate it with additional data, e.g., linguistic data categories. The vocabulary should support a reified view on, say, dependency relations.
 
+Example  ([POWLA](http://purl.org/powla/powla.owl)):
+```
+:relation a powla:Relation, powla:DominanceRelation;
+ a olia:SyntacticAdjunct;
+ powla:hasSource :someElement; powla:hasTarget :someOtherElement.
+```
+
+Web Annotation: `-`
+
+NIF: `-`
+
+POWLA: `+`
+
 ### B.13 Generic data structures for linguistic annotation: graphs
 
-In LAF, a graph a is a collection of nodes and edges. In RDF, this corresponds to an RDF graph (often representing the document that a particular set of RDF statements originates from). We do not require explicit data structures for graphs beyond that (do we?).
+In LAF, a graph a is a collection of nodes and edges. In RDF, this corresponds to an RDF graph (often representing the document that a particular set of RDF statements originates from). We do not require explicit data structures for graphs beyond that (do we?). A vocabulary that provides explicit data structures would be `+`, any other RDF vocabulary would be `(+)`, non-RDF vocabularies without explicit data structures would be `-`.
+
+NIF: `(+)`
+
+Web Annotation: `(+)`
 
 ### B.14 Generic data structures for linguistic annotation: annotations
 
@@ -331,7 +421,11 @@ In LAF, a graph a is a collection of nodes and edges. In RDF, this corresponds t
   - annotation (linguistic information attached to any node or edge)
   - annotation space (groups together annotations of the same type, say, POS)
 
-The vocabulary should provide a designated class for linguistic annotations. In Web Annotation, this would be either `oa:Annotation` or a body (depending on interpretation). In NIF, such an element is missing. For annotations of a particular string, this function is taken over by `nif:String`, for more complex constellations, `nif:AnnotationUnit` can be used, but is not the default way of modelling.
+The vocabulary should provide a designated class for linguistic annotations that different application can create application-specific subclasses for. In Web Annotation, this would be either `oa:Annotation` or a body (depending on interpretation). In NIF, such an element is missing. For annotations of a particular string, this function is taken over by `nif:String`, for more complex constellations, `nif:AnnotationUnit` can be used, but is not the default way of modelling.
+
+Web Annotation: `+`
+
+NIF: `(-)` (`nif:String`), resp. `(+)` (`nif:AnnotationUnit`, not the default encoding, though)
 
 ### B.15 Generic data structures for linguistic annotation: annotation space ("tagset")
 
@@ -343,22 +437,69 @@ The vocabulary should provide a designated class for linguistic annotations. In 
   - annotation (linguistic information attached to any node or edge)
   - annotation space (groups together annotations of the same type, say, POS)
 
-The vocabulary should provide a standard way to assign annotations a particular type or class. This corresponds to user-provided subclasses of (the abstract) `oa:Annotation` class in Web Annotation. 
+The vocabulary should provide a standard way to assign annotations a particular type or class. This corresponds to user-provided subclasses of (the abstract) `oa:Annotation` class in Web Annotation. In NIF, this could be treated as part of provenance metadata, but a designated property seems to be missing.
+
+Web Annotation: `+`
+
+NIF: `(-)`
 
 ### B.16 Provenance
 
 The vocabulary should provide a way to
 - assert provenance about (annotations of) nodes and edges, mark as `+`, or
 - assert provenance about (annotatios of) nodes, mark as `(+)`.
+- If it can be complemented with an external RDF vocabulary to assert provenance, mark as `(-)`.
 - Otherwise, mark as `-`.
 
 NIF 2.1 defines `nif:AnnotationUnit` which can use used to distinguish annotations comming from different NLP tools on same strings (same offsets).
+
+Web Annotation does not prescribe a reference vocabulary for provenance, but can be combined with, say, [PROV-O](https://www.w3.org/TR/prov-o/).
+
+NIF: `(-)` (NIF 2.0)
+
+NIF 2.1: `(+)`
+
+Web Annotation: `(-)`
 
 ### B.17 Concurrent annotation
 
 It should be possible to provide alternative, and distinct annotations of the same phenomenon with different provenance, e.g., for combining entity linking services or for comparing the output of different parsers.
 
 In addition to provenance, this requires to identify the "annotation space" (LAF terminology).
+
+Example (two alternative parses of the same sentence):
+'He saw the man with the telescope.'
+
+```
+(S (NP He)             # high PP attachment, tool A
+   (VP saw
+       (NP the man)
+       (PP with the telescope)))
+
+(S (NP He)             # low PP attachment, tool B
+   (VP saw
+       (NP the man
+           (PP with the telescope)))
+```
+
+For TSV ("CoNLL") annotations, a file with multiple annotations can be created with [CoNLL-Merge](https://github.com/acoli-repo/conll):
+
+```
+# WORD     PARSE-A         PARSE-B
+He         (S (NP *)       (S NP *)
+saw           (VP *           (VP *
+the               (NP *           (NP *
+man                   *)              *              # difference!
+with              (PP *               (PP *
+the                   *                   *
+telescope             *)))                *))))      # difference!
+```
+
+Real-world examples: concurrent annotations of Brown corpus ([Susanne](https://www.grsampson.net/RSue.html), [Penn](https://catalog.ldc.upenn.edu/LDC2019T05)), concurrent annotations of WSJ corpus ([Penn](https://catalog.ldc.upenn.edu/LDC2019T05), [OntoNotes](https://catalog.ldc.upenn.edu/ldc2013t19)).
+
+NIF: `-`
+
+Web Annotation: `-`
 
 ### B.18 Sequence of annotation units
 
@@ -393,6 +534,10 @@ The different encoding possibilities can be transformed into each other. E.g., e
 
 To facilitate encoding, a vocabulary should specify which (if any) strategy is recommended. In addition to marking whether a vocabulary provides sequence annotation vocabulary (`+`, `-`), mark the strategy.
 
+NIF: `(+)` (only for selected annotation units, e.g., `nif:nextWord`, `nif:nextSentence`)
+
+Web Annotation: `-`
+
 ### B.19 annotation values: plain literals
 
 The vocabulary should support annotation (annotation value/body) with plain literals, e.g., strings.
@@ -402,6 +547,10 @@ Example:
 :some_region_uri nif:lemma "tree" .
 ```
 
+NIF: `+`
+
+Web Annotation: `+`
+
 ### B.20 annotation values: feature structures
 
 The vocabulary should support annotation (annotation value/body) with feature structures, i.e., root nodes of directed (acyclic) graphs. In RDF, this requirement can be reformulated as permitting RDF resources (URIs) as annotations.
@@ -410,6 +559,10 @@ Example:
 ```
 :some_region_uri nif:oliaLink penn:NN.
 ```
+
+NIF: `+`
+
+Web Annotation: `+`
 
 ## C. Levels of linguistic analysis: units of annotation
 
