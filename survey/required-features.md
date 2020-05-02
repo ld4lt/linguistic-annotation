@@ -5,6 +5,11 @@ Feature requests for a LLOD-compliant vocabulary for linguistic annotations on t
 
 List will be used to compile a compliancy table for NIF, Web Annotation and other vocabularies.
 
+## Table of contents
+(auto-generated using https://magnetikonline.github.io/markdown-toc-generate/, needs to be updated when changes are being made)
+
+
+
 ## LLOD compliancy
 
 ### RDF serialization
@@ -140,6 +145,26 @@ ext:offset_23_32 -> Argentina
 
 In NIF, annotations such as `ext:offset_0_14_23_32` are not considered nor supported, mark as `-`.
 In Web Annotations, multiple selectors can be combined into an aggregate selector, mark as `+`.
+
+### Pointers: Annotation of media files
+
+Annotation of non-textual data, e.g., audio, video, images.
+
+Core feature of Web Annotation, hence `+`.
+Not supported in NIF, `-`
+
+### Pointers: Support the annotation of timestamps/timelines
+
+For multi-media annoation, timeline-based annotation is the primary annotation strategy adopted by tools such as [ELAN](https://tla.mpi.nl/tools/tla-tools/elan/) and [Exmaralda](https://exmaralda.org/en/about-exmaralda/). Here, textual data is the value (body) of an annotation, the timeline is correlated with one or multiple mediafiles, but the mediafile is not directly the target of the annotation.
+
+Supported in Web Annotation if a user-specific selector is provided, hence `(+)`, not supported in NIF `-`.
+
+### Pointers: standoff annotation
+
+Vocabulary should be able to annotate content residing in a separate file or resource.
+
+NIF: `+`
+Web Annotation: `+`
 
 ### Generic data structures for linguistic annotation: node != pointer
 
@@ -490,3 +515,11 @@ Motivation: Digital Philologies
 
 Currently no native vocabulary within Web Annotation or NIF, but both can be extended with user-provided properties for the purpose, hence `(-)`.
 
+### Dialog annotation
+
+Represent contributions of different dialog partners as indepndent texts/documents/media files and annotate them separately, but within the same annotation graph (tbc: could be required by SemAF).
+
+This is necessary, for example, if multiple recorders are being used, and annotation may switch from the (best) recorder for participant A to the (best) recorder for participant B.
+
+Not addressed in NIF: `-`
+Web Annotation allows to annotate multiple targets simultaneously, but it lacks the vocabulary to create links between annotations, e.g., for marking turn shifts), hence `(+)` 
