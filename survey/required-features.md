@@ -6,6 +6,8 @@ Feature requests for a LLOD-compliant vocabulary for linguistic annotations on t
 List will be used to compile a compliancy table for NIF, Web Annotation and other vocabularies, with primary values `+`, `(+)`, `(-)` and `-`.
 Note: The section numbers below are used to identify entries in the result table. Do not change! (Instead, mark a section/feature as deprecated if it's dropped or replaced by a different feature request.)
 
+Add required features for a reference vocabuilary for linguistic annotations on the web here *or* [as an issue](https://github.com/ld4lt/linguistic-annotation/issues). 
+
 ## Table of contents
 (auto-generated using https://magnetikonline.github.io/markdown-toc-generate/, needs to be updated when changes are being made)
 
@@ -18,6 +20,9 @@ Note: The section numbers below are used to identify entries in the result table
 	- [A.6 Explicit context strings](#a6-explicit-context-strings)
 	- [A.7 API specifications for web services](#a7-api-specifications-for-web-services)
 	- [A.8 Assign data categories](#a8-assign-data-categories)
+	- [A.9 Compatible with Web Annotation vocabulary](#a9-compatible-with-web-annotation-vocabulary)
+	- [A.10 Compatible with NIF 2.0 core vocabulary](#a10-compatible-with-nif-20-core-vocabulary)
+	- [A.11 Compatible with ISO standards](#a11-compatible-with-iso-standards)
 - [B. Expressiveness](#b-expressiveness)
 	- [B.1 Pointers to primary data](#b1-pointers-to-primary-data)
 	- [B.2 Pointers: Vocabulary for explicit references](#b2-pointers-vocabulary-for-explicit-references)
@@ -203,6 +208,48 @@ NIF: `(+)` (`nif:oliaLink`, pointing to [OLiA](http://purl.org/olia/; for string
 Web Annotation: `(-)` (No reference vocabulary defined, but annotations can be defined as subclasses of OLiA classes) 
 
 LAF: `(+)` (LAF and other ISO/TC37 standards: pointing to [ISOCat](http://www.isocat.org/), no longer maintained, successor solutions are only emerging: [CCR](https://www.clarin.eu/ccr), [DatCatInfo](http://www.datcatinfo.net/#/))
+
+### A.9 Compatible with Web Annotation vocabulary
+
+Web Annotation is an important standard, and the only actual W3C standard for RDF-based annotations on the web. Compatibility with Web Annotation is thus a requirement.
+
+If a vocabulary
+- builds and refines Web Annotation data structures, mark as `+`
+- is transformable into / can be used in combination with Web Annotation, but is redundant (i.e., provides its own vocabulary for aspects covered by Web Annotation), mark as `(+)`
+- can be used for some (which?) use cases in combination with Web Annotation, but has incompatible conceptualizations, mark as `(-)`
+- otherwise, `-`
+
+NIF: `(+)` (Hellmann et al. 2013 describe the use of NIF string URIs as Web Annotation targets)
+
+Web Annotation: `+`
+
+### A.10 Compatible with NIF 2.0 core vocabulary
+
+NIF has an indepndent user and developer community that should be involved in the results of any harmonization effort, compatibility with NIF is thus a requirement.
+
+If a vocabulary
+- builds and refines NIF data structures, mark as `+`
+- is transformable into / can be used in combination with NIF, but is redundant (i.e., provides its own vocabulary for aspects covered by NIF), mark as `(+)`
+- can be used for some (which?) use cases in combination with NIF, but has incompatible conceptualizations, mark as `(-)`
+- otherwise, `-`
+
+NIF: `+`
+
+Web Annotation: `(-)` (conversion restricted to types of annotation supported by NIF, potential loss of information, e.g., distinction between target and annotation, resp., body and annotation is unclear)
+
+CoNLL-RDF: `+` (extends NIF vocabulary with data structures for one-word-per-line annotations, e.g., CoNLL, SketchEngine formats, see [here](https://github.com/acoli-repo/conll-rdf/); note the [extension for the encoding of trees](https://github.com/acoli-repo/conll-rdf/blob/master/examples/tree-example.sh) by means of [POWLA](http://purl.org/powla/powla.owl))
+
+Ligt: `+` (extends NIF vocabulary with specifications for morphology (interlinear glossed text); still under development, see [here](https://github.com/acoli-repo/ligt)
+
+### A.11 Compatible with ISO standards
+
+Much community work on standardization has been going into a standardization process conducted within ISO TC37. Unfortunately, documentation is partially available only, so we consider compliancy with [LAF](https://www.cs.vassar.edu/~ide/papers/ISO+24612-2012.pdf) only, here. For application-specific substandards of LAF (MAF, SynAF, SemAF), cf. discussion below.
+
+ISO standards by themselves are not directly compatible with NIF or Web Annotation as long as they are lacking an RDF serialization. A LAF serialization has been the basis for developing [POWLA](http://purl.org/powla/powla.owl)) that can be used in combination with either NIF or Web Annotation.
+
+NIF: `-` (no generic data structures for linguistic annotation; conflates regions and nodes, see below)
+
+Web Annotation: `(+)` (regions ~ targets, nodes ~ annotation, annotation ~ body; but no linguistic data structures, combination has been explored by [Verspoor et al. (2012)](https://www.aclweb.org/anthology/W12-3610.pdf).
 
 ## B. Expressiveness
 
