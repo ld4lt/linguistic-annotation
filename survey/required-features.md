@@ -104,19 +104,64 @@ ISO standards (LAF, etc.) are usually proprietary. If internal copies or drafts 
 
 A highly praised feature of NIF (in comparison to Web Annotation) is that it supports compact String URIs that can be interpreted in isolation (but whose information can [should] be made explicit in RDF statements).
 
-In NIF, this is part of the specification (`+`). In Web Annotation, this is possible, but not part of the standard, but only described in a [working note](https://w3c.github.io/web-annotation/selector-note/), hence `(+)`.
+Example:
+`http://example.com#hash_4_8_7049dd7875989b97e8568f5c0fd1f12b_favorite` (NIF String URI)
+`http://example.org/document/1#char=0,11` (RFC5147 String URI)
+
+In NIF, this is part of the specification (`+`). In Web Annotation, this is possible, but not part of the standard, but only described in a [working note](https://w3c.github.io/web-annotation/selector-note/), hence `(+)`. For a list of relevant standards for IRI fragment identifiers see https://en.wikipedia.org/wiki/Web_annotation#Related_specifications. 
 
 ### A.5 Explicit selectors
 
 Aside from string IRIs, it should be possible to decode their information (e.g., offset information) into RDF statements.
 
-NIF: `+`, WebAnnotation: `+`
+Example (NIF):
+```
+<http://example.org/document/1#char=0,11>
+ a nif:String ;
+ nif:isString "the content"^^xsd:string;
+ nif:beginIndex "0"^^xsd:nonNegativeInteger;
+ nif:endIndex "11"^^xsd:nonNegativeInteger;
+ nif:sourceUrl <http://differentday.blogspot.com/2007_01_01_archive.html>.
+```
+
+Example (Web Annotation):
+
+```
+[] a oa:ResourceSelection;
+     oa:hasSource <http://example.org/ebook1> ;
+     oa:hasSelector [
+        a oa:TextPositionSelector ;
+        oa:start 412 ;
+        oa:end 795
+     ].
+```
+
+NIF: `+`
+Web Annotation: `+`
 
 ### A.6 Explicit context strings
 
 In order to facilitate interpretability and robustness of string URIs (regardless of changes in underlying resource or differences in, say, Unicode normalization), the vocabulary should permit to provide explicit contexts that contain the text that a string IRI refers to (e.g., its offsets).
 
-NIF: `+`, WebAnnotation: `-`
+Example (NIF):
+```
+<http://example.org/document/1#char=0,21> 		# context object 
+ a nif:String , nif:Context ;
+ nif:isString "We talk about Xiamen."^^xsd:string;	# string value of context
+ nif:beginIndex "0"^^xsd:nonNegativeInteger;		# selector properties for context within source
+ nif:endIndex "21"^^xsd:nonNegativeInteger;
+ nif:sourceUrl <http://differentday.blogspot.com/2007_01_01_archive.html> .	# source URL
+
+<http://example.org/document/1#char=14,20> a nif:String ;
+ nif:referenceContext <http://example.org/document/1#char=0,3680> ;	# points to reference context
+ nif:anchorOf "Xiamen"^^xsd:string ;					# string value of annotation unit
+ nif:beginIndex "14"^^xsd:nonNegativeInteger ;				# selector properties for string within context
+ nif:endIndex "20"^^xsd:nonNegativeInteger ;
+ a nif:Word.
+```
+
+NIF: `+`
+Web Annotation: `-`
 
 ### A.7 API specifications for web services
 
