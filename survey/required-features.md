@@ -17,6 +17,7 @@ Note: The section numbers below are used to identify entries in the result table
 	- [A.5 Explicit selectors](#a5-explicit-selectors)
 	- [A.6 Explicit context strings](#a6-explicit-context-strings)
 	- [A.7 API specifications for web services](#a7-api-specifications-for-web-services)
+	- [A.8 Assign data categories](#a8-assign-data-categories)
 - [B. Expressiveness](#b-expressiveness)
 	- [B.1 Pointers to primary data](#b1-pointers-to-primary-data)
 	- [B.2 Pointers: Vocabulary for explicit references](#b2-pointers-vocabulary-for-explicit-references)
@@ -186,9 +187,22 @@ Web Annotation: `-`
 In addition to modelling aspects, the vocabulary should provide API specifications for web services that perform linguistic annotation, e.g., POS tagging, or that provide access to and/or manipulation of data.
 
 NIF: https://persistence.uni-leipzig.org/nlp2rdf/specification/api.html `+`
+
 Web Annotation: https://www.w3.org/TR/annotation-protocol/ `+`
 
 For independent APIs, also cf. DTS: https://distributed-text-services.github.io/specifications/ (esp. for applications in the humanities)
+
+### A.8 Assign data categories
+
+A vocabulary for linguistic annotation should either provide an exhaustive inventory of possible data categories (this is not possible, because more and novel annotation [schemes] keep emerging) or define how to link to a community-maintained repository of reference categories (this is the solution adopted in LAF and NIF).
+
+A vocabulary can either provide its own properties (e.g. `nif:oliaLink`) or use standard RDF properties (`rdf:type`, etc.), but the strategy should be made explicit. 
+
+NIF: `(+)` (`nif:oliaLink`, pointing to [OLiA](http://purl.org/olia/; for string annotations only; not for relational annotations)
+
+Web Annotation: `(-)` (No reference vocabulary defined, but annotations can be defined as subclasses of OLiA classes) 
+
+LAF: `(+)` (LAF and other ISO/TC37 standards: pointing to [ISOCat](http://www.isocat.org/), no longer maintained, successor solutions are only emerging: [CCR](https://www.clarin.eu/ccr), [DatCatInfo](http://www.datcatinfo.net/#/))
 
 ## B. Expressiveness
 
