@@ -667,18 +667,25 @@ NIF defines such properties for limited number of possible relations among conce
 
 ### D.1 Word-level annotation: sequence of words
 
-`nif:nextWord`, hence `+`.
-Lacking in Web Annotation, hence `-`.
+NIF: `+` (`nif:nextWord`)
+
+Web Annotation: `-`
 
 ### D.2 Sentence-level annotation: sequence of sentences
 
-`nif:nextSentence`, lacking in Web Annotation (`-`).
+NIF: `+` (`nif:nextSentence`)
+
+Web Annotation: `-`
 
 ### D.3 Morphology: sequence of morphological segments
 
 `cats` = `cat` + `s` with `cat "directly precedes" s`.
 
-Lacking in NIF and Web Annotation, hence `-`.
+NIF: `-`
+
+Web Annotation: `-`
+
+For a possible solution, cf. [Ligt](https://github.com/acoli-repo/ligt).
 
 ### D.4 Syntax: discontinuous multi-word segments
 
