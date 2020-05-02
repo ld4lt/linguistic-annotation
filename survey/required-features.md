@@ -228,6 +228,12 @@ The vocabulary should provide a way to
 
 NIF 2.1 defines `nif:AnnotationUnit` which can use used to distinguish annotations comming from different NLP tools on same strings (same offsets).
 
+### Concurrent annotation
+
+It should be possible to provide alternative, and distinct annotations of the same phenomenon with different provenance, e.g., for combining entity linking services or for comparing the output of different parsers.
+
+In addition to provenance, this requires to identify the "annotation space" (LAF terminology).
+
 ### Sequence of annotation units
 
 An annotation vocabulary should allow to encode the sequence of annotation units of the same kind (words, sentences, ...), either by enumeration or by explicit properties.
