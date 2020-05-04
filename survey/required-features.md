@@ -819,15 +819,21 @@ Currently no native vocabulary within Web Annotation or NIF, but both can be ext
 
 ### F.2 Collation and alignment
 
-Alignment: Parallel corpora are conventionally used, but current technology is restricted to bilingual pairs (e.g., [TreeAligner](https://www.cl.uzh.ch/en/texttechnologies/research/corpus-linguistics/paralleltreebanks/treealigner.ht). For developing language-independent applications and tools, it would be beneficial to support alignment between more than two languages.
+Alignment: Parallel corpora are conventionally used, but current technology is restricted to bilingual pairs (e.g., [TreeAligner](https://www.cl.uzh.ch/en/texttechnologies/research/corpus-linguistics/paralleltreebanks/treealigner.ht). For developing language-independent applications and tools, it would be beneficial to support alignment between more than two languages. Different kinds of alignments need to be distinguished: Undirected alignment (the intuitive default) and directed alignment (as produced by standard alignment tools that produce either m:1 or 1:n alignments).
 
-Collation: For different editions of the same document (e.g., different manuscripts), align corresponding passages in an order-insensitive way. Note that collation typically extends to *much* more than two sources. For existing tools, cf. [CollateX](https://collatex.net/doc/), but note that it does not support annotated data.
+Collation: For different editions of the same document (e.g., different manuscripts), align corresponding passages in an order-insensitive way. Note that collation typically extends to *much* more than two sources. For existing tools, cf. [CollateX](https://collatex.net/doc/), but note that it does not support annotated data. Collation as such is undirected, but it should be possible to assert the direction of text reuse.
 
 Motivation: NLP (parallel corpora) and Digital Humanities (collation)
 
-Currently no native vocabulary within Web Annotation or NIF, but both can be extended with user-provided properties for the purpose, hence `(-)`.
+Currently no native vocabulary within Web Annotation or NIF, but both can be extended with user-provided properties or classes for the purpose, hence `(-)`.
+
+Web Annotation: `(-)` (extensible for undirected alignment for more than 2 languages: "alignment" as subclass of `oa:Annotation` with multiple targets)
+
+NIF: `(-)`
 
 For original TSV ("CoNLL") annotations, such data can be created with [CoNLL-Merge](https://github.com/acoli-repo/conll) and represented in RDF using the [CoNLL-RDF vocabulary](https://github.com/acoli-repo/conll-rdf).
+
+CoNLL-RDF: `(+)` (directed alignment only, encoded in CoNLL columns, i.e., CoNLL-RDF properties, cf. [here](https://github.com/acoli-repo/rdf4discourse/blob/master/discourse-markers/parcor/opus/Europarl.de-it.annotated-sample.conll))
 
 ### F.3 Links with lexical resources
 
