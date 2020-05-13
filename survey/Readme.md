@@ -50,7 +50,8 @@ Most frequently used for linguistic annotation (in a LOD context) are
         
         *   A probably more widely used binary RDF format is RDF-HDT: [http://www.rdfhdt.org/](http://www.rdfhdt.org/)
             
-
+* BioC http://bioc.sourceforge.net
+    * a simple XML-based format to share text data and annotations. Used in the Biomedical domain.
   
   
 
