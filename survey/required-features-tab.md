@@ -47,5 +47,7 @@
 | E.3 Phrase structure syntax: hierarchical relations |   |   | (-) | (-) | (-) | - |   | (+) | + | - | + |   |
 | E.4 Phrase structure syntax: other relations | - |   | (-) | (-) | (-) | - |   | (+) | (+) | - | + |   |
 | E.5 Semantics: relations | - |   | (-) | (-) | (+) | - |   | (+) | (+) | - | (-) | + |
-| F.2 Collation and alignment | (-) |   | (-) | (-) | (+) |   |   |   |   |   |   |   |
-| F.4 Dialog annotation |   |   | - | - |   |   |   |   |   |   |   |   |
+| F.1 Intertextual relations | (-) |   | (-) | (-) | (+) | - |   | (-) | (-) | - | - | - |
+| F.2 Collation and alignment | (-) |   | (-) | (-) | (+) | - |   | (-) | - | - | - | - |
+| F.3 Links with lexical resources | (+) |   | (+) | (+) | (+) | (+) |   | (+) |   |   |   |   |
+| F.4 Dialog annotation | - |   | - | - | - | - |   | (+) | (+) | - |   | + |

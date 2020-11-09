@@ -1378,6 +1378,23 @@ Motivation: Digital Humanities
 
 Currently no native vocabulary within Web Annotation or NIF, but both can be extended with user-provided properties for the purpose, hence `(-)`.
 
+NIF: `(-)`
+
+Web Annotation: `(-)`
+
+CoNLL-RDF: `(+)` (a partial linking functionality can be implemented using CoNLL-Merge, then corresponding tokens in different editions refer to the same `nif:Word` -- which may be an empty token, see alignment below)
+
+LAF: `(-)` (tbc.)
+
+MAF: `-`
+
+SynAF: `-`
+
+SemAF: `-` (tbc)
+
+Ligt: `-`
+
+
 ### F.2 Collation and alignment
 
 Alignment: Parallel corpora are conventionally used, but current technology is restricted to bilingual pairs (e.g., [TreeAligner](https://www.cl.uzh.ch/en/texttechnologies/research/corpus-linguistics/paralleltreebanks/treealigner.ht). For developing language-independent applications and tools, it would be beneficial to support alignment between more than two languages. Different kinds of alignments need to be distinguished: Undirected alignment (the intuitive default) and directed alignment (as produced by standard alignment tools that produce either m:1 or 1:n alignments).
@@ -1396,13 +1413,43 @@ For original TSV ("CoNLL") annotations, such data can be created with [CoNLL-Mer
 
 CoNLL-RDF: `(+)` (directed alignment only, encoded in CoNLL columns, i.e., CoNLL-RDF properties, cf. [here](https://github.com/acoli-repo/rdf4discourse/blob/master/discourse-markers/parcor/opus/Europarl.de-it.annotated-sample.conll))
 
+LAF: `-` (tbc., no examples known)
+
+Ligt: `-`
+
+MAF: `-`
+
+SynAF: `-` (tbc)
+
+SemAF: `-` (tbc)
+
+POWLA: `(-)` (can be extended)
+
 ### F.3 Links with lexical resources
 
 Link an expression with a glossary or a dictionary, e.g., to provide attestation information (within a dictionary) or to provide lexical information (within a corpus). Approach should be coordinated with [OntoLex-FrAC](https://github.com/acoli-repo/ontolex-frac).
 
 Motivation: Digital Philologies
 
-Currently no native vocabulary within Web Annotation or NIF, but both can be extended with user-provided properties for the purpose, hence `(-)`.
+Currently no native vocabulary within Web Annotation or NIF, but according to FrAC draft, either can be used in conjunction with OntoLex-FrAC, hence `(+)`. In fact, this can be extended to *any* other RDF vocabulary applied to a linguistic corpus.
+
+NIF: `(+)`
+
+Web Annotation: `(+)`
+
+CoNLL-RDF: `(+)`
+
+Ligt: `(+)`
+
+POWLA: `(+)`
+
+SemAF: tbc
+
+SynAF: tbc
+
+MAF: tbc
+
+LAF: tbc (imagineable, but no example known)
 
 ### F.4 Dialog annotation
 
@@ -1412,6 +1459,22 @@ This is necessary, for example, if multiple recorders are being used, and annota
 
 Not addressed in NIF: `-`
 Web Annotation allows to annotate multiple targets simultaneously, but it lacks the vocabulary to create links between annotations, e.g., for marking turn shifts), hence `(+)` 
+
+Web Annotation: `-` (tbc., no example known)
+
+SemAF: `+` (tbc)
+
+POWLA: `(+)` (extensible)
+
+LAF: `(+)` (tbc., via ISOcat?)
+
+SynAF: tbc
+
+MAF: `-` (tbc)
+
+Ligt: `-`
+
+CoNLL-RDF: `-` (only if annotated as plain text, no formal vocabulary)
 
 ### Other (please add)
 ...
