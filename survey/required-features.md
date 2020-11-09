@@ -1117,13 +1117,39 @@ NIF defines such properties for limited number of possible relations among conce
 
 NIF: `+` (`nif:nextWord`)
 
-Web Annotation: `-`
+Web Annotation: `-` (no sequence properties whatsoever)
+
+CoNLL-RDF: `+` (`nif:nextWord`)
+
+Ligt: `+`
+
+POWLA: `(+)` (words are not a designated datatype)
+
+LAF: `(+)` (tbc., implicitly via offsets?)
+
+SynAF: `(+)` (tbc: implicitly via XML?)
+
+MAF: `(+)` (tbc: implicitly via XML?)
+
+SemAF: `(+)` (tbc: implcitly via XML?)
 
 ### D.2 Sentence-level annotation: sequence of sentences
 
 NIF: `+` (`nif:nextSentence`)
 
 Web Annotation: `-`
+
+CoNLL-RDF: `+`
+
+Ligt: `+`
+
+LAF: `(+)` (tbc)
+
+MAF: `(+)` (tbc)
+
+SemAF: `(+)` (tbc)
+
+SynAF: `(+)` (tbc)
 
 ### D.3 Morphology: sequence of morphological segments
 
@@ -1134,6 +1160,18 @@ NIF: `-`
 Web Annotation: `-`
 
 For a possible solution, cf. [Ligt](https://github.com/acoli-repo/ligt).
+
+Ligt: `+`
+
+CoNLL-RDF: `-`
+
+LAF: `(+)` (tbc)
+
+MAF: `+`
+
+SynAF: `(-)` (tbc)
+
+SemAF: `(-)` (tbc)
 
 ### D.4 Syntax: discontinuous multi-word segments
 
@@ -1148,11 +1186,48 @@ At a deep level, the phrase here is `[about what]`. If this can be represented d
 
 Note that this is different from the annotation of discontinuous strings, as the words being connected can have an internal syntactic structure.
 
+Web Annotation: `(-)` (no vocabulary for phrase-level structures, could be added, e.g., from POWLA)
+
+NIF: `-` (NIF phrases are strings, i.e., necessarily continuous)
+
+POWLA: `+`
+
+LAF: `+`
+
+CoNLL-RDF: `(-)` (no phrases, could be added when combined with POWLA)
+
+Ligt: `(-)` (no examples known)
+
+MAF: tbc.
+
+SynAF: `(+)` (tbc., syntax is likely the reason for having such nodes in LAF)
+
+SemAF: `(+)` (tbc., in analogy with SynAF?)
+
+
 ### D.5 Syntax/text structure: sequence of elements within a phrase
 
 Within the vocabulary, we should be able to quickly navigate from one sibling to the next.
 
 Lacking in NIF and Web Annotation, hence `-`, but provided by [POWLA](http://purl.org/powla), an RDF/OWL reconstruction of LAF.
+
+NIF: `(-)` (depends on internal structure of the phrase, if these are words, this could be `nif:nextWord`, if these are phrases, this is undefined)
+
+Web Annotation: `-`
+
+POWLA: `+`
+
+Ligt: `+`
+
+CoNLL-RDF: `-` (no phrases)
+
+LAF: `(+)` (tbc)
+
+SynAF: `+` (tbc)
+
+MAF: `-` (tbc)
+
+SemAF: `+` (tbc., e.g., for discourse annotation)
 
 ## E. Levels of linguistic analysis: relational structure
 

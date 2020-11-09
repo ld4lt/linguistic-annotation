@@ -37,8 +37,10 @@
 | C.3 morphology: morphological segments | (+) | (-) | (-) | (-) | - | (+) | + | (+) | + | - |   |
 | C.4 syntax/text structure: node labels/types | (+) | (+) | (+) | (+) | (+) | + | - | + | - | (+) | (+) |
 | C.5 semantics: node labels/types | (-) | (-) | (-) | (-) | (-) | + | - | + | - | - | + |
-| D.1 Word-level annotation: sequence of words | - | + | + | + |   |   |   |   |   |   |   |
-| D.2 Sentence-level annotation: sequence of sentences | - | + | + | + |   |   |   |   |   |   |   |
-| D.3 Morphology: sequence of morphological segments | - | - | - | - |   |   |   |   |   |   |   |
+| D.1 Word-level annotation: sequence of words | - | + | + | + | + | (+) | + | (+) | (+) | (+) | (+) |
+| D.2 Sentence-level annotation: sequence of sentences | - | + | + | + | + | (+) | + | (+) | (+) | (+) | (+) |
+| D.3 Morphology: sequence of morphological segments | - | - | - | - | - | (+) | + | (+) | + | (-) | (-) |
+| D.4 Syntax: discontinuous multi-word segments | (-) | - | - | - | (-) | + | (-) | + |   | (+) | (+) |
+| D.5 Syntax/text structure: sequence of elements within a phrase | - | (-) | (-) | (-) | - | + | + | (+) | - | + | + |
 | F.2 Collation and alignment | (-) | (-) | (-) | (-) | (+) |   |   |   |   |   |   |
 | F.4 Dialog annotation |   | - | - | - |   |   |   |   |   |   |   |
