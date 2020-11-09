@@ -92,6 +92,20 @@ NIF: `+` (RDF)
 
 Web Annotation: `+` (RDF, preference for JSON-LD)
 
+CoNLL-RDF: `+`
+
+POWLA: `+`
+
+Ligt: `+`
+
+LAF: `-`
+
+MAF: `-`
+
+SynAF: `-`
+
+SemAF: `-`
+
 ### A.2 Extent of standardization
 
 Are candidate vocabularies standardized by a formal standardization body (e.g., ISO, W3C, etc., mark as `+`), community standards used by multiple providers (mark as `(+)`) or tool- or application-specific solutions (mark as `-`)?
@@ -99,6 +113,20 @@ Are candidate vocabularies standardized by a formal standardization body (e.g., 
 Web Annotation: `+` (regular W3C standard)
 
 NIF: `(+)` (widely used community standard, and referred to in W3C standards)
+
+CoNLL-RDF: `(-)` (some usage, not standardized)
+
+POWLA: `(+)` (this basically implements LAF)
+
+Ligt: `-`
+
+LAF: `+`
+
+MAF: `+`
+
+SynAF: `+`
+
+SemAF: `+`
 
 ### A.3 Documentation
 
@@ -120,9 +148,15 @@ LAF: `(+)` (via https://www.cs.vassar.edu/~ide/papers/ISO+24612-2012.pdf)
 
 MAF: `+` (link tbc.)
 
-SynAF: `-` (unless link/infoprmation provided)
+SynAF: `-` (unless link/information provided)
 
-SemAF: `-` (unless link/infoprmation provided)
+SemAF: `-` (unless link/information provided)
+
+CoNLL-RDF: `+`
+
+POWLA: `(+)` (on-line documentation dated, more up-to-date documentation in Cimiano et al. 2020, but this is not open access)
+
+Ligt: `(-)` (partially documented only)
 
 ### A.4 IRI fragment identifiers for strings
 
@@ -133,6 +167,18 @@ Example:
 `http://example.org/document/1#char=0,11` (RFC5147 String URI)
 
 In NIF, this is part of the specification (`+`). In Web Annotation, this is possible, but not part of the standard, but only described in a [working note](https://w3c.github.io/web-annotation/selector-note/), hence `(+)`. For a list of relevant standards for IRI fragment identifiers see https://en.wikipedia.org/wiki/Web_annotation#Related_specifications. 
+
+NIF: `+`
+
+Web Annotation: `(+)`
+
+CoNLL-RDF: `-` (provides *token* identifiers, not string identifiers. surface string lost in the underlying CoNLL format)
+
+Ligt: `-`
+
+POWLA: `(-)` (not specified, to be provided by complementary vocabulary, e.g., NIF or WA)
+
+LAF: `-` (proprietary means of defining selectors)
 
 ### A.5 Explicit selectors
 

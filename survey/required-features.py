@@ -13,6 +13,10 @@ def autocomplete(keys,dict):
 			if k in ["POWLA"]:
 				if "LAF" in dict:
 					dict[k]=dict["LAF"]
+			if k in ["MAF","SynAF","SemAF"]:
+				if "LAF" in dict and not "+" in dict["LAF"]:
+					dict[k]=dict["LAF"]
+				# MAF etc. are LAF sub-vocabularies
 	return dict
 
 def spellout(feat, keys,dict,output):

@@ -1,8 +1,9 @@
 | feats | Web Annotation | NIF | NIF 2.0 | NIF 2.1 | CoNLL-RDF | POWLA | Ligt | LAF | MAF | SynAF | SemAF |
 |---|---|---|---|---|---|---|---|---|---|---|---|
-| A.1 RDF serialization | + | + | + | + |   |   |   |   |   |   |   |
-| A.2 Extent of standardization | + | (+) | (+) | (+) |   |   |   |   |   |   |   |
-| A.3 Documentation | + | + | + | + |   | (+) |   | (+) | + | - | - |
+| A.1 RDF serialization | + | + | + | + | + | + | + | - | - | - | - |
+| A.2 Extent of standardization | + | (+) | (+) | (+) |   | (+) | - | + | + | + | + |
+| A.3 Documentation | + | + | + | + | + | (+) |   | (+) | + | - | - |
+| A.4 IRI fragment identifiers for strings | (+) | + | + | + | - | - | - | - | - | - | - |
 | A.5 Explicit selectors | + | + | + | + |   |   |   |   |   |   |   |
 | A.6 Explicit context strings | - | + | + | + |   |   |   |   |   |   |   |
 | A.8 Assign data categories |   | (+) | (+) | (+) |   | (+) |   | (+) |   |   |   |
