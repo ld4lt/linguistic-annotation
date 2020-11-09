@@ -54,6 +54,9 @@ with open("required-features-tab.md","w") as output:
 		line=input.readline()
 		while(line):
 			if(re.match(r"^## [A-Z][^A-Za-z0-9].*",line)):
+				spellout(feat,keys,dict,output)
+				dict={}
+				feat=re.sub(r"^[#]+\s","",line)
 				if(len(dict)>0):
 					output.write("\n\n")
 				output.write(line+"\n\n")		
