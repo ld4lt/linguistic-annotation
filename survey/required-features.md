@@ -337,7 +337,7 @@ ext:offset_23_32 -> Argentina
 
 NIF: `-` (annotations such as `ext:offset_0_14_23_32` are not considered nor supported)
 
-Web Annotations: `+` (multiple selectors can be combined into an aggregate selector)
+Web Annotation: `+` (multiple selectors can be combined into an aggregate selector)
 
 ### B.6 Pointers: Annotation of media files
 
