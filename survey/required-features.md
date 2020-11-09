@@ -207,7 +207,16 @@ Example (Web Annotation):
 ```
 
 NIF: `+`
+
 Web Annotation: `+`
+
+CoNLL-RDF: `-`
+
+POWLA: `(+)` (recent publications recommend to rely on external vocabularies instead)
+
+Ligt: `-`
+
+Doesn't apply to LAF, etc.
 
 ### A.6 Explicit context strings
 
@@ -231,15 +240,26 @@ Example (NIF):
 ```
 
 NIF: `+`
+
 Web Annotation: `-`
+
+CoNLL-RDF: `-`
+
+POWLA: `-`
+
+Ligt: `-`
+
+Doesn't apply to LAF, etc.
 
 ### A.7 API specifications for web services
 
 In addition to modelling aspects, the vocabulary should provide API specifications for web services that perform linguistic annotation, e.g., POS tagging, or that provide access to and/or manipulation of data.
 
-NIF: https://persistence.uni-leipzig.org/nlp2rdf/specification/api.html `+`
+NIF: `+` (https://persistence.uni-leipzig.org/nlp2rdf/specification/api.html)
 
-Web Annotation: https://www.w3.org/TR/annotation-protocol/ `+`
+Web Annotation: `+` (https://www.w3.org/TR/annotation-protocol/)
+
+None of the other vocabularies specify web service protocols.
 
 For independent APIs, also cf. DTS: https://distributed-text-services.github.io/specifications/ (esp. for applications in the humanities)
 
@@ -255,6 +275,16 @@ Web Annotation: `(-)` (No reference vocabulary defined, but annotations can be d
 
 LAF: `(+)` (LAF and other ISO/TC37 standards: pointing to [ISOCat](http://www.isocat.org/), no longer maintained, successor solutions are only emerging: [CCR](https://www.clarin.eu/ccr), [DatCatInfo](http://www.datcatinfo.net/#/))
 
+MAF: `(+)`
+
+SemAF: `(+)`
+
+SynAF: `(+)`
+
+CoNLL-RDF: `(+)` (Publications and examples feature OLiA links, but only via `rdf:type` assignments; CoNLL-RDF is a NIF fragment, so, `nif:oliaLink` could be used)
+
+Ligt: `(+)` (Not specified, but designed as a NIF fragment, so, `nif:oliaLink` could be used)
+
 ### A.9 Compatible with Web Annotation vocabulary
 
 Web Annotation is an important standard, and the only actual W3C standard for RDF-based annotations on the web. Compatibility with Web Annotation is thus a requirement.
@@ -268,6 +298,14 @@ If a vocabulary
 NIF: `(+)` (Hellmann et al. 2013 describe the use of NIF string URIs as Web Annotation targets)
 
 Web Annotation: `+`
+
+POWLA: `(+)`
+
+CoNLL-RDF: `(+)`
+
+Ligt: `(+)`
+
+LAF: `(+)` (A partial reconstruction of LAF within WA has been described by Verspoor et al. 2012, but this does not seem to have been adopted in subsequent research nor evaluated by any third party.)
 
 ### A.10 Compatible with NIF 2.0 core vocabulary
 
@@ -287,6 +325,10 @@ CoNLL-RDF: `+` (extends NIF vocabulary with data structures for one-word-per-lin
 
 Ligt: `+` (extends NIF vocabulary with specifications for morphology (interlinear glossed text); still under development, see [here](https://github.com/acoli-repo/ligt)
 
+POWLA: `(+)`
+
+LAF: `-` (NIF systematically conflates LAF data structures, see A.11)
+
 ### A.11 Compatible with ISO standards
 
 Much community work on standardization has been going into a standardization process conducted within ISO TC37. Unfortunately, documentation is partially available only, so we consider compliancy with [LAF](https://www.cs.vassar.edu/~ide/papers/ISO+24612-2012.pdf) only, here. For application-specific substandards of LAF (MAF, SynAF, SemAF), cf. discussion below.
@@ -296,6 +338,18 @@ ISO standards by themselves are not directly compatible with NIF or Web Annotati
 NIF: `-` (no generic data structures for linguistic annotation; conflates regions and nodes, see below)
 
 Web Annotation: `(+)` (regions ~ targets, nodes ~ annotation, annotation ~ body; but no linguistic data structures, combination has been explored by [Verspoor et al. (2012)](https://www.aclweb.org/anthology/W12-3610.pdf).
+
+CoNLL-RDF: `-` (only a specific subset, possibly SynAF)
+
+Ligt: `-` (only a specific subset, possibly MAF)
+
+LAF: `+`
+
+MAF: `+`
+
+SemAF: `+`
+
+SynAF: `+`
 
 ## B. Expressiveness
 

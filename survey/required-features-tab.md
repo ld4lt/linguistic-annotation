@@ -4,12 +4,13 @@
 | A.2 Extent of standardization | + | (+) | (+) | (+) | (-) | (+) | - | + | + | + | + |
 | A.3 Documentation | + | + | + | (-) | + | (+) | (-) | (+) | + | - | - |
 | A.4 IRI fragment identifiers for strings | (+) | + | + | + | - | (-) | - | - | - | - | - |
-| A.5 Explicit selectors | + | + | + | + |   |   |   |   |   |   |   |
-| A.6 Explicit context strings | - | + | + | + |   |   |   |   |   |   |   |
-| A.8 Assign data categories | (-) | (+) | (+) | (+) |   | (+) |   | (+) |   |   |   |
-| A.9 Compatible with Web Annotation vocabulary | + | (+) | (+) | (+) |   |   |   |   |   |   |   |
-| A.10 Compatible with NIF 2.0 core vocabulary | (-) | + | + | + | + |   | + |   |   |   |   |
-| A.11 Compatible with ISO standards | (+) | - | - | - |   |   |   |   |   |   |   |
+| A.5 Explicit selectors | + | + | + | + | - | (+) | - |   |   |   |   |
+| A.6 Explicit context strings | - | + | + | + | - | - | - |   |   |   |   |
+| A.7 API specifications for web services | + | + | + | + |   |   |   |   |   |   |   |
+| A.8 Assign data categories | (-) | (+) | (+) | (+) | (+) | (+) | (+) | (+) | (+) | (+) | (+) |
+| A.9 Compatible with Web Annotation vocabulary | + | (+) | (+) | (+) | (+) | (+) | (+) | (+) |   |   |   |
+| A.10 Compatible with NIF 2.0 core vocabulary | (-) | + | + | + | + | (+) | + | - | - | - | - |
+| A.11 Compatible with ISO standards | (+) | - | - | - | - | + | - | + | + | + | + |
 | B.3 Pointers: User-provided selectors | + | - | - | - |   |   |   |   |   |   |   |
 | B.5 Pointers: Annotation of discontinuous strings | + | - | - | - |   |   |   |   |   |   |   |
 | B.6 Pointers: Annotation of media files | + | - | - | - |   |   |   |   |   |   |   |
