@@ -1,3 +1,6 @@
+## A. LLOD compliancy
+
+
 | feats | Web Annotation | NIF | NIF 2.0 | NIF 2.1 | CoNLL-RDF | Ligt | ISO and derivatives | POWLA | LAF | MAF | SynAF | SemAF |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|
 | A.1 RDF serialization | + |   | + | + | + | + |   | + | - | - | - | - |
@@ -10,6 +13,13 @@
 | A.8 Assign data categories | (-) |   | (+) | (+) | (+) | (+) |   | (+) | (+) | (+) | (+) | (+) |
 | A.9 Compatible with Web Annotation vocabulary | + |   | (+) | (+) | (+) | (+) |   | (+) | (+) | (+) | (+) | (+) |
 | A.10 Compatible with NIF 2.0 core vocabulary | (-) |   | + | + | + | + |   | (+) | - | - | - | - |
+
+
+## B. Expressiveness
+
+
+| feats | Web Annotation | NIF | NIF 2.0 | NIF 2.1 | CoNLL-RDF | Ligt | ISO and derivatives | POWLA | LAF | MAF | SynAF | SemAF |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|
 | A.11 Compatible with ISO standards | (+) |   | - | - | - | - |   | + | + | + | + | + |
 | B.1 Pointers to primary data | + |   | + | + | (-) | (-) |   | (+) | + | + | + | + |
 | B.2 Pointers: Vocabulary for explicit references | + |   | + | + | - | - |   | (+) | - | - | - | - |
@@ -31,23 +41,50 @@
 | B.17 Concurrent annotation | - |   | - | - | (-) | (-) |   | + | + |   |   |   |
 | B.18 Sequence of annotation units | - |   | (+) | (+) | (+) | (+) |   | + | + |   |   |   |
 | B.19 annotation values: plain literals | + |   | + | + | + | + |   | + | + |   |   |   |
+
+
+## C. Levels of linguistic analysis: units of annotation
+
+
+| feats | Web Annotation | NIF | NIF 2.0 | NIF 2.1 | CoNLL-RDF | Ligt | ISO and derivatives | POWLA | LAF | MAF | SynAF | SemAF |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|
 | B.20 annotation values: feature structures | + |   | + | + | (+) | (+) |   | + | + | + | + | + |
 | C.1 Word-level annotations: word unit | (+) |   | + | + | + | + |   | (+) | + | + | + | + |
 | C.2 Sentence-level annotation: sentence unit | (+) |   | + | + | + | + |   | (+) | (-) | (-) | + | + |
 | C.3 morphology: morphological segments | (+) |   | (-) | (-) | - | + |   | (+) | (+) | + | - |   |
 | C.4 syntax/text structure: node labels/types | (+) |   | (+) | (+) | (+) | - |   | + | + | - | (+) | (+) |
+
+
+## D. Levels of linguistic analysis: sequential structure
+
+
+| feats | Web Annotation | NIF | NIF 2.0 | NIF 2.1 | CoNLL-RDF | Ligt | ISO and derivatives | POWLA | LAF | MAF | SynAF | SemAF |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|
 | C.5 semantics: node labels/types | (-) |   | (-) | (-) | (-) | - |   | + | + | - | - | + |
 | D.1 Word-level annotation: sequence of words | - |   | + | + | + | + |   | (+) | (+) | (+) | (+) | (+) |
 | D.2 Sentence-level annotation: sequence of sentences | - |   | + | + | + | + |   | (+) | (+) | (+) | (+) | (+) |
 | D.3 Morphology: sequence of morphological segments | - |   | - | - | - | + |   | (+) | (+) | + | (-) | (-) |
 | D.4 Syntax: discontinuous multi-word segments | (-) |   | - | - | (-) | (-) |   | + | + |   | (+) | (+) |
+
+
+## E. Levels of linguistic analysis: relational structure
+
+
+| feats | Web Annotation | NIF | NIF 2.0 | NIF 2.1 | CoNLL-RDF | Ligt | ISO and derivatives | POWLA | LAF | MAF | SynAF | SemAF |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|
 | D.5 Syntax/text structure: sequence of elements within a phrase | - |   | (-) | (-) | - | + |   | + | (+) | - | + | + |
 | E.1 Morphology: relations | (-) |   | - | - |   | (-) |   | (-) |   | + | - | - |
 | E.2 Dependency syntax | - |   | (+) | (+) | + | - |   | (+) | (+) | - | + | (-) |
 | E.3 Phrase structure syntax: hierarchical relations |   |   | (-) | (-) | (-) | - |   | (+) | + | - | + |   |
 | E.4 Phrase structure syntax: other relations | - |   | (-) | (-) | (-) | - |   | (+) | (+) | - | + |   |
 | E.5 Semantics: relations | - |   | (-) | (-) | (+) | - |   | (+) | (+) | - | (-) | + |
+## F. Data structures for novel applications
+
+
+| feats | Web Annotation | NIF | NIF 2.0 | NIF 2.1 | CoNLL-RDF | Ligt | ISO and derivatives | POWLA | LAF | MAF | SynAF | SemAF |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|
 | F.1 Intertextual relations | (-) |   | (-) | (-) | (+) | - |   | (-) | (-) | - | - | - |
 | F.2 Collation and alignment | (-) |   | (-) | (-) | (+) | - |   | (-) | - | - | - | - |
 | F.3 Links with lexical resources | (+) |   | (+) | (+) | (+) | (+) |   | (+) |   |   |   |   |
 | F.4 Dialog annotation | - |   | - | - | - | - |   | (+) | (+) | - |   | + |
+

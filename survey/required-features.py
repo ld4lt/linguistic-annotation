@@ -50,16 +50,21 @@ vals=["+","-","(+)", "(-)"]
 dict={} # current key-value pairs
 
 with open("required-features-tab.md","w") as output:
-	output.write("| feats |")
-	for k in keys:
-		output.write(" "+k+" |")
-	output.write("\n|---|")
-	for k in keys:
-		output.write("---|")
-	output.write("\n")
 	with open("required-features.md","r") as input:
 		line=input.readline()
 		while(line):
+			if(re.match(r"^## [A-Z][^A-Za-z0-9].*",line)):
+				if(len(dict)>0):
+					output.write("\n\n")
+				output.write(line+"\n\n")		
+				output.write("| feats |")
+				for k in keys:
+					output.write(" "+k+" |")
+				output.write("\n|---|")
+				for k in keys:
+					output.write("---|")
+				output.write("\n")
+		
 			line=line.strip()
 			if(line.startswith("###")):
 				spellout(feat,keys,dict,output)
@@ -78,3 +83,5 @@ with open("required-features-tab.md","w") as output:
 
 	if len(dict)>0:
 		spellout(feat,keys,dict,output)
+
+	output.write("\n")
