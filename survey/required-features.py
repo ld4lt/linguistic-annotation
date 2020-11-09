@@ -3,10 +3,15 @@
 
 import re
 
-# implement some inference rules
+# inference rules*
+# NIF 2.1 <= NIF (* use if undefined)
+# NIF 2.0 <= NIF
+# POWLA <= LAF
+# MAF, SemAF, SynAF <= LAF; if LAF=(-) or LAF=-
 def autocomplete(keys,dict):
 	for k in keys:
 		if not k in dict:
+			print(k,dict)
 			if k in [ "NIF 2.0", "NIF 2.1" ] :
 				if "NIF" in dict:
 					dict[k]=dict["NIF"]
@@ -20,7 +25,11 @@ def autocomplete(keys,dict):
 	return dict
 
 def spellout(feat, keys,dict,output):
+	print(feat)
+	print(dict)
 	dict=autocomplete(keys,dict)
+	print(dict)
+	print()
 	if(len(dict)>0):
 		output.write("| "+feat+" |")
 		for k in keys:
@@ -55,7 +64,7 @@ with open("required-features-tab.md","w") as output:
 				for v in vals:
 					if ": `"+v+"`" in line:
 						for k in keys:						
-							if re.match(r"^.*"+k+":\s*`["+v+"]+`.*",line):
+							if line.startswith(k+": `"+v+"`") or re.match(r"^.*"+k+":\s*`["+v+"]+`.*",line):
 								dict[k]=v;
 						k=re.sub(r"^([^:]+):.*",r"\1",line).strip()
 						if(not k in keys):
