@@ -307,6 +307,12 @@ Ligt: `(+)`
 
 LAF: `(+)` (A partial reconstruction of LAF within WA has been described by Verspoor et al. 2012, but this does not seem to have been adopted in subsequent research nor evaluated by any third party.)
 
+MAF: `(+)` (not checked in detail, but cf. LAF)
+
+SemAF: `(+)`  (not checked in detail, but cf. LAF)
+
+SynAF: `(+)`  (not checked in detail, but cf. LAF)
+
 ### A.10 Compatible with NIF 2.0 core vocabulary
 
 NIF has an indepndent user and developer community that should be involved in the results of any harmonization effort, compatibility with NIF is thus a requirement.
@@ -393,6 +399,24 @@ Examples for IRI fragment identifiers as pointers:
 
 The default mechanism to define pointers in Web Annotation is by means of selectors that use application-specific information to address elements of a web document using explicit RDF statements.
 
+NIF: `+`
+
+Web Annotation: `+`
+
+CoNLL-RDF: `(-)` (pointers to tokens, not primary data)
+
+Ligt: `(-)` (pointers to data structures, not primary data)
+
+POWLA: `(+)` (offset-based pointers possible, last publications recommend to use external vocabularies)
+
+LAF: `+` (XPointers)
+
+MAF: `+` (from LAF)
+
+SemAF: `+` (from LAF)
+
+SynAF: `+` (from LAF)
+
 ### B.2 Pointers: Vocabulary for explicit references
 
 Provide (optional) RDF statements to explicate pointer information (e.g., offsets).
@@ -405,6 +429,18 @@ Example (NIF):
  nif:endIndex "20"^^xsd:nonNegativeInteger .
 ```
 
+NIF: `+`
+
+Web Annotation: `+`
+
+POWLA: `(+)` (offset-based pointers possible, last publications recommend to use external vocabularies)
+
+CoNLL-RDF: `-`
+
+Ligt: `-`
+
+LAF: `-` (no RDF statements)
+
 ### B.3 Pointers: User-provided selectors
 
 Allow users to define application-specific pointers.
@@ -412,6 +448,12 @@ Allow users to define application-specific pointers.
 Web Annotation: `+`, provides the class `oa:Selector`. For different media, users can provide selector subclasses that encode the information an appication needs to identify the annotated element.
 
 NIF: `-` (would be considered out of scope)
+
+POWLA: `(+)` (in combination with Web Annotation)
+
+CoNLL-RDF: `-`
+
+LAF: `(-)` (actually, this is hard to tell, technically, this would be possible, but there don't seem to be documented examples)
 
 ### B.4 Pointers: Support the annotation of continuous strings
 
@@ -422,6 +464,24 @@ Example (basic phrase structure syntax)
 ```
 [NP ten books]
 ```
+
+NIF: `+`
+
+Web Annotation: `+`
+
+POWLA: `+`
+
+CoNLL-RDF: `+`
+
+Ligt: `+`
+
+LAF: `+`
+
+MAF: `+`
+
+SemAF: `+`
+
+SynAF: `+`
 
 ### B.5 Pointers: Annotation of discontinuous strings
 
@@ -439,6 +499,16 @@ NIF: `-` (annotations such as `ext:offset_0_14_23_32` are not considered nor sup
 
 Web Annotation: `+` (multiple selectors can be combined into an aggregate selector)
 
+CoNLL-RDF: `(-)` (not natively, but in combination with POWLA)
+
+POWLA: `(+)` (a terminal is offset-defined, so it apparently has to be a continuous string, but nonterminals can aggregate discontinuous sequences of terminals)
+
+Ligt: `(-)` (in principle, discontinuous aggregates could exist, but there are no examples for that nor any model in current IGT annotation)
+
+LAF: `(+)` (the existence of discontinuous anchors needs to be confirmed, but nodes can aggregate other nodes regardless of their position)
+
+MAF, SemAF, SynAF: tbc.
+
 ### B.6 Pointers: Annotation of media files
 
 Annotation of non-textual data, e.g., audio, video, images.
@@ -446,6 +516,12 @@ Annotation of non-textual data, e.g., audio, video, images.
 Web Annotation: `+` (core feature)
 
 NIF: `-`
+
+CoNLL-RDF: `-`
+
+Ligt: `-`
+
+LAF: `(-)` (tbc.)
 
 ### B.7 Pointers: Support the annotation of timestamps/timelines
 
@@ -457,6 +533,16 @@ Web Annotation: `(+)` (users may provide a specialized selector for such data)
 
 NIF: `-`
 
+CoNLL-RDF: `-`
+
+POWLA: `(+)` (if combined with Web Annotation)
+
+Ligt: `-`
+
+LAF: `(+)` (tbc.; CC: I'm pretty sure this has been addressed)
+
+MAF, SynAF, SemAF: tbc.
+
 ### B.8 Pointers: standoff annotation
 
 Vocabulary should be able to annotate content residing in a separate file or resource.
@@ -464,6 +550,16 @@ Vocabulary should be able to annotate content residing in a separate file or res
 NIF: `+`
 
 Web Annotation: `+`
+
+LAF: `+`
+
+CoNLL-RDF: `+`
+
+POWLA: `+`
+
+Ligt: `(+)` (no examples known)
+
+MAF, SemAF, SynAF: tbc.
 
 ### B.9 Generic data structures for linguistic annotation: node != pointer
 
@@ -488,6 +584,16 @@ These are co-extensional, but their hierarchical organization (in the annotation
 Web Annotation: `+` (pointer = target, node = annotation or body -- depending on interpretation)
 
 NIF: `-`
+
+CoNLL-RDF: `(+)` (in combination with POWLA)
+
+POWLA: `+`
+
+Ligt: `(-)` (unclear)
+
+LAF: `+`
+
+MAF, SemAF, SynAF: tbc.
 
 ### B.10 Generic data structures for linguistic annotation: zero nodes
 
@@ -521,6 +627,16 @@ NIF: `(+)` (the default encoding for annotations in NIF is by subclasses of `nif
 
 Web Annotation: `(+)` (Web annotation requires some target.)
 
+POWLA: `+` (from LAF)
+
+LAF: `+`
+
+Ligt: `+`
+
+CoNLL-RDF: `(+)` (for zero tokens in underlying CoNLL format)
+
+MAF, SemAF, SynAF: tbc.
+
 ### B.11 Generic data structures for linguistic annotation: edge ('relation')
 
 [ISO 24612-2012](https://www.cs.vassar.edu/~ide/papers/ISO+24612-2012.pdf) edge is a relation from one or multiple nodes to one or multiple nodes. Edges are, for example, syntactic dependencies. The vocabulary should provide a way to mark an RDF statement as being a edge/relation in the sense of LAF, e.g., a property or class that annotation-specific edges can provide sub-classes/-properties for.
@@ -534,6 +650,20 @@ NIF: `-`
 
 Web Annotation: `-`
 
+CoNLL-RDF: `(+)` (restricted to syntactic dependencies and semantic roles)
+
+Ligt: `-`
+
+LAF: `+`
+
+POWLA: `+`
+
+MAF: tbc.
+
+SemAF: `+` (tbc: restricted to certain relation types)
+
+SynAF: `+` (part of the old TIGER format, SynAF is marketed as TIGER2, so, it should keep that) 
+
 #### B.11.a Non-reified representation of edges
 
 It should be possible to encode edges with a single RDF statement (if provider decides not provide metadata, etc.).
@@ -546,6 +676,12 @@ NIF: `(-)` (`nif:subStringOf` could be abused for this purpose, for hierarchical
 Web Annotation: `-`
 
 POWLA: `(+)` (for hierarchical relations only)
+
+Ligt: `-`
+
+CoNLL-RDF: `(+)` (for semantic roles only)
+
+LAF, MAF, SemAF, SynAF: not applicable, no RDF
 
 ### B.12 Reified representation of edges (annotation relations)
 
@@ -564,6 +700,12 @@ NIF: `-`
 
 POWLA: `+`
 
+CoNLL-RDF: `-` (only in combination with POWLA)
+
+Ligt: `-`
+
+LAF: `(+)` ("reification" is not directly applicable to non-RDF data)
+
 ### B.13 Generic data structures for linguistic annotation: graphs
 
 In LAF, a graph a is a collection of nodes and edges. In RDF, this corresponds to an RDF graph (often representing the document that a particular set of RDF statements originates from). We do not require explicit data structures for graphs beyond that (do we?). A vocabulary that provides explicit data structures would be `+`, any other RDF vocabulary would be `(+)`, non-RDF vocabularies without explicit data structures would be `-`.
@@ -571,6 +713,16 @@ In LAF, a graph a is a collection of nodes and edges. In RDF, this corresponds t
 NIF: `(+)`
 
 Web Annotation: `(+)`
+
+POWLA: `+`
+
+LAF: `+`
+
+CoNLL-RDF: `(+)`
+
+Ligt: `(+)`
+
+MAF, SemAF, SynAF: tbc.
 
 ### B.14 Generic data structures for linguistic annotation: annotations
 
@@ -588,6 +740,14 @@ Web Annotation: `+`
 
 NIF: `(-)` (`nif:String`), resp. `(+)` (`nif:AnnotationUnit`, not the default encoding, though)
 
+LAF: `+`
+
+POWLA: `(+)` (tbc)
+
+Ligt: `(-)` (tbc)
+
+MAF, SemAF, SynAF: tbc
+
 ### B.15 Generic data structures for linguistic annotation: annotation space ("tagset")
 
 [ISO 24612-2012](https://www.cs.vassar.edu/~ide/papers/ISO+24612-2012.pdf) defines generic linguistic data structures from which annotation-specific datastructures can be derived. These are
@@ -602,7 +762,17 @@ The vocabulary should provide a standard way to assign annotations a particular 
 
 Web Annotation: `+`
 
-NIF: `(-)`
+NIF: `(+)` (via OLiA)
+
+POWLA: `(+)` (via OLiA)
+
+CoNLL-RDF: `(+)` (via OLiA)
+
+Ligt: `(-)` (no example known)
+
+LAF: `+`
+
+MAF, SemAF, SynAF: tbc.
 
 ### B.16 Provenance
 
@@ -621,6 +791,14 @@ NIF: `(-)` (NIF 2.0)
 NIF 2.1: `(+)`
 
 Web Annotation: `(-)`
+
+CoNLL-RDF: `(-)`
+
+LAF: `-` (no RDF extension possible)
+
+POWLA: `(-)`
+
+Ligt: `(-)`
 
 ### B.17 Concurrent annotation
 
@@ -662,6 +840,16 @@ NIF: `-`
 
 Web Annotation: `-`
 
+POWLA: `+`
+
+LAF: `+`
+
+CoNLL-RDF: `(-)` (different properties in different columns, controlled by the user)
+
+Ligt: `(-)` (no example known)
+
+MAF, SemAF, SynAF: tbc.
+
 ### B.18 Sequence of annotation units
 
 An annotation vocabulary should allow to encode the sequence of annotation units of the same kind (words, sentences, ...), either by enumeration or by explicit properties.
@@ -699,6 +887,16 @@ NIF: `(+)` (only for selected annotation units, e.g., `nif:nextWord`, `nif:nextS
 
 Web Annotation: `-`
 
+Ligt: `(+)` (for native annotation units)
+
+CoNLL-RDF: `(+)` (for native CoNLL-RDF annotation units)
+
+POWLA: `+`
+
+LAF: `+`
+
+MAF, SynAF, SemAF: tbc.
+
 ### B.19 annotation values: plain literals
 
 The vocabulary should support annotation (annotation value/body) with plain literals, e.g., strings.
@@ -712,6 +910,16 @@ NIF: `+`
 
 Web Annotation: `+`
 
+CoNLL-RDF: `+`
+
+Ligt: `+`
+
+POWLA: `+`
+
+LAF: `+`
+
+MAF, SynAF, SemAF: tbc.
+
 ### B.20 annotation values: feature structures
 
 The vocabulary should support annotation (annotation value/body) with feature structures, i.e., root nodes of directed (acyclic) graphs. In RDF, this requirement can be reformulated as permitting RDF resources (URIs) as annotations.
@@ -724,6 +932,20 @@ Example:
 NIF: `+`
 
 Web Annotation: `+`
+
+POWLA: `+` (e.g., using OLiA)
+
+CoNLL-RDF: `(+)` (can be represented, but are not created by default conversion)
+
+Ligt: `(+)` (no example known)
+
+LAF: `+`
+
+MAF: `+` (tbc)
+
+SynAF: `+` (tbc)
+
+SemAF: `+`
 
 ## C. Levels of linguistic analysis: units of annotation
 
