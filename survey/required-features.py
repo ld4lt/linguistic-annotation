@@ -8,6 +8,9 @@ import re
 # NIF 2.0 <= NIF
 # POWLA <= LAF
 # MAF, SemAF, SynAF <= LAF; if LAF=(-) or LAF=-
+
+# clear:
+# NIF
 def autocomplete(keys,dict):
 	for k in keys:
 		if not k in dict:
@@ -22,6 +25,8 @@ def autocomplete(keys,dict):
 				if "LAF" in dict and not "+" in dict["LAF"]:
 					dict[k]=dict["LAF"]
 				# MAF etc. are LAF sub-vocabularies
+	if "NIF" in dict:
+		dict.pop("NIF")
 	return dict
 
 def spellout(feat, keys,dict,output):
@@ -40,7 +45,7 @@ def spellout(feat, keys,dict,output):
 		output.write("\n")
 
 feat=""
-keys=["Web Annotation", "NIF", "NIF 2.0" ,"NIF 2.1","CoNLL-RDF","POWLA","Ligt","LAF","MAF","SynAF","SemAF"]
+keys=["Web Annotation", "NIF", "NIF 2.0" ,"NIF 2.1","CoNLL-RDF","Ligt","ISO and derivatives", "POWLA","LAF","MAF","SynAF","SemAF"]
 vals=["+","-","(+)", "(-)"]
 dict={} # current key-value pairs
 

@@ -1259,18 +1259,86 @@ hierachical/other relations to be confirmed, cf. OntoLex-Morph and MAF
 
 Vocabulary should either provide the vocabulary or refer to an external terminology repository that provides the necessary vocabulary
 
+Ligt: `(-)` (no examples, via link with OntoLex-Morph?)
+
+POWLA: `(-)` (via link with OntoLex-Morph?)
+
+NIF: `-` (no morphologial segmentation)
+
+Web Annotation: `(-)` (via link with external vocabulary, e.g., OntoLex-Morph?)
+
+LAF: tbc
+
+MAF: `+` (tbc)
+
+SynAF: `-` (tbc)
+
+SemAF: `-` (tbc)
+
 ### E.2 Dependency syntax
  
 no hierarchical relations, to be confirmed whether primary and secondary dependencies are to be distinguished (cf. https://universaldependencies.org/), cf. SynAF (other standards?)
+
+Ligt: `-`
+
+Web Annotation: `-`
+
+CoNLL-RDF: `+` (native vocabulary)
+
+POWLA: `(+)` (via external vocabulary, e.g., OLiA)
+
+NIF: `(+)` (not part of NIF core, but example implementation with OLiA for Stanford Parser)
+
+SynAF: `+` (tbc)
+
+SemAF: `(-)` (tbc)
+
+MAF: `-`
+
+LAF: `(+)` (voa external vocabulary: ISOcat) 
 
 ### E.3 Phrase structure syntax: hierarchical relations
 
 hierarchical relations, must be annotatable, see SynAF, to be confirmed whether primary and secondary edges are to be distinguished (cf. [TIGER XML](https://www.ims.uni-stuttgart.de/forschung/ressourcen/werkzeuge/TIGERSearch/doc/html/TigerXML.html))
 
+NIF: `(-)` (labelled edges do not seem be foreseen, must be encoded as phrase-level features)
+
+SynAF: `+` (tbc)
+
+LAF: `+` (via external vocabulary, ISOcat)
+
+POWLA: `(+)` (labels via external vocabulary, OLiA)
+
+CoNLL-RDF: `(-)` (via POWLA and OLiA)
+
+Ligt: `-`
+
+MAF: `-`
+
+SemAF: tbc
+
 ### E.4 Phrase structure syntax: other relations
 
 to be confirmed, e.g., for movement/traces, see SynAF. 
 Note that an indirect encoding by means of empty elements may be possible under certain circumstances, cf. the modelling of syntactic movement by means of traces in generative syntax.
+
+CoNLL-RDF: `(-)` (support for Penn-style encoding of traces and coindexing, these need to be manually resolved, though)
+
+SynAF: `+`
+
+POWLA: `(+)` (via external vocabulary, e.g., OLiA)
+
+LAF: `(+)` (via external vocabulary, ISOCat)
+
+MAF: `-`
+
+Ligt: `-`
+
+SemAF: tbc
+
+NIF: `(-)`
+
+Web Annotation: `-` (no relational annotation foreseen)
 
 ### E.5 Semantics: relations
 
@@ -1278,8 +1346,25 @@ cf. SemAF, must cover a broad inventory of relations, including TimeML, PropBank
 
 In order to prevent unlimited growth of the vocabulary, semantic annotations should use refer to a(n extensible) terminology repository rather than aiming to provide an exhaustive list 'within the vocabulary'. 
 
-### Other (to be added)
+SemAF: `+`
 
+POWLA: `(+)` (via OLiA)
+
+CoNLL-RDF: `(+)` (native support for semantic roles)
+
+NIF: `(-)` (can be extended, e.g., a FrameNet extension, using a separate namespace)
+
+Web Annotation: `-` (no relational annotation foreseen)
+
+Ligt: `-`
+
+MAF: `-`
+
+LAF: `(+)` (via ISOcat)
+
+SynAF: `(-)` (tbc.) 
+
+### Other (to be added)
 
 ## F. Data structures for novel applications
 
