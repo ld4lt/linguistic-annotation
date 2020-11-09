@@ -25,14 +25,18 @@
 | B.11.a Non-reified representation of edges | - | (-) | (-) | (-) | (+) | (+) | - |   |   |   |   |
 | B.12 Reified representation of edges (annotation relations) | - | - | - | - | - | + | - | (+) |   |   |   |
 | B.13 Generic data structures for linguistic annotation: graphs | (+) | (+) | (+) | (+) | (+) | + | (+) | + |   |   |   |
-| B.14 Generic data structures for linguistic annotation: annotations | + | (-) | (-) | (-) |   | (+) | (-) | + |   |   |   |
+| B.14 Generic data structures for linguistic annotation: annotations | + | (-) | (-) | (-) | (-) | (+) | (-) | + |   |   |   |
 | B.15 Generic data structures for linguistic annotation: annotation space ("tagset") | + | (+) | (+) | (+) | (+) | (+) | (-) | + |   |   |   |
 | B.16 Provenance | (-) | (-) | (-) | (+) | (-) | (-) | (-) | - | - | - | - |
 | B.17 Concurrent annotation | - | - | - | - | (-) | + | (-) | + |   |   |   |
 | B.18 Sequence of annotation units | - | (+) | (+) | (+) | (+) | + | (+) | + |   |   |   |
 | B.19 annotation values: plain literals | + | + | + | + | + | + | + | + |   |   |   |
 | B.20 annotation values: feature structures | + | + | + | + | (+) | + | (+) | + | + | + | + |
-| C.3 morphology: morphological segments | (+) |   |   |   |   |   |   |   |   |   |   |
+| C.1 Word-level annotations: word unit | (+) | + | + | + | + | (+) | + | + | + | + | + |
+| C.2 Sentence-level annotation: sentence unit | (+) | + | + | + | + | (+) | + | (-) | (-) | + | + |
+| C.3 morphology: morphological segments | (+) | (-) | (-) | (-) | - | (+) | + | (+) | + | - |   |
+| C.4 syntax/text structure: node labels/types | (+) | (+) | (+) | (+) | (+) | + | - | + | - | (+) | (+) |
+| C.5 semantics: node labels/types | (-) | (-) | (-) | (-) | (-) | + | - | + | - | - | + |
 | D.1 Word-level annotation: sequence of words | - | + | + | + |   |   |   |   |   |   |   |
 | D.2 Sentence-level annotation: sequence of sentences | - | + | + | + |   |   |   |   |   |   |   |
 | D.3 Morphology: sequence of morphological segments | - | - | - | - |   |   |   |   |   |   |   |

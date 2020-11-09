@@ -744,6 +744,8 @@ LAF: `+`
 
 POWLA: `(+)` (tbc)
 
+CoNLL-RDF: `(-)` (not created by default)
+
 Ligt: `(-)` (tbc)
 
 MAF, SemAF, SynAF: tbc
@@ -966,13 +968,43 @@ Example: part-of-speech annotation
 book/NN
 ```
 
-`nif:Word`, hence `+`.
-No concept in Web Annotation, but tokens can be targets, hence `(+)`.
+NIF: `+` (`nif:Word`)
+
+Web Annotation: `(+)` (no designated concept)
+
+CoNLL-RDF: `+` (`nif:Word`)
+
+POWLA: `(+)` (`powla:Terminal`, but can be sub-token)
+
+LAF: `+`
+
+Ligt: `+`
+
+MAF: `+`
+
+SynAF: `+`
+
+SemAF: `+`
 
 ### C.2 Sentence-level annotation: sentence unit
 
-`nif:Sentence`, hence `+`.
-Lacking in Web Annotation, hence `(+)`.
+NIF: `+` (`nif:Sentence`)
+
+Web Annotation: `(+)` (no explicit data structure, but can be added)
+
+CoNLL-RDF: `+` (`nif:Sentence`)
+
+Ligt: `+`
+
+POWLA: `(+)` (`powla:Root`, but this doesn't have to be sentential)
+
+LAF: `(-)` (tbc.)
+
+MAF: tbc.
+
+SynAF: `+`
+
+SemAF: `+` (tbc.)
 
 ### C.3 morphology: morphological segments
 
@@ -999,20 +1031,52 @@ ext:offset_0_3 -> cat
 ext:offset_3_4 -> s
 ```
 
-Not addressed by NIF, neither WA. No NIF vocabulary, but can be accessed as substrings, hence `(+)`.
-Web Annotation: `(+)`
+Not addressed by NIF, neither WA. 
 
-It is unclear how to use NIF in combination with the Lemon Morphology Module: https://www.w3.org/community/ontolex/wiki/Morphology
+NIF: `(-)` (no designated vocabulary, can be accessed as substrings, but not in all cases.)
+
+Web Annotation: `(+)` (no designated vocabulary, but can be added)
+
+CoNLL-RDF: `-`
+
+Ligt: `+`
+
+LAF: `(+)` (no designated vocabulary, but can be modelled as segments)
+
+MAF: `+` (tbc.)
+
+SynAF: `-` (tbc)
+
+SemAF: tbc
+
+POWLA: `(+)` (no designated vocabulary, but can be added)
+
+A candidate vocabulary to relate with is the OntoLex Morphology module:  https://www.w3.org/community/ontolex/wiki/Morphology.
+The interface between morphological dictionary and corpus has not been defined yet.
 
 ### C.4 syntax/text structure: node labels/types
 
 The vocabulary should provide (or refer to) an inventory of syntactic categories, e.g., phrase. Note that this must be extensible to accomodate novel types of annotation.
 
-Web Annotation: user-provided subclasses of `oa:Annotation`, hence `(-)`
+Web Annotation: `(+)` (via user-provided subclasses of `oa:Annotation`)
 
-NIF predefined: `nif:Word`, `nif:Phrase`, `nif:Paragraph`, etc.; but note that these do not describe nodes in the sense of LAF, but regions, so, this is `(+)`
+NIF: `(+)` (predefined datatypes `nif:Word`, `nif:Phrase`, `nif:Paragraph`, etc.; but note that these do not describe nodes in the sense of LAF, but regions)
 
 In addition, NIF allows to use `nif:oliaLink` to refer to an external terminology base, here [OLiA](http://purl.org/olia). An alternative to OLiA is the [CLARIN Concept Registry](https://www.clarin.eu/ccr), but note that it is extensible only by national CLARIN representatives whereas OLiA is an [open source project on GitHub](https://github.com/acoli-repo/olia). AFAIK, NIF uses `nif:oliaLink` for part of speech information only, so this is partial solution, again, hence, `(+)`.
+
+POWLA: `+` (using an external vocabulary, OLiA)
+
+CoNLL-RDF: `(+)` (phrase structures can only be expressed in combination with POWLA)
+
+Ligt: `-` (no examples for phrase-level annotations)
+
+LAF: `+` (ISOcat)
+
+SynAF: `(+)` (ISOcat, for syntax, but hard-wired data structures only)
+
+MAF: `-` (no syntax nodes)
+
+SemAF: `(+)` (ISOcat, for text/discourse, but hard-wired data structures only)
 
 ### C.5 semantics: node labels/types
 
@@ -1020,8 +1084,23 @@ Similar as for syntax/text structure, details to be determined from SemAF, [NERD
 
 This requires a very rich and extensible inventory of data categories, so better as an external resource. Again, [OLiA](http://purl.org/olia) and the [OLiA Discourse Extensions](http://www.acoli.informatik.uni-frankfurt.de/resources/discourse/) are a candidate resources here, but note that this would require extensions wrt. lexical semantics.
 
-NIF supports entity linking, but no other form of semantic annotation, hence `(-)`.
-Web Annotation is widely used for entity linking, but it does not provide a designated vocabulary for entities, hence `(-)`.
+NIF: `(-)`. NIF supports entity linking, but no other form of semantic annotation, hence `(-)`.
+
+Web Annotation: `(-)`. Web Annotation is widely used for entity linking, but it does not provide a designated vocabulary for entities, hence `(-)`.
+
+POWLA: `+` (using an external vocabulary, OLiA)
+
+CoNLL-RDF: `(-)` (can be created from CoNLL-RDF data)
+
+Ligt: `-` (morphology only)
+
+MAF: `-` (morphology only)
+
+SynAF: `-` (tbc)
+
+SemAF: `+` (tbc)
+
+LAF: `+` (ISOcat)
 
 ## D. Levels of linguistic analysis: sequential structure
 
