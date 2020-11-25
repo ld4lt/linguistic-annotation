@@ -780,6 +780,10 @@ MAF, SemAF, SynAF: tbc.
 
 The vocabulary should provide a way to assert provenance (e.g., creator, tools involved, other sources), confidence (e.g. a confidence score or confidence level) and related metadata about annotations.
 
+In particular, it is important 
+- to be able to express [what person(s) or organization(s) is (are) responsible](https://github.com/ld4lt/linguistic-annotation/issues/3) asserting the claim behind a given linguistic annotation, and
+- to express a level of confidence in an annotation; this is a [common need for linguistic annotations](https://github.com/ld4lt/linguistic-annotation/issues/1) 
+
 If a vocabulary is capable to
 - assert provenance (etc.) about (annotations of) nodes and edges, mark as `+`, or
 - assert provenance (etc.) about (annotatios of) nodes, mark as `(+)`.
