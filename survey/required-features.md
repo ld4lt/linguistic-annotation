@@ -1478,3 +1478,13 @@ CoNLL-RDF: `-` (only if annotated as plain text, no formal vocabulary)
 
 ### Other (please add)
 ...
+
+## G. Best practices beyond vocabulary
+
+Sections A-F are primarily about standardization. To provide best practices are yet another requirement, but are less part of standardization / vocabulary development rather than the application of existing conventions. Whether these are within scope of the current discussion is yet to be discussed.
+
+### G.1 Recommended best practices for IRI identifiers used for linguistic annotations
+
+It would be helpful to have a set of recommended best practices for IRI identifiers used for linguistic annotations. E.g. when/if to use ARKs vs Handles vs DOIs, vs PURLs (also see https://project-thor.readme.io/docs/project-glossary and https://github.com/ld4lt/linguistic-annotation/issues/2).
+
+Apparently, all vocabularies discussed here remain agnostic about IRIs (except for fragment identifiers).
