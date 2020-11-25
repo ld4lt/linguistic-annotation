@@ -39,7 +39,7 @@ Add required features for a reference vocabuilary for linguistic annotations on 
 	- [B.13 Generic data structures for linguistic annotation: graphs](#b13-generic-data-structures-for-linguistic-annotation-graphs)
 	- [B.14 Generic data structures for linguistic annotation: annotations](#b14-generic-data-structures-for-linguistic-annotation-annotations)
 	- [B.15 Generic data structures for linguistic annotation: annotation space ("tagset")](#b15-generic-data-structures-for-linguistic-annotation-annotation-space-tagset)
-	- [B.16 Provenance](#b16-provenance)
+	- [B.16 Provenance and confidence](#b16-provenance-and-confidence)
 	- [B.17 Concurrent annotation](#b17-concurrent-annotation)
 	- [B.18 Sequence of annotation units](#b18-sequence-of-annotation-units)
 	- [B.19 annotation values: plain literals](#b19-annotation-values-plain-literals)
@@ -776,12 +776,14 @@ LAF: `+`
 
 MAF, SemAF, SynAF: tbc.
 
-### B.16 Provenance
+### B.16 Provenance and confidence
 
-The vocabulary should provide a way to
-- assert provenance about (annotations of) nodes and edges, mark as `+`, or
-- assert provenance about (annotatios of) nodes, mark as `(+)`.
-- If it can be complemented with an external RDF vocabulary to assert provenance, mark as `(-)`.
+The vocabulary should provide a way to assert provenance (e.g., creator, tools involved, other sources), confidence (e.g. a confidence score or confidence level) and related metadata about annotations.
+
+If a vocabulary is capable to
+- assert provenance (etc.) about (annotations of) nodes and edges, mark as `+`, or
+- assert provenance (etc.) about (annotatios of) nodes, mark as `(+)`.
+- If it can be complemented with an external RDF vocabulary to assert provenance (etc.), mark as `(-)`.
 - Otherwise, mark as `-`.
 
 NIF 2.1 defines `nif:AnnotationUnit` which can use used to distinguish annotations comming from different NLP tools on same strings (same offsets).
