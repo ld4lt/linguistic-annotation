@@ -1464,15 +1464,14 @@ Represent contributions of different dialog partners as indepndent texts/documen
 This is necessary, for example, if multiple recorders are being used, and annotation may switch from the (best) recorder for participant A to the (best) recorder for participant B.
 
 Not addressed in NIF: `-`
-Web Annotation allows to annotate multiple targets simultaneously, but it lacks the vocabulary to create links between annotations, e.g., for marking turn shifts), hence `(+)` 
 
-Web Annotation: `-` (tbc., no example known)
+Web Annotation: `(+)` allows to annotate multiple targets simultaneously, but it lacks the vocabulary to create links between annotations, e.g., for marking turn shifts)
 
 SemAF: `+` (tbc)
 
 POWLA: `(+)` (extensible)
 
-LAF: `(+)` (tbc., via ISOcat?)
+LAF: `(+)` (tbc.)
 
 SynAF: tbc
 
