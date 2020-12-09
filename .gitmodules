@@ -1,0 +1,3 @@
+[submodule "apps/inclusions/markdown2docbook"]
+	path = apps/inclusions/markdown2docbook
+	url = https://github.com/msmid/markdown2docbook.git
