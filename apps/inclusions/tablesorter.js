@@ -1,19 +1,19 @@
 // script below adapted from https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_sort_table_desc
-function sortTable(n) {
+function sortTable(n,t) {
    var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
-   table = document.getElementById("survey");
+   table = document.getElementById(t);
    switching = true;
    dir = "asc";
    while (switching) {
       switching = false;
-      rows = table.rows;
-      for (i = 1; i < (rows.length - 1);
+      rows = table.querySelectorAll("tbody tr:not(.score)");
+      for (i = 0; i < (rows.length - 1);
       i++) {
          shouldSwitch = false;
          x = rows[i].getElementsByTagName("TD")[n];
          y = rows[i + 1].getElementsByTagName("TD")[n];
-         xLc = x.innerText.toLowerCase();
-         yLc = y.innerText.toLowerCase();
+         xLc = x.innerText.toLowerCase().replace(/\(\+\)/, "3").replace(/\+/, "4").replace(/\(\-\)/, "2").replace(/-/, "1");
+         yLc = y.innerText.toLowerCase().replace(/\(\+\)/, "3").replace(/\+/, "4").replace(/\(\-\)/, "2").replace(/-/, "1");
          if (dir == "asc") {
             if (xLc > yLc) {
                shouldSwitch = true;
@@ -38,15 +38,15 @@ function sortTable(n) {
       }
    }
 }
-function sortTableByNumber(n) {
+function sortTableByNumber(n,t) {
    var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
-   table = document.getElementById("survey");
+   table = document.getElementById(t);
    switching = true;
    dir = "asc";
    while (switching) {
       switching = false;
-      rows = table.rows;
-      for (i = 1; i < (rows.length - 1);
+      rows = table.querySelectorAll("tbody tr:not(.score)");
+      for (i = 0; i < (rows.length - 1);
       i++) {
          shouldSwitch = false;
          x = rows[i].getElementsByTagName("TD")[n];
