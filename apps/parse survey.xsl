@@ -2,6 +2,7 @@
    xmlns:xs="http://www.w3.org/2001/XMLSchema"
    xmlns:la="https://www.w3.org/community/ld4lt"
    xmlns:doc="http://docbook.org/ns/docbook"
+   xmlns:xl="http://www.w3.org/1999/xlink"
    xmlns:md2doc="http://www.markdown2docbook.com/ns/md2doc"
    version="3.0">
    <!-- APPLICATION FOR PARSING THE LINGUISTIC ANNOTATION SURVEY OF REQUIRED FEATURES -->
@@ -100,8 +101,14 @@
                <name>SemAF</name>
             </standard>
          </group>
+         <standard>
+            <name>TEI</name>
+         </standard>
       </standards>
    </xsl:variable>
+   
+   <!-- Find top-level sections, to sort the HTML tables -->
+   <xsl:variable name="top-level-sections" as="element()*" select="$required-features-as-docbook/doc:section/doc:section[doc:title[matches(., '^[A-Z]\. ')]]"/>
    
    <xsl:variable name="parse-pass-1" as="document-node()">
       <xsl:document>
@@ -122,11 +129,18 @@
       <xsl:variable name="these-entries" as="xs:string*">
          <xsl:analyze-string select="." regex="^([,a-zA-Z .-]+):">
             <xsl:matching-substring>
-               <xsl:copy-of select="tokenize(regex-group(1), '[\s,]+')"/>
+               <xsl:value-of select="normalize-space(regex-group(1))"/>
             </xsl:matching-substring>
          </xsl:analyze-string>
       </xsl:variable>
-      <xsl:variable name="these-standards-tree-entries" select="$standards-tree//*[name = $these-entries]"/>
+      <!-- Fetch matching standards, but omit any where a descendant has been picked. This ensures that if NIF 2.0 is specified, NIF
+      in general is not picked. -->
+      <xsl:variable name="these-standards-tree-entries"
+         select="
+            $standards-tree//*[name[contains($these-entries, .)]][not(some $i in descendant::*/name
+               satisfies contains($these-entries, $i))]"
+         as="element()*"/>
+      
       <xsl:for-each select="$these-standards-tree-entries">
          <xsl:variable name="these-versions" select=".//version" as="element()*"/>
          <!-- Let something like NIF populate down to NIF 2.0 etc. -->
@@ -171,7 +185,7 @@
             <xsl:variable name="these-data" select="$parse-pass-1/*/item[aspect = $this-title]"/>
             <row>
                <key>
-                  <xsl:value-of select="$this-title"/>
+                  <xsl:value-of select="normalize-space($this-title)"/>
                </key>
                <xsl:for-each select="$standards-tree//*[name][not(standard)][not(version)]">
                   <xsl:variable name="these-names" select="name"/>
@@ -186,18 +200,45 @@
       </xsl:copy>
    </xsl:template>
    
+   <!-- PASS 3: CALCULATE SCORES -->
+   
    <xsl:variable name="parse-pass-3" as="document-node()">
       <xsl:apply-templates select="$parse-pass-2" mode="calculate-scores"/>
    </xsl:variable>
    <xsl:mode name="calculate-scores" on-no-match="shallow-copy"/>
    <xsl:template match="/*" mode="calculate-scores">
       <xsl:variable name="these-rows" select="row" as="element()*"/>
+      <xsl:variable name="standard-cell-count" select="count(row[1]/cell)"/>
       <xsl:copy>
          <xsl:copy-of select="@*"/>
          <xsl:apply-templates mode="#current"/>
+         
+         <!-- Add one row per category -->
+         <xsl:for-each-group select="row" group-by="substring(key, 1, 1)">
+            <xsl:sort select="current-grouping-key()"/>
+            <xsl:variable name="this-group" select="current-grouping-key()" as="xs:string"/>
+            <row class="score">
+               <key>
+                  <xsl:value-of select="$this-group"/>
+               </key>
+               <xsl:for-each select="1 to $standard-cell-count">
+                  <xsl:variable name="this-pos" select="."/>
+                  <xsl:variable name="these-cells" select="current-group()/cell[$this-pos]"/>
+                  <cell>
+                     <xsl:copy-of select="$these-cells[1]/@*"/>
+                     <xsl:value-of select="la:calculate-score($these-cells)"/>
+                  </cell>
+               </xsl:for-each>
+               <cell/>
+            </row>
+            
+         </xsl:for-each-group> 
+         
+         
+         <!-- Add a row that totals everything -->
          <row class="score">
-            <key>score</key>
-            <xsl:for-each select="1 to count(row[1]/cell)">
+            <key>all</key>
+            <xsl:for-each select="1 to $standard-cell-count">
                <xsl:variable name="this-pos" select="."/>
                <xsl:variable name="these-cells" select="$these-rows/cell[$this-pos]"/>
                <cell>
@@ -249,102 +290,158 @@
       <xsl:sequence select="sum($these-scores)"/>
    </xsl:function>
    
+   
+   
+   <!-- CONVERT THE CALCULATED DATA INTO AN HTML REPORT -->
+   
    <xsl:variable name="results-as-html" as="document-node()">
       <xsl:apply-templates select="$parse-pass-3" mode="parse-to-html"/>
    </xsl:variable>
    <xsl:template match="/*" mode="parse-to-html">
+      <xsl:variable name="these-rows" select="row" as="element()*"/>
       <html xmlns="http://www.w3.org/1999/xhtml">
          <head>
             <title>
                <xsl:text>Linguistic Annotation Survey generated </xsl:text>
                <xsl:value-of select="current-dateTime()"/>
             </title>
-            <style>
-               table {
-               border-spacing: 0;
-               width: 100%;
-               border: 1px solid #ddd;
-               }
-               th {
-               cursor: pointer;
-               text-align: center;
-               padding: 1em;
-               }
-               td {
-               text-align: right;
-               padding: 1em;
-               }
-               tr:nth-child(even) {
-               background-color: #f2f2f2;
-               }
-               .support{
-               text-align: center;}
-               .comment{
-               text-align: left;
-               }
-               .hascomment{
-               background-color: lightgray;
-               cursor: pointer;
-               }
-               .hide{
-               display: none;
-               }
-               .sup4{
-               background-color: #33ff33;
-               }
-               .sup3{
-               background-color: #ccffcc;
-               }
-               .sup2{
-               background-color: #ffff66;
-               }
-               .sup1{
-               background-color: #ff6666;
-               }
-            </style>
+            <style><xsl:value-of select="unparsed-text('inclusions/survey.css')"/></style>
          </head>
          <body>
             <h1>Linguistic Annotation Survey</h1>
-            <div>Generated <xsl:value-of select="current-dateTime()"/> from stylsheet at <xsl:value-of select="static-base-uri()"/></div>
+            <div>Generated <xsl:value-of select="current-dateTime()"/> from stylesheet at <xsl:value-of select="static-base-uri()"/></div>
             <h2>Key</h2>
             <div>Some criteria below assign specific meaning to the four codes. Default values, however, are as follows:</div>
             <div><code>+</code>: criterium is fully supported (score 1)</div>
             <div><code>(+)</code>: criterium is partly supported, or offers potential for full support via extensions (score 0.5)</div>
             <div><code>(-)</code>: criterium is not supported, but might be extended to partial or full support (score -0.5)</div>
             <div><code>-</code>: criterium is not supported, and cannot be extended to develop partial or full support (score -1)</div>
+            <div>Any code that looks like this... <div class="inline">
+                  <div class="support hascomment" onclick="reveal('example')">(+)</div>
+                  <div class="comment hide" id="example">comment</div>
+               </div>...contains a comment. Click to reveal the comment.</div>
             <h2>Survey</h2>
-            <table id="survey">
-               <thead>
-                  <xsl:apply-templates select="row[1]" mode="build-thead"/>
-               </thead>
-               <tbody>
-                  <xsl:apply-templates mode="#current"/>
-               </tbody>
-            </table>
+            
+            <!-- We repeat the first TLS as a placeholder for doing everything -->
+            <xsl:for-each select="$top-level-sections, $top-level-sections[1]">
+               <xsl:variable name="this-title" select="doc:title[1]"/>
+               <xsl:variable name="this-is-general" select="position() gt count($top-level-sections)" as="xs:boolean"/>
+               <xsl:variable name="this-table-id" select="if ($this-is-general) then 'all' else
+                  analyze-string($this-title, '^[A-Z]')/*:match" as="xs:string"/>
+               <xsl:variable name="this-explanatory-intro" as="element()*" select="doc:section[1]/preceding-sibling::* except doc:title"/>
+               
+               <xsl:choose>
+                  <xsl:when test="$this-is-general">
+                     <h3>All categories</h3>
+                  </xsl:when>
+                  <xsl:otherwise>
+                     <h3>
+                        <xsl:value-of select="doc:title[1]"/>
+                     </h3>
+                  </xsl:otherwise>
+               </xsl:choose>
+               <xsl:if test="exists($this-explanatory-intro)">
+                  <div>
+                     <div class="label" onclick="reveal('about{$this-table-id}')">About this category</div>
+                     <div class="hide" id="about{$this-table-id}">
+                        <xsl:apply-templates select="$this-explanatory-intro" mode="#current"/>
+                     </div>
+                  </div>
+               </xsl:if>
+               <table id="{$this-table-id}">
+                  <colgroup>
+                     <col class="key"/>
+                  </colgroup>
+                  
+                  <xsl:for-each-group select="$these-rows[1]/cell"
+                     group-by="($standards-tree//*[name = replace(current()/@class, '_', ' ')]/ancestor-or-self::*[name][last()]/name, position())[1]">
+                     <colgroup>
+                        <!--<xsl:attribute name="span" select="count(current-group())"/>-->
+                        <xsl:attribute name="class" select="current-grouping-key() || ' group'"/>
+                        <xsl:for-each select="current-group()">
+                           <col>
+                              <xsl:if test="position() eq 1">
+                                 <xsl:attribute name="class" select="'borderleft'"/>
+                              </xsl:if>
+                           </col>
+                        </xsl:for-each>
+                     </colgroup>
+                  </xsl:for-each-group>
+                  <colgroup>
+                     <col class="score"/>
+                  </colgroup>
+                  
+                  <thead>
+                     <tr>
+                        <th/>
+                        <xsl:for-each-group select="$these-rows[1]/cell" group-by="($standards-tree//*[name = replace(current()/@class, '_', ' ')]/ancestor-or-self::*[name][last()]/name, position())[1]">
+                           <xsl:variable name="group-count" select="count(current-group())" as="xs:integer"/>
+                           <xsl:choose>
+                              <xsl:when test="$group-count gt 1">
+                                 <th>
+                                    <xsl:attribute name="colspan" select="$group-count"/>
+                                    <xsl:value-of select="current-grouping-key()"/>
+                                 </th>
+                              </xsl:when>
+                              <xsl:otherwise>
+                                 <th/>
+                              </xsl:otherwise>
+                           </xsl:choose>
+                        </xsl:for-each-group>
+                        <th/>
+                     </tr>
+                     <xsl:apply-templates select="$these-rows[1]" mode="build-thead">
+                        <xsl:with-param name="table-id" as="xs:string" tunnel="yes" select="$this-table-id"/>
+                     </xsl:apply-templates>
+                  </thead>
+                  <tbody>
+                     <xsl:choose>
+                        <xsl:when test="$this-is-general">
+                           <xsl:apply-templates select="$these-rows" mode="#current">
+                              <xsl:with-param name="grand-total" select="true()" tunnel="yes"
+                                 as="xs:boolean"/>
+                           </xsl:apply-templates>
+                        </xsl:when>
+                        <xsl:otherwise>
+                           <xsl:apply-templates select="$these-rows[key[starts-with(., $this-table-id)]]" mode="#current"/>
+                        </xsl:otherwise>
+                     </xsl:choose>
+                  </tbody>
+               </table>
+               
+            </xsl:for-each>
             <script xml:space="preserve"><xsl:value-of select="unparsed-text('inclusions/tablesorter.js')"/></script>
          </body>
       </html>
    </xsl:template>
    
    <xsl:template match="row/*" mode="build-thead">
-      <th xmlns="http://www.w3.org/1999/xhtml" onclick="sortTable({count(preceding-sibling::*)})">
+      <xsl:param name="table-id" as="xs:string" tunnel="yes"/>
+      <th xmlns="http://www.w3.org/1999/xhtml" onclick="sortTable({count(preceding-sibling::*)},'{$table-id}')">
          <xsl:copy-of select="@*"/>
          <xsl:value-of select="@class"/>
       </th>
    </xsl:template>
    <xsl:template match="row/*[last()]" priority="1" mode="build-thead">
-      <th xmlns="http://www.w3.org/1999/xhtml" onclick="sortTableByNumber({count(preceding-sibling::*)})">
+      <xsl:param name="table-id" as="xs:string" tunnel="yes"/>
+      <th xmlns="http://www.w3.org/1999/xhtml" onclick="sortTableByNumber({count(preceding-sibling::*)},'{$table-id}')">
          <xsl:copy-of select="@*"/>
          <xsl:value-of select="@class"/>
       </th>
    </xsl:template>
    <xsl:template match="row" mode="parse-to-html build-thead">
-      <tr xmlns="http://www.w3.org/1999/xhtml">
-         <xsl:copy-of select="@*"/>
-         <xsl:apply-templates mode="#current"/>
-      </tr>
+      <xsl:param name="grand-total" select="false()" tunnel="yes" as="xs:boolean"/>
+      <xsl:variable name="skip-this" select="$grand-total = true() and ((@class = 'score') and not(key = 'all'))"/>
+      <xsl:if test="not($skip-this)">
+         <tr xmlns="http://www.w3.org/1999/xhtml">
+            <xsl:copy-of select="@*"/>
+            <xsl:apply-templates mode="#current"/>
+         </tr>
+      </xsl:if>
    </xsl:template>
    <xsl:template match="key | cell" mode="parse-to-html">
+      <xsl:param name="grand-total" select="false()" tunnel="yes" as="xs:boolean"/>
+      
       <xsl:variable name="this-support-value" select="la:calculate-score(support)" as="xs:double?"/>
       <xsl:variable name="this-extra-class-name" as="xs:string?">
          <xsl:choose>
@@ -354,26 +451,43 @@
             <xsl:when test="$this-support-value eq -1">sup1</xsl:when>
          </xsl:choose>
       </xsl:variable>
+      <xsl:variable name="comment-id-parts" as="xs:string*">
+         <xsl:if test="exists(comment)">
+            <xsl:if test="$grand-total eq true()">gen</xsl:if>
+            <xsl:value-of select="generate-id(comment[1])"/>
+         </xsl:if>
+      </xsl:variable>
+      
       <td xmlns="http://www.w3.org/1999/xhtml">
          <xsl:copy-of select="@*"/>
          <xsl:attribute name="class" select="string-join((@class, $this-extra-class-name), ' ')"/>
          <xsl:apply-templates mode="#current">
-            <xsl:with-param name="comment-id"
-               select="
-                  if (exists(comment)) then
-                     generate-id(comment[1])
-                  else
-                     ()"
+            <xsl:with-param name="comment-id" select="string-join($comment-id-parts)"
                as="xs:string?"/>
          </xsl:apply-templates>
       </td>
+   </xsl:template>
+   <xsl:variable name="master-href-base" as="xs:string" select="'https://github.com/ld4lt/linguistic-annotation/blob/master/survey/required-features.md'"/>
+   <xsl:template match="key/text()" mode="parse-to-html">
+      <xsl:variable name="this-text" select="."/>
+      <xsl:variable name="this-toc-entry" select="$required-features-as-docbook/doc:section/doc:section[1]//doc:link[. = $this-text]"/>
+      <xsl:choose>
+         <xsl:when test="exists($this-toc-entry)">
+            <a xmlns="http://www.w3.org/1999/xhtml" href="{$master-href-base}{$this-toc-entry/@xl:href}">
+               <xsl:value-of select="."/>
+            </a>
+         </xsl:when>
+         <xsl:otherwise>
+            <xsl:value-of select="."/>
+         </xsl:otherwise>
+      </xsl:choose>
    </xsl:template>
    <xsl:template match="support" mode="parse-to-html">
       <xsl:param name="comment-id" as="xs:string?"/>
       <xsl:variable name="has-comment" select="string-length($comment-id) gt 0" as="xs:boolean"/>
       <xsl:variable name="this-class-val" select="if ($has-comment) then 'support hascomment' else 'support'"/>
       <!-- For alphabetical sorting -->
-      <div class="hide score">
+      <div xmlns="http://www.w3.org/1999/xhtml" class="hide score">
          <xsl:value-of select="round((la:calculate-score(.) + 2) * 2)"/>
       </div>
       <div xmlns="http://www.w3.org/1999/xhtml" class="{$this-class-val}">
@@ -393,6 +507,19 @@
          </xsl:if>
          <xsl:apply-templates mode="#current"/>
       </div>
+   </xsl:template>
+   <xsl:template match="doc:itemizedlist" mode="parse-to-html">
+      <ol xmlns="http://www.w3.org/1999/xhtml">
+         <xsl:apply-templates mode="#current"/>
+      </ol>
+   </xsl:template>
+   <xsl:template match="doc:listitem" mode="parse-to-html">
+      <li xmlns="http://www.w3.org/1999/xhtml">
+         <xsl:apply-templates mode="#current"/>
+      </li>
+   </xsl:template>
+   <xsl:template match="row[@class = 'score']/key" mode="parse-to-html">
+      <td xmlns="http://www.w3.org/1999/xhtml">score</td>
    </xsl:template>
    <xsl:template match="*" mode="parse-to-html">
       <div xmlns="http://www.w3.org/1999/xhtml" class="{name(.)}">
