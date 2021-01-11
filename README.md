@@ -31,9 +31,10 @@ Based on a survey conducted in 2019, NIF and Web Annotation are being actively u
 Approach
 ========
 
+Anti-pattern:
 ![The anti-pattern (https://xkcd.com/927/, CC-BY-NC 2.5)](https://imgs.xkcd.com/comics/standards.png)
 
-*   Joint work on harmonizing NIF and Web Annotation
+*   Joint work on harmonizing NIF and Web Annotation with the goal to extend one *or* the other
     
 *   Extend the consolidated model both wrt. genericity and explicitness and support for use cases currently not sufficiently covered (be it from language technology, knowledge engineering, computational lexicography or philology). 
     
