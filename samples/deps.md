@@ -1,12 +1,13 @@
+
 # Examples for dependency annotation in RDF
 
 ## NIF 2.0
 
 old wrapper demo, see https://github.com/NLP2RDF/software/blob/master/java-maven/implementation/stanfordcorenlp/src/main/java/org/nlp2rdf/implementation/stanfordcorenlp/StanfordWrapper.java
 
-  PREFIX stanford: <http://purl.org/olia/stanford.owl#>
-  _:nif_uri_for_dep stanford:nsubj _:nif_uri_for_head .
-  # replace blank nodes by actual string URIs
+	  PREFIX stanford: <http://purl.org/olia/stanford.owl#>
+	  _:nif_uri_for_dep stanford:nsubj _:nif_uri_for_head .
+	  # replace blank nodes by actual string URIs
 
 Note that `http://purl.org/olia/stanford.owl#nsubj` resolves to an invididual, not to a property. This is semantically not correct, but compact. 
 
@@ -19,47 +20,47 @@ Most labels produce datatype properties, but `HEAD` and `ID` (plus some column l
 
 With the following data
 
-  1 He    PRON 2 nsubj
-  2 came  VERB 0 root
-  3 home  ADV  2 advmod
+	  1 He    PRON 2 nsubj
+	  2 came  VERB 0 root
+	  3 home  ADV  2 advmod
 
 and the column labels
 
-  ID WORD POS HEAD EDGE
+	  ID WORD POS HEAD EDGE
 
 We produce
   
-  :s1_1 conll:WORD "He"; conll:HEAD _:s1_2; conll:EDGE "nsubj"; nif:nextWord :s1_2 .
-  # etc
+	  :s1_1 conll:WORD "He"; conll:HEAD _:s1_2; conll:EDGE "nsubj"; nif:nextWord :s1_2 .
+	  # etc
 
 ## POWLA
 
 POWLA an OWL2/DL formalization of the Linguistic Annotation Framework (http://purl.org/powla/powla.owl). It does provide linguistic data structures, but not how to ground them in a particular text. So, it should be combined with NIF, WA, CoNLL-RDF, or whatever.
 Here combined with CoNLL-RDF token URIs.
 
-  :s1_1 powla:isSourceOf [ a powla:Relation; powla:hasTarget :s1_2; powla:hasAnnotation "nsubj" ].
+	  :s1_1 powla:isSourceOf [ a powla:Relation; powla:hasTarget :s1_2; powla:hasAnnotation "nsubj" ].
 
 Note that powla:hasAnnotation should normally not be directly used, but via a task-specific subproperty, say `my:dependency rdfs:subPropertyOf powla:hasAnnotation`. Then, that would be 
 
-  my:dependency rdfs:subPropertyOf powla:hasAnnotation.
-  :s1_1 powla:isSourceOf [ a powla:Relation; powla:hasTarget :s1_2; my:dependency "nsubj" ].
+	  my:dependency rdfs:subPropertyOf powla:hasAnnotation.
+	  :s1_1 powla:isSourceOf [ a powla:Relation; powla:hasTarget :s1_2; my:dependency "nsubj" ].
 
 Alternatively, we can link to individuals in an ontology, e.g., using `nif:oliaLink` (which is, however, reserved for POS information in NIF 2.0) or `lexinfo:partOfSpeech` (normally for dictionaries, only; but note that `lexinfo:subject` is a property):
 
-  :s1_1 powla:isSourceOf [ a powla:Relation; powla:hasTarget :s1_2; my:dependency stanford:nsubj ].
+	  :s1_1 powla:isSourceOf [ a powla:Relation; powla:hasTarget :s1_2; my:dependency stanford:nsubj ].
 
 Or to a particular class (as recommended within OLiA, http://purl.org/olia)
 
-  :s1_10 powla:isSourceOf [ a powla:Relation; powla:hasTarget _:s1_11; a stanford:NominalSubject ].
+	  :s1_10 powla:isSourceOf [ a powla:Relation; powla:hasTarget _:s1_11; a stanford:NominalSubject ].
 
 So far, this was source- (dependent-) centered.
 In POWLA, the relation between source (dependent) and target (head) can also be expressed in a relation-centered way:
 
-  [ a stanford:NominalSubject; powla:hasSource :s1_10; powla:hasTarget :s1_11 ] .
+	  [ a stanford:NominalSubject; powla:hasSource :s1_10; powla:hasTarget :s1_11 ] .
 
 Or in a target- (head-) centered way:
 
-  :s_11 powla:isTargetOf [ a powla:Relation, stanford:NominalSubject; powla:hasSource :s1_10 ] .
+	  :s_11 powla:isTargetOf [ a powla:Relation, stanford:NominalSubject; powla:hasSource :s1_10 ] .
   
 ## Discussion
 
