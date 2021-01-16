@@ -51,21 +51,22 @@ Alternatively, we can link to individuals in an ontology, e.g., using `nif:oliaL
 
 Or to a particular class (as recommended within OLiA, http://purl.org/olia)
 
-	  :s1_10 powla:isSourceOf [ a powla:Relation; powla:hasTarget _:s1_11; a stanford:NominalSubject ].
+	  :s1_1 powla:isSourceOf [ a powla:Relation; powla:hasTarget :s1_2; a stanford:NominalSubject ].
 
 So far, this was source- (dependent-) centered.
 In POWLA, the relation between source (dependent) and target (head) can also be expressed in a relation-centered way:
 
-	  [ a stanford:NominalSubject; powla:hasSource :s1_10; powla:hasTarget :s1_11 ] .
+	  [ a stanford:NominalSubject; powla:hasSource :s1_1; powla:hasTarget :s1_2 ] .
 
 Or in a target- (head-) centered way:
 
-	  :s_11 powla:isTargetOf [ a powla:Relation, stanford:NominalSubject; powla:hasSource :s1_10 ] .
+	  :s_2 powla:isTargetOf [ a powla:Relation, stanford:NominalSubject; powla:hasSource :s1_1 ] .
   
 ## Discussion
 
+The CoNLL-RDF representation does not allow to express annotations on dependencies, but, instead of the dependent. This is exactly the underlying logic of CoNLL formats in general, but semantically dissatisfying.
+
 The non-reified representation of NIF 2.0 has the advantage of being compact and intuitive. It has the disadvantage that provenance, metadata and explicit annotations of the relation cannot be represented. A reified representation is thus necessary, but a non-reified representation could be introduced as a short-hand.
-But unlike the introduction of ad hoc properties as in the NIF 2.0 example, those should at least be defined as properties that express a dependency (or other directed) relation. Suggestion: If a non-reified representation is to be maintained, let it be defined as subproperty of a generic property, maybe `xy:SyntacticHead` or, more generally, `xy:Relation`.
+But unlike the introduction of ad hoc properties as in the NIF 2.0 example, those should at least be defined as properties that express a dependency (or other directed) relation. Suggestion: If a non-reified representation is to be maintained, let it be defined as subproperty of a generic property comparable to `conll:HEAD`, say, `xy:head`, or, more generally, `xy:relation`.
 
 The latter is exactly what POWLA (and LAF) proposed. Has the advantage of being able to add provenance and further annotations, disadvantage: relatively verbose.
-
