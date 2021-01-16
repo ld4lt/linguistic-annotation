@@ -1282,8 +1282,12 @@ SynAF: `-` (tbc)
 SemAF: `-` (tbc)
 
 ### E.2 Dependency syntax
- 
-no hierarchical relations, to be confirmed whether primary and secondary dependencies are to be distinguished (cf. https://universaldependencies.org/), cf. SynAF (other standards?)
+
+also see https://github.com/ld4lt/linguistic-annotation/blob/master/samples/deps.md
+
+A type of relation that can connect every word (except for the syntactic root[s]) within a sentence with exactly one other word within the same sentence. Because of the restrictions on cardinality and scope (words), this requires a generic data type.
+
+This requires relations independently from phrase structures. It is yet to be confirmed whether primary and secondary dependencies are to be distinguished (cf. https://universaldependencies.org/), cf. SynAF (other standards?)
 
 Ligt: `-`
 
@@ -1304,6 +1308,8 @@ MAF: `-`
 LAF: `(+)` (voa external vocabulary: ISOcat) 
 
 ### E.3 Phrase structure syntax: hierarchical relations
+
+also see https://github.com/ld4lt/linguistic-annotation/blob/master/samples/phrases.md
 
 hierarchical relations, must be annotatable, see SynAF, to be confirmed whether primary and secondary edges are to be distinguished (cf. [TIGER XML](https://www.ims.uni-stuttgart.de/forschung/ressourcen/werkzeuge/TIGERSearch/doc/html/TigerXML.html))
 
