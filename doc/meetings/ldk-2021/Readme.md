@@ -24,7 +24,7 @@ Note that we enforce a consistent numbering scheme for contributions that corres
 
 * 4 Use Cases
 * 4.a Linking Latin		Francesco Mambrini
-* 4.b Distributed Text Services	NN
+* 4.b Distributed Text Services	Christian Chiarcos
 * 4.c Interlinear Glossed Text	Maxim Ionov
 * 4.d Discourse Research	Giedre Valunaite Oleskevicienė
 * 4.e Transforming Language Resources	Christian Fäth
