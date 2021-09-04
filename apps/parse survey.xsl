@@ -65,6 +65,8 @@
       <standards>
          <standard>
             <name>NIF</name>
+            <link type="main" href="https://persistence.uni-leipzig.org/nlp2rdf/"/>
+            <link type="code" href="https://github.com/NLP2RDF"/>
             <version>
                <name>NIF 2.0</name>
             </version>
@@ -73,6 +75,7 @@
             </version>
             <extension>
                <name>CoNLL-RDF</name>
+               <link type="main" href="https://github.com/acoli-repo/conll-rdf/tree/master/owl"/>
             </extension>
             <extension>
                <name>Ligt</name>
@@ -81,15 +84,21 @@
          <standard>
             <name>Web Annotation</name>
             <name>Open Annotation</name>
+            <link type="main" href="https://www.w3.org/TR/annotation-model/"/>
          </standard>
          <group>
             <name>ISO and derivatives</name>
             <standard>
                <name>POWLA</name>
                <name>PAULA</name>
+               <link type="PAULA" href="https://www.sfb632.uni-potsdam.de/en/paula.html"/>
+               <link type="POWLA" href="http://purl.org/powla"/>
             </standard>
             <standard>
                <name>LAF</name>
+               <link type="main" href="https://www.iso.org/standard/37326.html"/>
+               <link type="ISO standard"
+                  href="https://www.cs.vassar.edu/~ide/papers/ISO+24612-2012.pdf"/>
             </standard>
             <standard>
                <name>MAF</name>
@@ -103,6 +112,7 @@
          </group>
          <standard>
             <name>TEI</name>
+            <link type="main" href="https://www.tei-c.org"/>
          </standard>
       </standards>
    </xsl:variable>
