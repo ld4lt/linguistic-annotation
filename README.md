@@ -40,4 +40,4 @@ Anti-pattern:
     
 *   Develop a minimal consensus vocabulary that complements Web Annotation with NIF functionalities and generic linguistic data structures; can be an extension of Web Annotation or as a revision of NIF (“NIF 3.0”).
     
-*   Publish this consensus model as persistent point of reference as a W3C Community Report (of LD4LT or a dedicated CG)
+*   Publish this consensus model as persistent point of reference as a W3C Community Report (of LD4LT)
